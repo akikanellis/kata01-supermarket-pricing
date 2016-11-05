@@ -1,0 +1,20 @@
+### Intellij ###
+
+# User-specific stuff:
+.idea/
+
+### Intellij Patch ###
+*.iml
+
+### Java ###
+*.class
+
+# Package Files #
+*.jar
+
+### Gradle ###
+.gradle
+build/
+
+# Avoid ignoring Gradle wrapper jar file (.jar files are usually ignored)
+!gradle-wrapper.jar
