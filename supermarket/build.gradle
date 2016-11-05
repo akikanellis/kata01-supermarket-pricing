@@ -1,0 +1,8 @@
+group 'com.akikanellis.kata01'
+
+apply plugin: 'java'
+apply from: rootProject.file('scripts/extra_tests.gradle')
+apply from: rootProject.file('scripts/code_analysis.gradle')
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
