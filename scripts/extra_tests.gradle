@@ -1,0 +1,34 @@
+// Adds source sets for the integration tests as well as the corresponding tasks.
+
+sourceSets {
+    integrationTest {
+        compileClasspath += sourceSets.test.runtimeClasspath
+        runtimeClasspath += sourceSets.test.runtimeClasspath
+    }
+}
+
+task integrationTest(type: Test) {
+    group 'verification'
+    description = "Run the integration tests."
+
+    testClassesDir = project.sourceSets.integrationTest.output.classesDir
+    classpath = project.sourceSets.integrationTest.runtimeClasspath
+}
+
+task allTest(type: Test) {
+    group 'verification'
+    description = "Run all the tests."
+
+    dependsOn tasks.withType(Test).findAll { it != allTest }
+}
+
+integrationTest.mustRunAfter test
+
+tasks.withType(Test) {
+    check.dependsOn it
+
+    testLogging {
+        events "passed", "skipped", "failed", "standardOut", "standardError"
+    }
+    reports.html.destination = file("${reporting.baseDir}/${name}")
+}
