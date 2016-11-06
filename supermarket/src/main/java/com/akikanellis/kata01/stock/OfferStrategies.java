@@ -6,16 +6,14 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class OfferStrategies {
-    private final Set<OfferStrategy> offerStrategies;
+public final class OfferStrategies {
+    private final Set<OfferStrategy> strategies;
 
-    private OfferStrategies(Collection<OfferStrategy> offerStrategies) {
-        this.offerStrategies = new HashSet<>(offerStrategies);
-    }
+    private OfferStrategies(Collection<OfferStrategy> strategies) { this.strategies = new HashSet<>(strategies); }
 
     public static OfferStrategies fromCollection(Collection<OfferStrategy> offerStrategies) {
         return new OfferStrategies(offerStrategies);
     }
 
-    public List<OfferStrategy> asList() { return new ArrayList<>(offerStrategies); }
+    public List<OfferStrategy> asList() { return new ArrayList<>(strategies); }
 }

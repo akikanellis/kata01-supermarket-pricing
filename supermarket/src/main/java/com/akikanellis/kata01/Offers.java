@@ -5,7 +5,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class Offers {
+public final class Offers {
     private final List<OfferWithQuantity> offersWithQuantities;
 
     private Offers(List<OfferWithQuantity> offersWithQuantities) { this.offersWithQuantities = offersWithQuantities; }
