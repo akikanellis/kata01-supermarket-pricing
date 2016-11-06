@@ -3,6 +3,7 @@ package com.akikanellis.kata01;
 import java.math.BigDecimal;
 import java.util.Objects;
 
+import static com.akikanellis.kata01.Preconditions.checkNotNegative;
 import static com.akikanellis.kata01.Preconditions.checkNotNull;
 
 public final class Price {
@@ -11,8 +12,22 @@ public final class Price {
 
     private final BigDecimal amount;
 
-    public Price(BigDecimal amount) {
+    private Price(BigDecimal amount) {
         this.amount = checkNotNull(amount);
+    }
+
+    public static Price from(int amount) {
+        BigDecimal bigDecimalAmount = new BigDecimal(amount);
+        return from(bigDecimalAmount);
+    }
+
+    public static Price from(BigDecimal amount) { return new Price(amount); }
+
+    public Price multiplyBy(int multiplier) {
+        checkNotNegative(multiplier);
+
+        BigDecimal newAmount = amount.multiply(new BigDecimal(multiplier));
+        return new Price(newAmount);
     }
 
     @Override public boolean equals(Object o) {
