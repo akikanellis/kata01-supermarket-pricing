@@ -1,0 +1,3 @@
+rootProject.name = 'kata01-supermarket-pricing-root'
+
+include ':supermarket'
