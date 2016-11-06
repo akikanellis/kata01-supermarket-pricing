@@ -3,12 +3,15 @@ package com.akikanellis.kata01.test_utils;
 import com.akikanellis.kata01.Item;
 import com.akikanellis.kata01.ItemWithQuantity;
 import com.akikanellis.kata01.Items;
+import com.akikanellis.kata01.OfferStrategies;
 import com.akikanellis.kata01.OfferStrategy;
 import com.akikanellis.kata01.Offers;
 import com.akikanellis.kata01.Price;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public final class Fakes {
 
@@ -56,5 +59,13 @@ public final class Fakes {
                 return null;
             }
         };
+    }
+
+    public static OfferStrategies createDefaultOfferStrategies() {
+        List<OfferStrategy> offerStrategies = IntStream.range(0, 3)
+                .mapToObj(ignored -> createDefaultOfferStrategy())
+                .collect(Collectors.toList());
+
+        return OfferStrategies.fromCollection(offerStrategies);
     }
 }

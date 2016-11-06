@@ -7,18 +7,21 @@ public class StockFacade {
     private final GetStockUseCase getStock;
     private final AddOfferStrategyUseCase addOfferStrategy;
     private final RemoveOfferStrategyUseCase removeOfferStrategy;
+    private final GetActiveOfferStrategiesUseCase getActiveOfferStrategies;
 
     public StockFacade(AddNewItemIfNotExistsUseCase addNewItemIfNotExistsUseCase,
                        FillStockUseCase fillStockUseCase,
                        ReduceStockUseCase reduceStock,
                        GetStockUseCase getStock, AddOfferStrategyUseCase addOfferStrategy,
-                       RemoveOfferStrategyUseCase removeOfferStrategy) {
+                       RemoveOfferStrategyUseCase removeOfferStrategy,
+                       GetActiveOfferStrategiesUseCase getActiveOfferStrategies) {
         this.addNewItemIfNotExistsUseCase = addNewItemIfNotExistsUseCase;
         this.fillStockUseCase = fillStockUseCase;
         this.reduceStock = reduceStock;
         this.getStock = getStock;
         this.addOfferStrategy = addOfferStrategy;
         this.removeOfferStrategy = removeOfferStrategy;
+        this.getActiveOfferStrategies = getActiveOfferStrategies;
     }
 
     public void addNewItem(Item item) { addNewItemIfNotExistsUseCase.execute(item); }
@@ -32,4 +35,6 @@ public class StockFacade {
     public void addOfferStrategy(OfferStrategy offerStrategy) { addOfferStrategy.execute(offerStrategy); }
 
     public void removeOfferStrategy(OfferStrategy offerStrategy) { removeOfferStrategy.execute(offerStrategy); }
+
+    public OfferStrategies getActiveOfferStrategies() { return getActiveOfferStrategies.execute(); }
 }
