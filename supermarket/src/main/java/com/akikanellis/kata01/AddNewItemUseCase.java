@@ -5,7 +5,5 @@ public class AddNewItemUseCase {
 
     public AddNewItemUseCase(StockRepository stock) { this.stock = stock; }
 
-    public void execute(Item item) {
-        throw new UnsupportedOperationException("To be implemented.");
-    }
+    public void execute(Item item) { stock.create(item); }
 }
