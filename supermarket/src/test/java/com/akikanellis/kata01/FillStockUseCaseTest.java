@@ -1,5 +1,6 @@
 package com.akikanellis.kata01;
 
+import org.assertj.core.api.Assertions;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -33,5 +34,12 @@ public class FillStockUseCaseTest {
         fillStock.execute(item, 50);
 
         verify(stock).addQuantity(item, 70);
+    }
+
+    @Test public void fillingStock_withNegativeQuantity_throwsException() {
+        Item item = createDefaultItem();
+
+        Assertions.assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() -> fillStock.execute(item, -5));
     }
 }

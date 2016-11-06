@@ -1,5 +1,7 @@
 package com.akikanellis.kata01;
 
+import static com.akikanellis.kata01.Preconditions.checkNotNegative;
+
 public class FillStockUseCase {
     private final StockRepository stock;
     private final AddNewItemIfNotExistsUseCase addNewItemIfNotExists;
@@ -10,6 +12,7 @@ public class FillStockUseCase {
     }
 
     public void execute(Item item, int quantity) {
+        checkNotNegative(quantity);
         addNewItemIfNotExists.execute(item);
 
         int newQuantity = calculateNewQuantity(item, quantity);
