@@ -1,6 +1,14 @@
 package com.akikanellis.kata01;
 
 public class FillStockUseCase {
+    private final StockRepository stock;
+    private final AddNewItemIfNotExistsUseCase addNewItemIfNotExists;
+
+    public FillStockUseCase(StockRepository stock, AddNewItemIfNotExistsUseCase addNewItemIfNotExists) {
+        this.addNewItemIfNotExists = addNewItemIfNotExists;
+        this.stock = stock;
+    }
+
     public void execute(Item item, int quantity) {
         throw new UnsupportedOperationException("To be implemented.");
     }
