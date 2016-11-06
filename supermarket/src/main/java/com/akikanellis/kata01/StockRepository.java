@@ -33,7 +33,5 @@ public class StockRepository {
     /* Visible for testing */
     int getQuantity(Item item) { return stock.get(item); }
 
-    public Items getAll() {
-        return null;
-    }
+    public Items getAll() { return Items.fromEntries(stock.entrySet()); }
 }

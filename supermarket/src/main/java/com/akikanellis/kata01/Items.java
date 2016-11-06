@@ -5,7 +5,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class Items {
+public final class Items {
     private final List<ItemWithQuantity> itemsWithQuantities;
 
     private Items(List<ItemWithQuantity> itemsWithQuantities) { this.itemsWithQuantities = itemsWithQuantities; }
