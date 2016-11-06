@@ -13,11 +13,7 @@ public class FillStockUseCase {
         addNewItemIfNotExists.execute(item);
 
         int newQuantity = calculateNewQuantity(item, quantity);
-        try {
-            stock.addQuantity(item, newQuantity);
-        } catch (ItemDoesNotExistException e) {
-            e.printStackTrace();
-        }
+        stock.addQuantity(item, newQuantity);
     }
 
     private int calculateNewQuantity(Item item, int quantity) {

@@ -18,7 +18,7 @@ public class StockRepository {
         stock.put(item, 0);
     }
 
-    public void addQuantity(Item item, int quantity) throws ItemDoesNotExistException {
+    public void addQuantity(Item item, int quantity) {
         checkNotNegative(quantity);
         checkItemExists(item);
 
@@ -26,11 +26,11 @@ public class StockRepository {
         stock.put(item, quantity + currentQuantity);
     }
 
-    private void checkItemExists(Item item) throws ItemDoesNotExistException {
+    private void checkItemExists(Item item) {
         if (!contains(item)) throw new ItemDoesNotExistException(item);
     }
 
-    public void removeQuantity(Item item, int quantity) throws ItemDoesNotExistException {
+    public void removeQuantity(Item item, int quantity) {
         checkNotNegative(quantity);
         checkItemExists(item);
 

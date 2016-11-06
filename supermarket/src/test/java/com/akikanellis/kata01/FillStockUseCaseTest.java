@@ -26,7 +26,7 @@ public class FillStockUseCaseTest {
         verify(addNewItemIfNotExists).execute(item);
     }
 
-    @Test public void fillingStock_addsStockOnTopOfPreviousQuantity() throws ItemDoesNotExistException {
+    @Test public void fillingStock_addsStockOnTopOfPreviousQuantity() {
         Item item = createDefaultItem();
         when(stock.getQuantity(item)).thenReturn(20);
 

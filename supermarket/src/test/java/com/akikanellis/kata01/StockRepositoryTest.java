@@ -36,7 +36,7 @@ public class StockRepositoryTest {
                 .isThrownBy(() -> stock.create(item));
     }
 
-    @Test public void addingQuantity_withExistingItem_AddsToQuantity() throws ItemDoesNotExistException {
+    @Test public void addingQuantity_withExistingItem_AddsToQuantity() {
         Item item = createDefaultItem();
         stock.create(item);
         stock.addQuantity(item, 5);
@@ -46,8 +46,7 @@ public class StockRepositoryTest {
         assertThat(stock.getQuantity(item)).isEqualTo(15);
     }
 
-    @Test
-    public void addingQuantity_withNotExistingItem_throwsException() throws ItemDoesNotExistException {
+    @Test public void addingQuantity_withNotExistingItem_throwsException() {
         Item item = createDefaultItem();
 
         assertThatExceptionOfType(ItemDoesNotExistException.class)
@@ -61,8 +60,7 @@ public class StockRepositoryTest {
                 .isThrownBy(() -> stock.addQuantity(item, -5));
     }
 
-    @Test
-    public void removingQuantity_withExistingItemAndBiggerCurrentQuantity_reducesQuantity() throws ItemDoesNotExistException {
+    @Test public void removingQuantity_withExistingItemAndBiggerCurrentQuantity_reducesQuantity() {
         Item item = createDefaultItem();
         stock.create(item);
         stock.addQuantity(item, 20);
@@ -72,8 +70,7 @@ public class StockRepositoryTest {
         assertThat(stock.getQuantity(item)).isEqualTo(5);
     }
 
-    @Test public void removingQuantity_withExistingItemAndSmallerCurrentQuantity_reducesQuantityToZero()
-            throws ItemDoesNotExistException {
+    @Test public void removingQuantity_withExistingItemAndSmallerCurrentQuantity_reducesQuantityToZero() {
         Item item = createDefaultItem();
         stock.create(item);
         stock.addQuantity(item, 10);
@@ -83,8 +80,7 @@ public class StockRepositoryTest {
         assertThat(stock.getQuantity(item)).isEqualTo(0);
     }
 
-    @Test public void removingQuantity_withNotExistingItem_throwsException()
-            throws ItemDoesNotExistException {
+    @Test public void removingQuantity_withNotExistingItem_throwsException() {
         Item item = createDefaultItem();
 
         assertThatExceptionOfType(ItemDoesNotExistException.class)
