@@ -8,6 +8,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import static com.akikanellis.kata01.test_utils.Fakes.createDefaultItem;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class FillStockUseCaseTest {
@@ -23,5 +24,14 @@ public class FillStockUseCaseTest {
         fillStock.execute(item, 50);
 
         verify(addNewItemIfNotExists).execute(item);
+    }
+
+    @Test public void fillingStock_addsStockOnTopOfPreviousQuantity() throws ItemDoesNotExistException {
+        Item item = createDefaultItem();
+        when(stock.getQuantity(item)).thenReturn(20);
+
+        fillStock.execute(item, 50);
+
+        verify(stock).addQuantity(item, 70);
     }
 }
