@@ -18,17 +18,21 @@ public class StockRepository {
         stock.put(item, 0);
     }
 
-    public void addQuantity(Item item, int quantity) {
+    public void addQuantity(Item item, int quantity) throws ItemDoesNotExistException {
         checkNotNegative(quantity);
-        createIfItNotExists(item);
+        checkItemExists(item);
 
         Integer currentQuantity = stock.get(item);
         stock.put(item, quantity + currentQuantity);
     }
 
-    public void removeQuantity(Item item, int quantity) {
+    private void checkItemExists(Item item) throws ItemDoesNotExistException {
+        if (!contains(item)) throw new ItemDoesNotExistException(item);
+    }
+
+    public void removeQuantity(Item item, int quantity) throws ItemDoesNotExistException {
         checkNotNegative(quantity);
-        createIfItNotExists(item);
+        checkItemExists(item);
 
         int newQuantity = calculateReducedQuantity(item, quantity);
         stock.put(item, newQuantity);
