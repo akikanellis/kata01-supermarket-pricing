@@ -6,6 +6,9 @@ import java.util.Objects;
 import static com.akikanellis.kata01.Preconditions.checkNotNull;
 
 public final class Price {
+    public static final Price ZERO = new Price(BigDecimal.ZERO);
+    public static final Price ONE = new Price(BigDecimal.ONE);
+
     private final BigDecimal amount;
 
     public Price(BigDecimal amount) {
