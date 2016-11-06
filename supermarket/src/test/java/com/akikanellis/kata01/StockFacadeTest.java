@@ -6,6 +6,7 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import static com.akikanellis.kata01.test_utils.Fakes.createDefaultItem;
 import static org.mockito.Mockito.verify;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -17,11 +18,7 @@ public class StockFacadeTest {
     @Before public void beforeEach() { stockFacade = new StockFacade(addNewItemIfNotExistsUseCase, fillStockUseCase); }
 
     @Test public void addingNewItem_usesUseCase() {
-        Item item = Item.builder()
-                .barcode(1)
-                .name("Apple")
-                .price(Price.ONE)
-                .build();
+        Item item = createDefaultItem();
 
         stockFacade.addNewItem(item);
 
@@ -29,11 +26,7 @@ public class StockFacadeTest {
     }
 
     @Test public void fillingStock_usesStockUseCase() {
-        Item item = Item.builder()
-                .barcode(1)
-                .name("Apple")
-                .price(Price.ONE)
-                .build();
+        Item item = createDefaultItem();
 
         stockFacade.fillStock(item, 50);
 
