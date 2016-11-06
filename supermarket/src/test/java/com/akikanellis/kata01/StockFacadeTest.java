@@ -10,10 +10,10 @@ import static org.mockito.Mockito.verify;
 
 @RunWith(MockitoJUnitRunner.class)
 public class StockFacadeTest {
-    @Mock private AddNewItemUseCase addNewItemUseCase;
+    @Mock private AddNewItemIfNotExistsUseCase addNewItemIfNotExistsUseCase;
     private StockFacade stockFacade;
 
-    @Before public void beforeEach() { stockFacade = new StockFacade(addNewItemUseCase); }
+    @Before public void beforeEach() { stockFacade = new StockFacade(addNewItemIfNotExistsUseCase); }
 
     @Test public void addingNewItem_usesUseCase() {
         Item item = Item.builder()
@@ -24,6 +24,6 @@ public class StockFacadeTest {
 
         stockFacade.addNewItem(item);
 
-        verify(addNewItemUseCase).execute(item);
+        verify(addNewItemIfNotExistsUseCase).execute(item);
     }
 }

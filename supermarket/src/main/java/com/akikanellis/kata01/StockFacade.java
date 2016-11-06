@@ -1,11 +1,11 @@
 package com.akikanellis.kata01;
 
 public class StockFacade {
-    private final AddNewItemUseCase addNewItemUseCase;
+    private final AddNewItemIfNotExistsUseCase addNewItemIfNotExistsUseCase;
 
-    public StockFacade(AddNewItemUseCase addNewItemUseCase) {
-        this.addNewItemUseCase = addNewItemUseCase;
+    public StockFacade(AddNewItemIfNotExistsUseCase addNewItemIfNotExistsUseCase) {
+        this.addNewItemIfNotExistsUseCase = addNewItemIfNotExistsUseCase;
     }
 
-    public void addNewItem(Item item) { addNewItemUseCase.execute(item); }
+    public void addNewItem(Item item) { addNewItemIfNotExistsUseCase.execute(item); }
 }
