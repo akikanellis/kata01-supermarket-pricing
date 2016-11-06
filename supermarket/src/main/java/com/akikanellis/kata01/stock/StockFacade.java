@@ -1,4 +1,7 @@
-package com.akikanellis.kata01;
+package com.akikanellis.kata01.stock;
+
+import com.akikanellis.kata01.Item;
+import com.akikanellis.kata01.Items;
 
 public class StockFacade {
     private final AddNewItemIfNotExistsUseCase addNewItemIfNotExistsUseCase;

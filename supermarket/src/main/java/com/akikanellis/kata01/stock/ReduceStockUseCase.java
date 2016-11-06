@@ -1,4 +1,6 @@
-package com.akikanellis.kata01;
+package com.akikanellis.kata01.stock;
+
+import com.akikanellis.kata01.Item;
 
 import static com.akikanellis.kata01.Preconditions.checkNotNegative;
 

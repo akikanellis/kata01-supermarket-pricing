@@ -1,4 +1,6 @@
-package com.akikanellis.kata01;
+package com.akikanellis.kata01.stock;
+
+import com.akikanellis.kata01.Items;
 
 public class GetStockUseCase {
     private final StockRepository stock;

@@ -1,5 +1,7 @@
-package com.akikanellis.kata01;
+package com.akikanellis.kata01.stock;
 
+import com.akikanellis.kata01.Item;
+import com.akikanellis.kata01.Items;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

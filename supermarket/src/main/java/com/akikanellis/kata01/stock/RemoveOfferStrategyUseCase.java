@@ -1,4 +1,4 @@
-package com.akikanellis.kata01;
+package com.akikanellis.kata01.stock;
 
 public class RemoveOfferStrategyUseCase {
     private final OfferStrategyRepository offerStrategies;
