@@ -2,6 +2,7 @@ package com.akikanellis.kata01;
 
 import org.junit.Test;
 
+import static com.akikanellis.kata01.Preconditions.checkNotNegative;
 import static com.akikanellis.kata01.Preconditions.checkNotNull;
 import static com.akikanellis.kata01.Preconditions.checkNotNullOrEmpty;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -49,5 +50,27 @@ public class PreconditionsTest {
         assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(() -> checkNotNullOrEmpty(""))
                 .withMessageContaining("empty");
+    }
+
+    @Test public void checkingNotNegative_withPositive_returnsNumber() {
+        int expectedNumber = 5;
+
+        int actualNumber = checkNotNegative(expectedNumber);
+
+        assertThat(actualNumber).isSameAs(expectedNumber);
+    }
+
+    @Test public void checkingNotNegative_withZero_returnsNumber() {
+        int expectedNumber = 0;
+
+        int actualNumber = checkNotNegative(expectedNumber);
+
+        assertThat(actualNumber).isSameAs(expectedNumber);
+    }
+
+    @Test public void checkingNotNegative_withNegative_throwsExceptionWithMessageForNegative() {
+        assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() -> checkNotNegative(-5))
+                .withMessageContaining("negative");
     }
 }

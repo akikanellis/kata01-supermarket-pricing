@@ -25,4 +25,11 @@ final class Preconditions {
 
         return s;
     }
+
+    static int checkNotNegative(int n) {
+        if (n < 0) throw new IllegalArgumentException(String.format("Argument can't be negative. Found [%d]", n));
+
+        return n;
+    }
+
 }
