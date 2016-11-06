@@ -60,4 +60,37 @@ public class StockRepositoryTest {
         assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(() -> stock.increaseQuantity(item, -5));
     }
+
+    @Test public void reducingQuantity_withExistingItemAndBiggerCurrentQuantity_reducesQuantity() {
+        Item item = createDefaultItem();
+        stock.increaseQuantity(item, 20);
+
+        stock.decreaseQuantity(item, 15);
+
+        assertThat(stock.getQuantity(item)).isEqualTo(5);
+    }
+
+    @Test public void reducingQuantity_withExistingItemAndSmallerCurrentQuantity_reducesQuantityToZero() {
+        Item item = createDefaultItem();
+        stock.increaseQuantity(item, 10);
+
+        stock.decreaseQuantity(item, 15);
+
+        assertThat(stock.getQuantity(item)).isEqualTo(0);
+    }
+
+    @Test public void reducingQuantity_withNotExistingItem_createsItemWithZeroQuantity() {
+        Item item = createDefaultItem();
+
+        stock.decreaseQuantity(item, 10);
+
+        assertThat(stock.getQuantity(item)).isEqualTo(0);
+    }
+
+    @Test public void reducingQuantity_withNegativeQuantity_throwsException() {
+        Item item = createDefaultItem();
+
+        assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() -> stock.decreaseQuantity(item, -5));
+    }
 }

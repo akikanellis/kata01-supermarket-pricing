@@ -25,6 +25,25 @@ public class StockRepository {
         stock.put(item, quantity + currentQuantity);
     }
 
+    public void decreaseQuantity(Item item, int quantity) {
+        checkNotNegative(quantity);
+
+        if (!contains(item)) create(item);
+
+        int newQuantity = calculateReducedQuantity(item, quantity);
+        stock.put(item, newQuantity);
+    }
+
+    private int calculateReducedQuantity(Item item, int quantity) {
+        int currentQuantity = getQuantity(item);
+        int newQuantity = currentQuantity - quantity;
+        if (newQuantity < 0) {
+            return 0;
+        } else {
+            return newQuantity;
+        }
+    }
+
     /* Visible for testing */
     boolean contains(Item item) { return stock.containsKey(item); }
 
