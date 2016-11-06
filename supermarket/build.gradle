@@ -7,3 +7,9 @@ apply from: rootProject.file('scripts/code_analysis.gradle')
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
+
+dependencies {
+    testCompile libraries.jUnit
+    testCompile libraries.assertJ
+    testCompile libraries.mockito
+}
