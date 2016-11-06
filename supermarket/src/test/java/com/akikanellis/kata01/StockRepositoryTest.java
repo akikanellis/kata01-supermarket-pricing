@@ -12,7 +12,7 @@ public class StockRepositoryTest {
 
     @Before public void beforeEach() { stock = new StockRepository(); }
 
-    @Test public void creatingItem_withNotExistingItem_initializesQuantityToZero() {
+    @Test public void creatingItem_initializesQuantityToZero() {
         Item item = createDefaultItem();
 
         stock.create(item);
@@ -20,7 +20,7 @@ public class StockRepositoryTest {
         assertThat(stock.getQuantity(item)).isEqualTo(0);
     }
 
-    @Test public void creatingItem_withNotExistingItem_createsItem() {
+    @Test public void creatingItem_createsItem() {
         Item newItem = createDefaultItem();
 
         stock.create(newItem);
@@ -28,13 +28,12 @@ public class StockRepositoryTest {
         assertThat(stock.contains(newItem)).isTrue();
     }
 
-    @Test public void creatingItem_withExistingItem_doesNothing() {
+    @Test public void creatingItem_withExistingItem_throwsException() {
         Item item = createDefaultItem();
-        stock.addQuantity(item, 5);
-
         stock.create(item);
 
-        assertThat(stock.getQuantity(item)).isEqualTo(5);
+        assertThatExceptionOfType(IllegalStateException.class)
+                .isThrownBy(() -> stock.create(item));
     }
 
     @Test public void addingQuantity_withExistingItem_AddsToQuantity() {

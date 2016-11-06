@@ -11,7 +11,9 @@ public class StockRepository {
     public StockRepository() { this.stock = new HashMap<>(); }
 
     public void create(Item item) {
-        if (contains(item)) return;
+        if (contains(item)) {
+            throw new IllegalStateException(String.format("The item already exists. Item was [%s]", item));
+        }
 
         stock.put(item, 0);
     }

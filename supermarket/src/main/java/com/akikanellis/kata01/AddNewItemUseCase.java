@@ -5,5 +5,9 @@ public class AddNewItemUseCase {
 
     public AddNewItemUseCase(StockRepository stock) { this.stock = stock; }
 
-    public void execute(Item item) { stock.create(item); }
+    public void execute(Item item) {
+        if (!stock.contains(item)) {
+            stock.create(item);
+        }
+    }
 }
