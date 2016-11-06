@@ -16,4 +16,5 @@ dependencies {
     testCompile libraries.jUnit
     testCompile libraries.assertJ
     testCompile libraries.mockito
+    testCompile libraries.equalsVerifier
 }
