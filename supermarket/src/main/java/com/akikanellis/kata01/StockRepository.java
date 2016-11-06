@@ -16,32 +16,30 @@ public class StockRepository {
         stock.put(item, 0);
     }
 
-    public void increaseQuantity(Item item, int quantity) {
+    public void addQuantity(Item item, int quantity) {
         checkNotNegative(quantity);
-
-        if (!contains(item)) create(item);
+        createIfItNotExists(item);
 
         Integer currentQuantity = stock.get(item);
         stock.put(item, quantity + currentQuantity);
     }
 
-    public void decreaseQuantity(Item item, int quantity) {
+    public void removeQuantity(Item item, int quantity) {
         checkNotNegative(quantity);
-
-        if (!contains(item)) create(item);
+        createIfItNotExists(item);
 
         int newQuantity = calculateReducedQuantity(item, quantity);
         stock.put(item, newQuantity);
     }
 
+    private void createIfItNotExists(Item item) {if (!contains(item)) create(item);}
+
     private int calculateReducedQuantity(Item item, int quantity) {
         int currentQuantity = getQuantity(item);
         int newQuantity = currentQuantity - quantity;
-        if (newQuantity < 0) {
-            return 0;
-        } else {
-            return newQuantity;
-        }
+
+        if (newQuantity < 0) return 0;
+        else return newQuantity;
     }
 
     /* Visible for testing */

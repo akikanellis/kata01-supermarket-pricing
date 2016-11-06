@@ -30,67 +30,67 @@ public class StockRepositoryTest {
 
     @Test public void creatingItem_withExistingItem_doesNothing() {
         Item item = createDefaultItem();
-        stock.increaseQuantity(item, 5);
+        stock.addQuantity(item, 5);
 
         stock.create(item);
 
         assertThat(stock.getQuantity(item)).isEqualTo(5);
     }
 
-    @Test public void addingItem_withExistingItem_AddsToQuantity() {
+    @Test public void addingQuantity_withExistingItem_AddsToQuantity() {
         Item item = createDefaultItem();
-        stock.increaseQuantity(item, 5);
+        stock.addQuantity(item, 5);
 
-        stock.increaseQuantity(item, 10);
+        stock.addQuantity(item, 10);
 
         assertThat(stock.getQuantity(item)).isEqualTo(15);
     }
 
-    @Test public void addingItem_withNotExistingItem_createsItemAndInitializesToQuantity() {
+    @Test public void addingQuantity_withNotExistingItem_createsItemAndInitializesToQuantity() {
         Item item = createDefaultItem();
 
-        stock.increaseQuantity(item, 10);
+        stock.addQuantity(item, 10);
 
         assertThat(stock.getQuantity(item)).isEqualTo(10);
     }
 
-    @Test public void addingItem_withNegativeQuantity_throwsException() {
+    @Test public void addingQuantity_withNegativeQuantity_throwsException() {
         Item item = createDefaultItem();
 
         assertThatExceptionOfType(IllegalArgumentException.class)
-                .isThrownBy(() -> stock.increaseQuantity(item, -5));
+                .isThrownBy(() -> stock.addQuantity(item, -5));
     }
 
-    @Test public void reducingQuantity_withExistingItemAndBiggerCurrentQuantity_reducesQuantity() {
+    @Test public void removingQuantity_withExistingItemAndBiggerCurrentQuantity_reducesQuantity() {
         Item item = createDefaultItem();
-        stock.increaseQuantity(item, 20);
+        stock.addQuantity(item, 20);
 
-        stock.decreaseQuantity(item, 15);
+        stock.removeQuantity(item, 15);
 
         assertThat(stock.getQuantity(item)).isEqualTo(5);
     }
 
-    @Test public void reducingQuantity_withExistingItemAndSmallerCurrentQuantity_reducesQuantityToZero() {
+    @Test public void removingQuantity_withExistingItemAndSmallerCurrentQuantity_reducesQuantityToZero() {
         Item item = createDefaultItem();
-        stock.increaseQuantity(item, 10);
+        stock.addQuantity(item, 10);
 
-        stock.decreaseQuantity(item, 15);
+        stock.removeQuantity(item, 15);
 
         assertThat(stock.getQuantity(item)).isEqualTo(0);
     }
 
-    @Test public void reducingQuantity_withNotExistingItem_createsItemWithZeroQuantity() {
+    @Test public void removingQuantity_withNotExistingItem_createsItemWithZeroQuantity() {
         Item item = createDefaultItem();
 
-        stock.decreaseQuantity(item, 10);
+        stock.removeQuantity(item, 10);
 
         assertThat(stock.getQuantity(item)).isEqualTo(0);
     }
 
-    @Test public void reducingQuantity_withNegativeQuantity_throwsException() {
+    @Test public void removingQuantity_withNegativeQuantity_throwsException() {
         Item item = createDefaultItem();
 
         assertThatExceptionOfType(IllegalArgumentException.class)
-                .isThrownBy(() -> stock.decreaseQuantity(item, -5));
+                .isThrownBy(() -> stock.removeQuantity(item, -5));
     }
 }
