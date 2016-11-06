@@ -13,7 +13,7 @@ import static org.mockito.Mockito.verify;
 public class StockFacadeTest {
     @Mock private AddNewItemIfNotExistsUseCase addNewItemIfNotExistsUseCase;
     @Mock private FillStockUseCase fillStockUseCase;
-    @Mock private ReduceStock reduceStock;
+    @Mock private ReduceStockUseCase reduceStock;
     private StockFacade stockFacade;
 
     @Before public void beforeEach() {

@@ -3,11 +3,11 @@ package com.akikanellis.kata01;
 public class StockFacade {
     private final AddNewItemIfNotExistsUseCase addNewItemIfNotExistsUseCase;
     private final FillStockUseCase fillStockUseCase;
-    private final ReduceStock reduceStock;
+    private final ReduceStockUseCase reduceStock;
 
     public StockFacade(AddNewItemIfNotExistsUseCase addNewItemIfNotExistsUseCase,
                        FillStockUseCase fillStockUseCase,
-                       ReduceStock reduceStock) {
+                       ReduceStockUseCase reduceStock) {
         this.addNewItemIfNotExistsUseCase = addNewItemIfNotExistsUseCase;
         this.fillStockUseCase = fillStockUseCase;
         this.reduceStock = reduceStock;
