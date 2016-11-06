@@ -3,6 +3,8 @@ package com.akikanellis.kata01.test_utils;
 import com.akikanellis.kata01.Item;
 import com.akikanellis.kata01.ItemWithQuantity;
 import com.akikanellis.kata01.Items;
+import com.akikanellis.kata01.OfferStrategy;
+import com.akikanellis.kata01.Offers;
 import com.akikanellis.kata01.Price;
 
 import java.util.ArrayList;
@@ -46,5 +48,13 @@ public final class Fakes {
         itemsWithQuantities.add(pearWithQuantity);
 
         return Items.fromList(itemsWithQuantities);
+    }
+
+    public static OfferStrategy createDefaultOfferStrategy() {
+        return new OfferStrategy() {
+            @Override public Offers calculateOffers(Items items) {
+                return null;
+            }
+        };
     }
 }
