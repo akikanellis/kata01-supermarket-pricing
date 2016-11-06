@@ -13,9 +13,12 @@ import static org.mockito.Mockito.verify;
 public class StockFacadeTest {
     @Mock private AddNewItemIfNotExistsUseCase addNewItemIfNotExistsUseCase;
     @Mock private FillStockUseCase fillStockUseCase;
+    @Mock private ReduceStock reduceStock;
     private StockFacade stockFacade;
 
-    @Before public void beforeEach() { stockFacade = new StockFacade(addNewItemIfNotExistsUseCase, fillStockUseCase); }
+    @Before public void beforeEach() {
+        stockFacade = new StockFacade(addNewItemIfNotExistsUseCase, fillStockUseCase, reduceStock);
+    }
 
     @Test public void addingNewItem_usesUseCase() {
         Item item = createDefaultItem();
@@ -25,11 +28,19 @@ public class StockFacadeTest {
         verify(addNewItemIfNotExistsUseCase).execute(item);
     }
 
-    @Test public void fillingStock_usesStockUseCase() {
+    @Test public void fillingStock_usesFillStockUseCase() {
         Item item = createDefaultItem();
 
         stockFacade.fillStock(item, 50);
 
         verify(fillStockUseCase).execute(item, 50);
+    }
+
+    @Test public void reducingStock_usesReduceStockUseCase() {
+        Item item = createDefaultItem();
+
+        stockFacade.reduceStock(item, 50);
+
+        verify(reduceStock).execute(item, 50);
     }
 }
