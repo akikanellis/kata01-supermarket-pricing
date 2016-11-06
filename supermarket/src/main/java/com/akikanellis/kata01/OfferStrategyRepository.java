@@ -1,6 +1,5 @@
 package com.akikanellis.kata01;
 
-import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -13,5 +12,5 @@ public class OfferStrategyRepository {
 
     public void remove(OfferStrategy offerStrategy) { offerStrategies.remove(offerStrategy); }
 
-    public Collection<OfferStrategy> getAll() { return new HashSet<>(offerStrategies); }
+    public OfferStrategies getAll() { return OfferStrategies.fromCollection(offerStrategies); }
 }

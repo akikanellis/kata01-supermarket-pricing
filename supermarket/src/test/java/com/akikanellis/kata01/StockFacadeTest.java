@@ -7,6 +7,7 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import static com.akikanellis.kata01.test_utils.Fakes.createDefaultItem;
+import static com.akikanellis.kata01.test_utils.Fakes.createDefaultOfferStrategy;
 import static com.akikanellis.kata01.test_utils.Fakes.defaultItems;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.mockito.Mockito.verify;
@@ -18,11 +19,13 @@ public class StockFacadeTest {
     @Mock private FillStockUseCase fillStockUseCase;
     @Mock private ReduceStockUseCase reduceStock;
     @Mock private GetStockUseCase getStock;
+    @Mock private AddOfferStrategyUseCase addOfferStrategy;
+    @Mock private RemoveOfferStrategyUseCase removeOfferStrategy;
     private StockFacade stockFacade;
 
     @Before public void beforeEach() {
-
-        stockFacade = new StockFacade(addNewItemIfNotExistsUseCase, fillStockUseCase, reduceStock, getStock);
+        stockFacade = new StockFacade(addNewItemIfNotExistsUseCase, fillStockUseCase, reduceStock, getStock,
+                addOfferStrategy, removeOfferStrategy);
     }
 
     @Test public void addingNewItem_usesUseCase() {
@@ -56,5 +59,21 @@ public class StockFacadeTest {
         Items actualItems = stockFacade.getStock();
 
         assertThat(actualItems).isSameAs(expectedItems);
+    }
+
+    @Test public void addingOfferStrategy_usesAddOfferStrategyUseCase() {
+        OfferStrategy offerStrategy = createDefaultOfferStrategy();
+
+        stockFacade.addOfferStrategy(offerStrategy);
+
+        verify(addOfferStrategy).execute(offerStrategy);
+    }
+
+    @Test public void removingOfferStrategy_usesRemoveOfferStrategyUseCase() {
+        OfferStrategy offerStrategy = createDefaultOfferStrategy();
+
+        stockFacade.removeOfferStrategy(offerStrategy);
+
+        verify(removeOfferStrategy).execute(offerStrategy);
     }
 }

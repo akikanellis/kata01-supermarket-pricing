@@ -16,7 +16,7 @@ public class OfferStrategyRepositoryTest {
 
         offerStrategies.add(offerStrategy);
 
-        assertThat(offerStrategies.getAll()).containsOnly(offerStrategy);
+        assertThat(offerStrategies.getAll().asList()).containsOnly(offerStrategy);
     }
 
     @Test public void removingStrategy_removesFromStrategies() {
@@ -25,6 +25,6 @@ public class OfferStrategyRepositoryTest {
 
         offerStrategies.remove(offerStrategy);
 
-        assertThat(offerStrategies.getAll()).isEmpty();
+        assertThat(offerStrategies.getAll().asList()).isEmpty();
     }
 }
