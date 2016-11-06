@@ -1,6 +1,7 @@
 package com.akikanellis.kata01.test_utils;
 
 import com.akikanellis.kata01.Item;
+import com.akikanellis.kata01.Items;
 import com.akikanellis.kata01.Price;
 
 public final class Fakes {
@@ -13,5 +14,9 @@ public final class Fakes {
                 .name("Apple")
                 .price(Price.ONE)
                 .build();
+    }
+
+    public static Items defaultItems() {
+        return new Items();
     }
 }
