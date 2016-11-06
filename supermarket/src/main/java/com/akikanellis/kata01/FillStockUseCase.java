@@ -16,7 +16,7 @@ public class FillStockUseCase {
         addNewItemIfNotExists.execute(item);
 
         int newQuantity = calculateNewQuantity(item, quantity);
-        stock.addQuantity(item, newQuantity);
+        stock.replaceQuantity(item, newQuantity);
     }
 
     private int calculateNewQuantity(Item item, int quantity) {

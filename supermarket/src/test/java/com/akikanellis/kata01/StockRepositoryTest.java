@@ -36,61 +36,19 @@ public class StockRepositoryTest {
                 .isThrownBy(() -> stock.create(item));
     }
 
-    @Test public void addingQuantity_withExistingItem_AddsToQuantity() {
+    @Test public void replacingQuantity_withExistingItem_ReplacesQuantity() {
         Item item = createDefaultItem();
         stock.create(item);
-        stock.addQuantity(item, 5);
 
-        stock.addQuantity(item, 10);
+        stock.replaceQuantity(item, 10);
 
-        assertThat(stock.getQuantity(item)).isEqualTo(15);
+        assertThat(stock.getQuantity(item)).isEqualTo(10);
     }
 
-    @Test public void addingQuantity_withNotExistingItem_throwsException() {
+    @Test public void replacingQuantity_withNotExistingItem_throwsException() {
         Item item = createDefaultItem();
 
         assertThatExceptionOfType(ItemDoesNotExistException.class)
-                .isThrownBy(() -> stock.addQuantity(item, 10));
-    }
-
-    @Test public void addingQuantity_withNegativeQuantity_throwsException() {
-        Item item = createDefaultItem();
-
-        assertThatExceptionOfType(IllegalArgumentException.class)
-                .isThrownBy(() -> stock.addQuantity(item, -5));
-    }
-
-    @Test public void removingQuantity_withExistingItemAndBiggerCurrentQuantity_reducesQuantity() {
-        Item item = createDefaultItem();
-        stock.create(item);
-        stock.addQuantity(item, 20);
-
-        stock.removeQuantity(item, 15);
-
-        assertThat(stock.getQuantity(item)).isEqualTo(5);
-    }
-
-    @Test public void removingQuantity_withExistingItemAndSmallerCurrentQuantity_reducesQuantityToZero() {
-        Item item = createDefaultItem();
-        stock.create(item);
-        stock.addQuantity(item, 10);
-
-        stock.removeQuantity(item, 15);
-
-        assertThat(stock.getQuantity(item)).isEqualTo(0);
-    }
-
-    @Test public void removingQuantity_withNotExistingItem_throwsException() {
-        Item item = createDefaultItem();
-
-        assertThatExceptionOfType(ItemDoesNotExistException.class)
-                .isThrownBy(() -> stock.removeQuantity(item, 10));
-    }
-
-    @Test public void removingQuantity_withNegativeQuantity_throwsException() {
-        Item item = createDefaultItem();
-
-        assertThatExceptionOfType(IllegalArgumentException.class)
-                .isThrownBy(() -> stock.removeQuantity(item, -5));
+                .isThrownBy(() -> stock.replaceQuantity(item, 10));
     }
 }

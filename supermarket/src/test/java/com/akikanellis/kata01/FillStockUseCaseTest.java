@@ -33,7 +33,7 @@ public class FillStockUseCaseTest {
 
         fillStock.execute(item, 50);
 
-        verify(stock).addQuantity(item, 70);
+        verify(stock).replaceQuantity(item, 70);
     }
 
     @Test public void fillingStock_withNegativeQuantity_throwsException() {
