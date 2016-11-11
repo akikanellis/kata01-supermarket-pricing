@@ -6,8 +6,22 @@ A solution to [Kata01: Supermarket Pricing](http://codekata.com/kata/kata01-supe
 Download [the latest JAR][1].
 
 ## User stories
-DescriptionPlaceholder
-
+The Kata's description is fairly vague giving us the freedom to define the user stories as we see fit.
+We assume that the supermarket has item stock that needs to be managed and that the *user* is the stock manager. Given that,
+our user stories are like so:
+ 
+ - As a stock manager user I can add a new item to the stock.
+ - As a stock manager user I can increase the quantity of an item so that I can update it in the arrival of more stock.
+ - As a stock manager user I can decrease the quantity of an item so that I can update it in the sale of stock.
+ - As a stock manager user I can see all the items in the stock.
+ - As a stock manager user I can add a new offer strategy to the stock so that the customers can have more discounts.
+ - As a stock manager user I can remove an offer strategy from the stock so that I can limit the customers' discounts.
+ - As a stock manager user I can see all the current offer strategies.
+ - As a stock manager user I can see all the applicable offers to the stock.
+ - As a stock manager user I can see the total value of the offers that are currently applicable.
+ - As a stock manager user I can see the total value of the stock, before the offers.
+ - As a stock manager user I can see the total value of the stock, after the offers.
+ 
 ## Design
 DescriptionPlaceholder
 
