@@ -42,4 +42,6 @@ public final class Price {
     }
 
     @Override public int hashCode() { return Objects.hashCode(amount); }
+
+    @Override public String toString() { return "Price{amount=" + amount + '}'; }
 }
