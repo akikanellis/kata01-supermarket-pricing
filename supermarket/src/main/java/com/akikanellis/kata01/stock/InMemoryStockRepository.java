@@ -1,6 +1,7 @@
 package com.akikanellis.kata01.stock;
 
 import com.akikanellis.kata01.Item;
+import com.akikanellis.kata01.ItemAlreadyExistsException;
 import com.akikanellis.kata01.ItemDoesNotExistException;
 import com.akikanellis.kata01.Items;
 
@@ -14,21 +15,15 @@ public class InMemoryStockRepository implements StockRepository {
     public InMemoryStockRepository() { this.stock = new HashMap<>(); }
 
     @Override public void create(Item item) {
-        if (contains(item)) {
-            throw new IllegalStateException(String.format("The item already exists. Item was [%s]", item));
-        }
+        if (contains(item)) throw new ItemAlreadyExistsException(item);
 
         stock.put(item, 0);
     }
 
     @Override public void replaceQuantity(Item item, int quantity) {
-        checkItemExists(item);
+        if (!contains(item)) throw new ItemDoesNotExistException(item);
 
         stock.put(item, quantity);
-    }
-
-    private void checkItemExists(Item item) {
-        if (!contains(item)) throw new ItemDoesNotExistException(item);
     }
 
     /* Visible for testing */
