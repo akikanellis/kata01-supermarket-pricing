@@ -98,7 +98,7 @@ public class StockFacadeTest {
     }
 
     @Test public void gettingOffersValue_usesUseCase() {
-        Price value = Price.from(-15);
+        Price value = Price.of(-15);
         when(getOffersValue.execute()).thenReturn(value);
 
         Price offersValue = stockFacade.getOffersValue();
@@ -107,7 +107,7 @@ public class StockFacadeTest {
     }
 
     @Test public void gettingStockValueBeforeOffers_usesUseCase() {
-        Price value = Price.from(50);
+        Price value = Price.of(50);
         when(getStockValueBeforeOffers.execute()).thenReturn(value);
 
         Price stockValueBeforeOffers = stockFacade.getStockValueBeforeOffers();
@@ -116,7 +116,7 @@ public class StockFacadeTest {
     }
 
     @Test public void gettingStockValueAfterOffers_usesUseCase() {
-        Price value = Price.from(35);
+        Price value = Price.of(35);
         when(getStockValueAfterOffers.execute()).thenReturn(value);
 
         Price stockValueAfterOffers = stockFacade.getStockValueAfterOffers();

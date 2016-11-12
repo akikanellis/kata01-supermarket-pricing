@@ -99,7 +99,7 @@ public final class Fakes {
     }
 
     private static Offer createThreeApplesForOnePoundOffer() {
-        return Offer.create("3 Apples for £1", Price.from(-50));
+        return Offer.create("3 Apples for £1", Price.of(-50));
     }
 
     public static Offers createDefaultOffers() {
@@ -111,11 +111,11 @@ public final class Fakes {
     }
 
     private static Offer createFiftyPercentOffPearsOffer() {
-        return Offer.create("50% off pears", Price.from(-50));
+        return Offer.create("50% off pears", Price.of(-50));
     }
 
     private static Offer createTwoOrangesOneFreeOffer() {
-        return Offer.create("Buy 2 Oranges get 1 free", Price.from(-50));
+        return Offer.create("Buy 2 Oranges get 1 free", Price.of(-50));
     }
 
     public static Offer createDefaultOffer() { return createThreeApplesForOnePoundOffer(); }

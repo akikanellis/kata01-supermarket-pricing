@@ -10,14 +10,14 @@ public class PriceTest {
 
     @Test public void creating_withNullAmount_throwsException() {
         assertThatExceptionOfType(NullPointerException.class)
-                .isThrownBy(() -> Price.from(null));
+                .isThrownBy(() -> Price.of(null));
     }
 
     @Test public void equals_isCorrect() { EqualsVerifier.forClass(Price.class).verify(); }
 
     @Test public void multiplyBy_withPositiveNumber_returnsMultipliedPrice() {
-        Price price = Price.from(500);
-        Price expectedPrice = Price.from(1500);
+        Price price = Price.of(500);
+        Price expectedPrice = Price.of(1500);
 
         Price actualPrice = price.multiplyBy(3);
 

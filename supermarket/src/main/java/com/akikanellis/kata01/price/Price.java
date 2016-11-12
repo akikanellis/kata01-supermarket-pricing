@@ -16,12 +16,12 @@ public final class Price {
         this.amount = checkNotNull(amount);
     }
 
-    public static Price from(int amount) {
+    public static Price of(int amount) {
         BigDecimal bigDecimalAmount = new BigDecimal(amount);
-        return from(bigDecimalAmount);
+        return of(bigDecimalAmount);
     }
 
-    public static Price from(BigDecimal amount) { return new Price(amount); }
+    public static Price of(BigDecimal amount) { return new Price(amount); }
 
     public Price multiplyBy(int multiplier) {
         checkNotNegative(multiplier);
