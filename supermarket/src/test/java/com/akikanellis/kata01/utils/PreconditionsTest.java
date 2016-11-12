@@ -1,4 +1,4 @@
-package com.akikanellis.kata01;
+package com.akikanellis.kata01.utils;
 
 import org.junit.Test;
 

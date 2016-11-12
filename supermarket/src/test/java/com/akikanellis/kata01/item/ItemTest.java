@@ -1,6 +1,5 @@
-package com.akikanellis.kata01;
+package com.akikanellis.kata01.item;
 
-import com.akikanellis.kata01.item.Item;
 import com.akikanellis.kata01.price.Price;
 import org.junit.Test;
 

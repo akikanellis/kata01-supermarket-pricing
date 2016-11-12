@@ -1,6 +1,5 @@
-package com.akikanellis.kata01;
+package com.akikanellis.kata01.price;
 
-import com.akikanellis.kata01.price.Price;
 import nl.jqno.equalsverifier.EqualsVerifier;
 import org.junit.Test;
 
