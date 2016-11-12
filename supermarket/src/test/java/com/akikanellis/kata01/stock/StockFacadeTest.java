@@ -98,26 +98,29 @@ public class StockFacadeTest {
     }
 
     @Test public void gettingOffersValue_usesUseCase() {
-        when(getOffersValue.execute()).thenReturn(Price.ONE);
+        Price value = Price.from(-15);
+        when(getOffersValue.execute()).thenReturn(value);
 
         Price offersValue = stockFacade.getOffersValue();
 
-        assertThat(offersValue).isSameAs(Price.ONE);
+        assertThat(offersValue).isSameAs(value);
     }
 
     @Test public void gettingStockValueBeforeOffers_usesUseCase() {
-        when(getStockValueBeforeOffers.execute()).thenReturn(Price.ONE);
+        Price value = Price.from(50);
+        when(getStockValueBeforeOffers.execute()).thenReturn(value);
 
         Price stockValueBeforeOffers = stockFacade.getStockValueBeforeOffers();
 
-        assertThat(stockValueBeforeOffers).isSameAs(Price.ONE);
+        assertThat(stockValueBeforeOffers).isSameAs(value);
     }
 
     @Test public void gettingStockValueAfterOffers_usesUseCase() {
-        when(getStockValueAfterOffers.execute()).thenReturn(Price.ONE);
+        Price value = Price.from(35);
+        when(getStockValueAfterOffers.execute()).thenReturn(value);
 
         Price stockValueAfterOffers = stockFacade.getStockValueAfterOffers();
 
-        assertThat(stockValueAfterOffers).isSameAs(Price.ONE);
+        assertThat(stockValueAfterOffers).isSameAs(value);
     }
 }
