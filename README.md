@@ -10,7 +10,7 @@ The Kata's description is fairly vague giving us the freedom to define the user 
 the supermarket has a stock of items that needs to be managed and that the *user* is the Stock Manager. Given that, our
 user stories are like so:
  
- - As a Stock Manager user, I can add a new item to the stock.
+ 1. As a Stock Manager user, I can add a new item to the stock.
  - As a Stock Manager user, I can increase the quantity of an item so that I can update it in the arrival of more stock.
  - As a Stock Manager user, I can decrease the quantity of an item so that I can update it in the sale of stock.
  - As a Stock Manager user, I can see all the items in the stock.
