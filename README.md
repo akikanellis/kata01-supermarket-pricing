@@ -101,10 +101,7 @@ like this:
 ### Main Resources
 
 - `/items`
-- `/items`
-- `/items`
 - `/offerstrategies`
-- `/applicableoffers`
 - `/applicableoffers`
 
 ### Supported verbs
