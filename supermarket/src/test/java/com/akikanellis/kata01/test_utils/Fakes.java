@@ -65,7 +65,7 @@ public final class Fakes {
     }
 
     public static OfferStrategy createDefaultOfferStrategy() {
-        return new OfferStrategy() {
+        return new OfferStrategy(1, "Default offer strategy") {
             @Override public Offers calculateOffers(Items items) {
                 return null;
             }
@@ -73,23 +73,29 @@ public final class Fakes {
     }
 
     public static OfferStrategies createDefaultOfferStrategies() {
-        OfferStrategy offerStrategy1 = items -> {
-            if (items.asList().isEmpty()) return Offers.empty();
+        OfferStrategy offerStrategy1 = new OfferStrategy(1, "Default offer strategy") {
+            @Override public Offers calculateOffers(Items items) {
+                if (items.asList().isEmpty()) return Offers.empty();
 
-            OfferWithQuantity offerWithQuantity = OfferWithQuantity.create(createThreeApplesForOnePoundOffer(), 10);
-            return Offers.fromList(Collections.singletonList(offerWithQuantity));
+                OfferWithQuantity offerWithQuantity = OfferWithQuantity.create(createThreeApplesForOnePoundOffer(), 10);
+                return Offers.fromList(Collections.singletonList(offerWithQuantity));
+            }
         };
-        OfferStrategy offerStrategy2 = items -> {
-            if (items.asList().isEmpty()) return Offers.empty();
+        OfferStrategy offerStrategy2 = new OfferStrategy(2, "Default offer strategy") {
+            @Override public Offers calculateOffers(Items items) {
+                if (items.asList().isEmpty()) return Offers.empty();
 
-            OfferWithQuantity offerWithQuantity = OfferWithQuantity.create(createTwoOrangesOneFreeOffer(), 2);
-            return Offers.fromList(Collections.singletonList(offerWithQuantity));
+                OfferWithQuantity offerWithQuantity = OfferWithQuantity.create(createThreeApplesForOnePoundOffer(), 2);
+                return Offers.fromList(Collections.singletonList(offerWithQuantity));
+            }
         };
-        OfferStrategy offerStrategy3 = items -> {
-            if (items.asList().isEmpty()) return Offers.empty();
+        OfferStrategy offerStrategy3 = new OfferStrategy(3, "Default offer strategy") {
+            @Override public Offers calculateOffers(Items items) {
+                if (items.asList().isEmpty()) return Offers.empty();
 
-            OfferWithQuantity offerWithQuantity = OfferWithQuantity.create(createFiftyPercentOffPearsOffer(), 1);
-            return Offers.fromList(Collections.singletonList(offerWithQuantity));
+                OfferWithQuantity offerWithQuantity = OfferWithQuantity.create(createThreeApplesForOnePoundOffer(), 1);
+                return Offers.fromList(Collections.singletonList(offerWithQuantity));
+            }
         };
 
         List<OfferStrategy> offerStrategies = new ArrayList<>();
