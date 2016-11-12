@@ -14,6 +14,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public final class Fakes {
 
@@ -119,5 +121,14 @@ public final class Fakes {
     }
 
     public static Offer createDefaultOffer() { return createThreeApplesForOnePoundOffer(); }
+
+    public static Offers createOffersWithPrices(long... amounts) {
+        List<OfferWithQuantity> offers = IntStream.range(0, amounts.length)
+                .mapToObj(i -> Offer.create("offer-" + i, Price.of(amounts[i])))
+                .map(offer -> OfferWithQuantity.create(offer, 1))
+                .collect(Collectors.toList());
+
+        return Offers.fromList(offers);
+    }
 }
 
