@@ -9,7 +9,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class OfferStrategyRepositoryTest {
     private OfferStrategyRepository offerStrategies;
 
-    @Before public void beforeEach() { offerStrategies = new OfferStrategyRepository(); }
+    @Before public void beforeEach() { offerStrategies = new InMemoryOfferStrategyRepository(); }
 
     @Test public void addingStrategy_addsToStrategies() {
         OfferStrategy offerStrategy = createDefaultOfferStrategy();
