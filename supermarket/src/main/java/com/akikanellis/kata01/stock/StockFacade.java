@@ -1,7 +1,11 @@
 package com.akikanellis.kata01.stock;
 
-import com.akikanellis.kata01.Item;
-import com.akikanellis.kata01.Items;
+import com.akikanellis.kata01.item.Item;
+import com.akikanellis.kata01.item.Items;
+import com.akikanellis.kata01.offer.OfferStrategies;
+import com.akikanellis.kata01.offer.OfferStrategy;
+import com.akikanellis.kata01.offer.Offers;
+import com.akikanellis.kata01.price.Price;
 
 public class StockFacade {
     private final AddNewItemIfNotExistsUseCase addNewItemIfNotExistsUseCase;
@@ -11,13 +15,18 @@ public class StockFacade {
     private final AddOfferStrategyUseCase addOfferStrategy;
     private final RemoveOfferStrategyUseCase removeOfferStrategy;
     private final GetActiveOfferStrategiesUseCase getActiveOfferStrategies;
+    private final GetApplicableOffersUseCase getApplicableOffers;
+    private final GetOffersValueUseCase getOffersValue;
+    private final GetStockValueBeforeOffersUseCase getStockValueBeforeOffers;
+    private final GetStockValueAfterOffersUseCase getStockValueAfterOffers;
 
-    public StockFacade(AddNewItemIfNotExistsUseCase addNewItemIfNotExistsUseCase,
-                       FillStockUseCase fillStockUseCase,
-                       ReduceStockUseCase reduceStock,
-                       GetStockUseCase getStock, AddOfferStrategyUseCase addOfferStrategy,
-                       RemoveOfferStrategyUseCase removeOfferStrategy,
-                       GetActiveOfferStrategiesUseCase getActiveOfferStrategies) {
+    public StockFacade(AddNewItemIfNotExistsUseCase addNewItemIfNotExistsUseCase, FillStockUseCase fillStockUseCase,
+                       ReduceStockUseCase reduceStock, GetStockUseCase getStock,
+                       AddOfferStrategyUseCase addOfferStrategy, RemoveOfferStrategyUseCase removeOfferStrategy,
+                       GetActiveOfferStrategiesUseCase getActiveOfferStrategies,
+                       GetApplicableOffersUseCase getApplicableOffers, GetOffersValueUseCase getOffersValue,
+                       GetStockValueBeforeOffersUseCase getStockValueBeforeOffers,
+                       GetStockValueAfterOffersUseCase getStockValueAfterOffers) {
         this.addNewItemIfNotExistsUseCase = addNewItemIfNotExistsUseCase;
         this.fillStockUseCase = fillStockUseCase;
         this.reduceStock = reduceStock;
@@ -25,6 +34,10 @@ public class StockFacade {
         this.addOfferStrategy = addOfferStrategy;
         this.removeOfferStrategy = removeOfferStrategy;
         this.getActiveOfferStrategies = getActiveOfferStrategies;
+        this.getApplicableOffers = getApplicableOffers;
+        this.getOffersValue = getOffersValue;
+        this.getStockValueBeforeOffers = getStockValueBeforeOffers;
+        this.getStockValueAfterOffers = getStockValueAfterOffers;
     }
 
     public void addNewItem(Item item) { addNewItemIfNotExistsUseCase.execute(item); }
@@ -40,4 +53,12 @@ public class StockFacade {
     public void removeOfferStrategy(OfferStrategy offerStrategy) { removeOfferStrategy.execute(offerStrategy); }
 
     public OfferStrategies getActiveOfferStrategies() { return getActiveOfferStrategies.execute(); }
+
+    public Offers getApplicableOffers() { return getApplicableOffers.execute(); }
+
+    public Price getOffersValue() { return getOffersValue.execute(); }
+
+    public Price getStockValueBeforeOffers() { return getStockValueBeforeOffers.execute(); }
+
+    public Price getStockValueAfterOffers() { return getStockValueAfterOffers.execute(); }
 }

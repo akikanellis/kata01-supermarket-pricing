@@ -1,8 +1,9 @@
 package com.akikanellis.kata01.stock;
 
-import com.akikanellis.kata01.Item;
-import com.akikanellis.kata01.ItemDoesNotExistException;
-import com.akikanellis.kata01.Items;
+import com.akikanellis.kata01.item.Item;
+import com.akikanellis.kata01.item.ItemAlreadyExistsException;
+import com.akikanellis.kata01.item.ItemDoesNotExistException;
+import com.akikanellis.kata01.item.Items;
 import com.akikanellis.kata01.test_utils.Fakes;
 import org.junit.Before;
 import org.junit.Test;
@@ -11,10 +12,10 @@ import static com.akikanellis.kata01.test_utils.Fakes.createDefaultItem;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
-public class StockRepositoryTest {
-    private StockRepository stock;
+public class InMemoryStockRepositoryTest {
+    private InMemoryStockRepository stock;
 
-    @Before public void beforeEach() { stock = new StockRepository(); }
+    @Before public void beforeEach() { stock = new InMemoryStockRepository(); }
 
     @Test public void creatingItem_withNotExistingItem_createsItem() {
         Item newItem = createDefaultItem();
@@ -36,7 +37,7 @@ public class StockRepositoryTest {
         Item item = createDefaultItem();
         stock.create(item);
 
-        assertThatExceptionOfType(IllegalStateException.class)
+        assertThatExceptionOfType(ItemAlreadyExistsException.class)
                 .isThrownBy(() -> stock.create(item));
     }
 

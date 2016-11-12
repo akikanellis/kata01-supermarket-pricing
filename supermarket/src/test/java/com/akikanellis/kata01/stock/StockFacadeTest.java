@@ -1,7 +1,11 @@
 package com.akikanellis.kata01.stock;
 
-import com.akikanellis.kata01.Item;
-import com.akikanellis.kata01.Items;
+import com.akikanellis.kata01.item.Item;
+import com.akikanellis.kata01.item.Items;
+import com.akikanellis.kata01.offer.OfferStrategies;
+import com.akikanellis.kata01.offer.OfferStrategy;
+import com.akikanellis.kata01.offer.Offers;
+import com.akikanellis.kata01.price.Price;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -11,6 +15,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 import static com.akikanellis.kata01.test_utils.Fakes.createDefaultItem;
 import static com.akikanellis.kata01.test_utils.Fakes.createDefaultOfferStrategies;
 import static com.akikanellis.kata01.test_utils.Fakes.createDefaultOfferStrategy;
+import static com.akikanellis.kata01.test_utils.Fakes.createDefaultOffers;
 import static com.akikanellis.kata01.test_utils.Fakes.defaultItems;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.mockito.Mockito.verify;
@@ -25,11 +30,16 @@ public class StockFacadeTest {
     @Mock private AddOfferStrategyUseCase addOfferStrategy;
     @Mock private RemoveOfferStrategyUseCase removeOfferStrategy;
     @Mock private GetActiveOfferStrategiesUseCase getActiveOfferStrategies;
+    @Mock private GetStockValueBeforeOffersUseCase getStockValueBeforeOffers;
+    @Mock private GetOffersValueUseCase getOffersValue;
+    @Mock private GetStockValueAfterOffersUseCase getStockValueAfterOffers;
+    @Mock private GetApplicableOffersUseCase getApplicableOffers;
     private StockFacade stockFacade;
 
     @Before public void beforeEach() {
         stockFacade = new StockFacade(addNewItemIfNotExistsUseCase, fillStockUseCase, reduceStock, getStock,
-                addOfferStrategy, removeOfferStrategy, getActiveOfferStrategies);
+                addOfferStrategy, removeOfferStrategy, getActiveOfferStrategies, getApplicableOffers, getOffersValue,
+                getStockValueBeforeOffers, getStockValueAfterOffers);
     }
 
     @Test public void addingNewItem_usesUseCase() {
@@ -88,5 +98,41 @@ public class StockFacadeTest {
         OfferStrategies actualOfferStrategies = stockFacade.getActiveOfferStrategies();
 
         assertThat(actualOfferStrategies).isSameAs(expectedOfferStrategies);
+    }
+
+    @Test public void gettingApplicableOffers_usesUseCase() {
+        Offers expectedOffers = createDefaultOffers();
+        when(getApplicableOffers.execute()).thenReturn(expectedOffers);
+
+        Offers actualOffers = stockFacade.getApplicableOffers();
+
+        assertThat(actualOffers).isSameAs(expectedOffers);
+    }
+
+    @Test public void gettingOffersValue_usesUseCase() {
+        Price value = Price.of(-15);
+        when(getOffersValue.execute()).thenReturn(value);
+
+        Price offersValue = stockFacade.getOffersValue();
+
+        assertThat(offersValue).isSameAs(value);
+    }
+
+    @Test public void gettingStockValueBeforeOffers_usesUseCase() {
+        Price value = Price.of(50);
+        when(getStockValueBeforeOffers.execute()).thenReturn(value);
+
+        Price stockValueBeforeOffers = stockFacade.getStockValueBeforeOffers();
+
+        assertThat(stockValueBeforeOffers).isSameAs(value);
+    }
+
+    @Test public void gettingStockValueAfterOffers_usesUseCase() {
+        Price value = Price.of(35);
+        when(getStockValueAfterOffers.execute()).thenReturn(value);
+
+        Price stockValueAfterOffers = stockFacade.getStockValueAfterOffers();
+
+        assertThat(stockValueAfterOffers).isSameAs(value);
     }
 }

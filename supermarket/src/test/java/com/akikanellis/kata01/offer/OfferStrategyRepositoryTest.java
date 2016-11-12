@@ -1,4 +1,4 @@
-package com.akikanellis.kata01.stock;
+package com.akikanellis.kata01.offer;
 
 import org.junit.Before;
 import org.junit.Test;

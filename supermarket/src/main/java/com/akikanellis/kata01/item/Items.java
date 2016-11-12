@@ -1,5 +1,6 @@
-package com.akikanellis.kata01;
+package com.akikanellis.kata01.item;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -21,6 +22,8 @@ public final class Items {
 
         return new Items(itemsWithQuantities);
     }
+
+    public static Items empty() { return fromList(Collections.emptyList()); }
 
     public List<ItemWithQuantity> asList() { return itemsWithQuantities; }
 }

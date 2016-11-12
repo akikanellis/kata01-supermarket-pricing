@@ -1,10 +1,10 @@
-package com.akikanellis.kata01;
+package com.akikanellis.kata01.utils;
 
 import org.junit.Test;
 
-import static com.akikanellis.kata01.Preconditions.checkNotNegative;
-import static com.akikanellis.kata01.Preconditions.checkNotNull;
-import static com.akikanellis.kata01.Preconditions.checkNotNullOrEmpty;
+import static com.akikanellis.kata01.utils.Preconditions.checkNotNegative;
+import static com.akikanellis.kata01.utils.Preconditions.checkNotNull;
+import static com.akikanellis.kata01.utils.Preconditions.checkNotNullOrEmpty;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
@@ -53,17 +53,17 @@ public class PreconditionsTest {
     }
 
     @Test public void checkingNotNegative_withPositive_returnsNumber() {
-        int expectedNumber = 5;
+        long expectedNumber = 5;
 
-        int actualNumber = checkNotNegative(expectedNumber);
+        long actualNumber = checkNotNegative(expectedNumber);
 
         assertThat(actualNumber).isSameAs(expectedNumber);
     }
 
     @Test public void checkingNotNegative_withZero_returnsNumber() {
-        int expectedNumber = 0;
+        long expectedNumber = 0;
 
-        int actualNumber = checkNotNegative(expectedNumber);
+        long actualNumber = checkNotNegative(expectedNumber);
 
         assertThat(actualNumber).isSameAs(expectedNumber);
     }

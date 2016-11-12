@@ -1,5 +1,7 @@
 package com.akikanellis.kata01.stock;
 
+import com.akikanellis.kata01.offer.OfferStrategy;
+import com.akikanellis.kata01.offer.OfferStrategyRepository;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

@@ -1,4 +1,4 @@
-package com.akikanellis.kata01.stock;
+package com.akikanellis.kata01.offer;
 
 import java.util.HashSet;
 import java.util.Set;

@@ -1,4 +1,4 @@
-package com.akikanellis.kata01;
+package com.akikanellis.kata01.utils;
 
 /**
  * Utilities regarding preconditions in arguments, parameters, fields etc.
@@ -26,7 +26,7 @@ public final class Preconditions {
         return s;
     }
 
-    public static int checkNotNegative(int n) {
+    public static long checkNotNegative(long n) {
         if (n < 0) throw new IllegalArgumentException(String.format("Argument can't be negative. Found [%d]", n));
 
         return n;
