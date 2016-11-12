@@ -12,9 +12,7 @@ public final class Price {
 
     private final BigDecimal amount;
 
-    private Price(BigDecimal amount) {
-        this.amount = checkNotNull(amount);
-    }
+    private Price(BigDecimal amount) { this.amount = checkNotNull(amount); }
 
     public static Price of(long amount) {
         BigDecimal bigDecimalAmount = BigDecimal.valueOf(amount);
@@ -22,6 +20,11 @@ public final class Price {
     }
 
     public static Price of(BigDecimal amount) { return new Price(amount); }
+
+    public Price add(Price other) {
+        BigDecimal newAmount = amount.add(other.amount);
+        return new Price(newAmount);
+    }
 
     public Price multiplyBy(long multiplier) {
         checkNotNegative(multiplier);
@@ -39,9 +42,4 @@ public final class Price {
     }
 
     @Override public int hashCode() { return Objects.hashCode(amount); }
-
-    public Price add(Price other) {
-        BigDecimal newAmount = amount.add(other.amount);
-        return new Price(newAmount);
-    }
 }
