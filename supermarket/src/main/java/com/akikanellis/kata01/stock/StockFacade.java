@@ -14,17 +14,16 @@ public class StockFacade {
     private final AddOfferStrategyUseCase addOfferStrategy;
     private final RemoveOfferStrategyUseCase removeOfferStrategy;
     private final GetActiveOfferStrategiesUseCase getActiveOfferStrategies;
-    private final GetStockValueBeforeOffersUseCase getStockValueBeforeOffers;
     private final GetOffersValueUseCase getOffersValue;
+    private final GetStockValueBeforeOffersUseCase getStockValueBeforeOffers;
+    private final GetStockValueAfterOffers getStockValueAfterOffers;
 
-    public StockFacade(AddNewItemIfNotExistsUseCase addNewItemIfNotExistsUseCase,
-                       FillStockUseCase fillStockUseCase,
-                       ReduceStockUseCase reduceStock,
-                       GetStockUseCase getStock, AddOfferStrategyUseCase addOfferStrategy,
-                       RemoveOfferStrategyUseCase removeOfferStrategy,
-                       GetActiveOfferStrategiesUseCase getActiveOfferStrategies,
+    public StockFacade(AddNewItemIfNotExistsUseCase addNewItemIfNotExistsUseCase, FillStockUseCase fillStockUseCase,
+                       ReduceStockUseCase reduceStock, GetStockUseCase getStock,
+                       AddOfferStrategyUseCase addOfferStrategy, RemoveOfferStrategyUseCase removeOfferStrategy,
+                       GetActiveOfferStrategiesUseCase getActiveOfferStrategies, GetOffersValueUseCase getOffersValue,
                        GetStockValueBeforeOffersUseCase getStockValueBeforeOffers,
-                       GetOffersValueUseCase getOffersValue) {
+                       GetStockValueAfterOffers getStockValueAfterOffers) {
         this.addNewItemIfNotExistsUseCase = addNewItemIfNotExistsUseCase;
         this.fillStockUseCase = fillStockUseCase;
         this.reduceStock = reduceStock;
@@ -32,8 +31,9 @@ public class StockFacade {
         this.addOfferStrategy = addOfferStrategy;
         this.removeOfferStrategy = removeOfferStrategy;
         this.getActiveOfferStrategies = getActiveOfferStrategies;
-        this.getStockValueBeforeOffers = getStockValueBeforeOffers;
         this.getOffersValue = getOffersValue;
+        this.getStockValueBeforeOffers = getStockValueBeforeOffers;
+        this.getStockValueAfterOffers = getStockValueAfterOffers;
     }
 
     public void addNewItem(Item item) { addNewItemIfNotExistsUseCase.execute(item); }
@@ -50,7 +50,9 @@ public class StockFacade {
 
     public OfferStrategies getActiveOfferStrategies() { return getActiveOfferStrategies.execute(); }
 
+    public Price getOffersValue() { return getOffersValue.execute(); }
+
     public Price getStockValueBeforeOffers() { return getStockValueBeforeOffers.execute(); }
 
-    public Price getOffersValue() { return getOffersValue.execute(); }
+    public Price getStockValueAfterOffers() { return getStockValueAfterOffers.execute(); }
 }

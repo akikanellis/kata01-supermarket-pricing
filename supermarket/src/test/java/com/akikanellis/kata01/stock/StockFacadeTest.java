@@ -30,12 +30,13 @@ public class StockFacadeTest {
     @Mock private GetActiveOfferStrategiesUseCase getActiveOfferStrategies;
     @Mock private GetStockValueBeforeOffersUseCase getStockValueBeforeOffers;
     @Mock private GetOffersValueUseCase getOffersValue;
+    @Mock private GetStockValueAfterOffers getStockValueAfterOffers;
     private StockFacade stockFacade;
 
     @Before public void beforeEach() {
         stockFacade = new StockFacade(addNewItemIfNotExistsUseCase, fillStockUseCase, reduceStock, getStock,
-                addOfferStrategy, removeOfferStrategy, getActiveOfferStrategies, getStockValueBeforeOffers,
-                getOffersValue);
+                addOfferStrategy, removeOfferStrategy, getActiveOfferStrategies, getOffersValue, getStockValueBeforeOffers,
+                getStockValueAfterOffers);
     }
 
     @Test public void addingNewItem_usesUseCase() {
@@ -110,5 +111,13 @@ public class StockFacadeTest {
         Price stockValueBeforeOffers = stockFacade.getStockValueBeforeOffers();
 
         assertThat(stockValueBeforeOffers).isSameAs(Price.ONE);
+    }
+
+    @Test public void gettingStockValueAfterOffers_usesUseCase() {
+        when(getStockValueAfterOffers.execute()).thenReturn(Price.ONE);
+
+        Price stockValueAfterOffers = stockFacade.getStockValueAfterOffers();
+
+        assertThat(stockValueAfterOffers).isSameAs(Price.ONE);
     }
 }
