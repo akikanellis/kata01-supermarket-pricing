@@ -30,7 +30,7 @@ public class StockFacadeTest {
     @Mock private GetActiveOfferStrategiesUseCase getActiveOfferStrategies;
     @Mock private GetStockValueBeforeOffersUseCase getStockValueBeforeOffers;
     @Mock private GetOffersValueUseCase getOffersValue;
-    @Mock private GetStockValueAfterOffers getStockValueAfterOffers;
+    @Mock private GetStockValueAfterOffersUseCase getStockValueAfterOffers;
     private StockFacade stockFacade;
 
     @Before public void beforeEach() {

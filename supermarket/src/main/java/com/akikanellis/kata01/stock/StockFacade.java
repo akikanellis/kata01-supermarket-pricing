@@ -16,14 +16,14 @@ public class StockFacade {
     private final GetActiveOfferStrategiesUseCase getActiveOfferStrategies;
     private final GetOffersValueUseCase getOffersValue;
     private final GetStockValueBeforeOffersUseCase getStockValueBeforeOffers;
-    private final GetStockValueAfterOffers getStockValueAfterOffers;
+    private final GetStockValueAfterOffersUseCase getStockValueAfterOffers;
 
     public StockFacade(AddNewItemIfNotExistsUseCase addNewItemIfNotExistsUseCase, FillStockUseCase fillStockUseCase,
                        ReduceStockUseCase reduceStock, GetStockUseCase getStock,
                        AddOfferStrategyUseCase addOfferStrategy, RemoveOfferStrategyUseCase removeOfferStrategy,
                        GetActiveOfferStrategiesUseCase getActiveOfferStrategies, GetOffersValueUseCase getOffersValue,
                        GetStockValueBeforeOffersUseCase getStockValueBeforeOffers,
-                       GetStockValueAfterOffers getStockValueAfterOffers) {
+                       GetStockValueAfterOffersUseCase getStockValueAfterOffers) {
         this.addNewItemIfNotExistsUseCase = addNewItemIfNotExistsUseCase;
         this.fillStockUseCase = fillStockUseCase;
         this.reduceStock = reduceStock;
