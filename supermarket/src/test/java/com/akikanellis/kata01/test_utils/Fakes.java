@@ -3,15 +3,17 @@ package com.akikanellis.kata01.test_utils;
 import com.akikanellis.kata01.item.Item;
 import com.akikanellis.kata01.item.ItemWithQuantity;
 import com.akikanellis.kata01.item.Items;
+import com.akikanellis.kata01.offer.Offer;
 import com.akikanellis.kata01.offer.OfferStrategies;
 import com.akikanellis.kata01.offer.OfferStrategy;
+import com.akikanellis.kata01.offer.OfferWithQuantity;
 import com.akikanellis.kata01.offer.Offers;
 import com.akikanellis.kata01.price.Price;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 public final class Fakes {
 
@@ -23,6 +25,13 @@ public final class Fakes {
                 .name("Apple")
                 .price(Price.ONE)
                 .build();
+    }
+
+    public static Item.Builder createDefaultItemBuilder() {
+        return Item.builder()
+                .barcode(1)
+                .name("Apple")
+                .price(Price.ONE);
     }
 
     public static Items defaultItems() {
@@ -62,10 +71,53 @@ public final class Fakes {
     }
 
     public static OfferStrategies createDefaultOfferStrategies() {
-        List<OfferStrategy> offerStrategies = IntStream.range(0, 3)
-                .mapToObj(ignored -> createDefaultOfferStrategy())
-                .collect(Collectors.toList());
+        OfferStrategy offerStrategy1 = items -> {
+            if (items.asList().isEmpty()) return Offers.empty();
+
+            OfferWithQuantity offerWithQuantity = OfferWithQuantity.create(createThreeApplesForOnePoundOffer(), 10);
+            return Offers.fromList(Collections.singletonList(offerWithQuantity));
+        };
+        OfferStrategy offerStrategy2 = items -> {
+            if (items.asList().isEmpty()) return Offers.empty();
+
+            OfferWithQuantity offerWithQuantity = OfferWithQuantity.create(createTwoOrangesOneFreeOffer(), 2);
+            return Offers.fromList(Collections.singletonList(offerWithQuantity));
+        };
+        OfferStrategy offerStrategy3 = items -> {
+            if (items.asList().isEmpty()) return Offers.empty();
+
+            OfferWithQuantity offerWithQuantity = OfferWithQuantity.create(createFiftyPercentOffPearsOffer(), 1);
+            return Offers.fromList(Collections.singletonList(offerWithQuantity));
+        };
+
+        List<OfferStrategy> offerStrategies = new ArrayList<>();
+        offerStrategies.add(offerStrategy1);
+        offerStrategies.add(offerStrategy2);
+        offerStrategies.add(offerStrategy3);
 
         return OfferStrategies.fromCollection(offerStrategies);
     }
+
+    private static Offer createThreeApplesForOnePoundOffer() {
+        return Offer.create("3 Apples for £1", Price.from(-50));
+    }
+
+    public static Offers createDefaultOffers() {
+        return Offers.fromList(Arrays.asList(
+                OfferWithQuantity.create(createThreeApplesForOnePoundOffer(), 10),
+                OfferWithQuantity.create(createTwoOrangesOneFreeOffer(), 2),
+                OfferWithQuantity.create(createFiftyPercentOffPearsOffer(), 1)
+        ));
+    }
+
+    private static Offer createFiftyPercentOffPearsOffer() {
+        return Offer.create("50% off pears", Price.from(-50));
+    }
+
+    private static Offer createTwoOrangesOneFreeOffer() {
+        return Offer.create("Buy 2 Oranges get 1 free", Price.from(-50));
+    }
+
+    public static Offer createDefaultOffer() { return createThreeApplesForOnePoundOffer(); }
 }
+
