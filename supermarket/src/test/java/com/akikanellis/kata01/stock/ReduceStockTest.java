@@ -1,6 +1,6 @@
 package com.akikanellis.kata01.stock;
 
-import com.akikanellis.kata01.Item;
+import com.akikanellis.kata01.item.Item;
 import org.assertj.core.api.Assertions;
 import org.junit.Before;
 import org.junit.Test;

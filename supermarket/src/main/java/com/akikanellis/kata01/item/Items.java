@@ -1,4 +1,4 @@
-package com.akikanellis.kata01;
+package com.akikanellis.kata01.item;
 
 import java.util.List;
 import java.util.Map;

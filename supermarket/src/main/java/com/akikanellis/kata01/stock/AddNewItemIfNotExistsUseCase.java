@@ -1,6 +1,6 @@
 package com.akikanellis.kata01.stock;
 
-import com.akikanellis.kata01.Item;
+import com.akikanellis.kata01.item.Item;
 
 public class AddNewItemIfNotExistsUseCase {
     private final InMemoryStockRepository stock;

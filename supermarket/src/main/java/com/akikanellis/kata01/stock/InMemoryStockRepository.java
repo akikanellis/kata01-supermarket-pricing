@@ -1,9 +1,9 @@
 package com.akikanellis.kata01.stock;
 
-import com.akikanellis.kata01.Item;
-import com.akikanellis.kata01.ItemAlreadyExistsException;
-import com.akikanellis.kata01.ItemDoesNotExistException;
-import com.akikanellis.kata01.Items;
+import com.akikanellis.kata01.item.Item;
+import com.akikanellis.kata01.item.ItemAlreadyExistsException;
+import com.akikanellis.kata01.item.ItemDoesNotExistException;
+import com.akikanellis.kata01.item.Items;
 
 import java.util.HashMap;
 import java.util.Map;
