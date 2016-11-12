@@ -8,8 +8,8 @@ import com.akikanellis.kata01.offer.Offers;
 import com.akikanellis.kata01.price.Price;
 
 public class StockFacade {
-    private final AddNewItemIfNotExistsUseCase addNewItemIfNotExistsUseCase;
-    private final FillStockUseCase fillStockUseCase;
+    private final AddNewItemIfNotExistsUseCase addNewItemIfNotExists;
+    private final FillStockUseCase fillStock;
     private final ReduceStockUseCase reduceStock;
     private final GetStockUseCase getStock;
     private final AddOfferStrategyUseCase addOfferStrategy;
@@ -20,15 +20,15 @@ public class StockFacade {
     private final GetStockValueBeforeOffersUseCase getStockValueBeforeOffers;
     private final GetStockValueAfterOffersUseCase getStockValueAfterOffers;
 
-    public StockFacade(AddNewItemIfNotExistsUseCase addNewItemIfNotExistsUseCase, FillStockUseCase fillStockUseCase,
+    public StockFacade(AddNewItemIfNotExistsUseCase addNewItemIfNotExists, FillStockUseCase fillStock,
                        ReduceStockUseCase reduceStock, GetStockUseCase getStock,
                        AddOfferStrategyUseCase addOfferStrategy, RemoveOfferStrategyUseCase removeOfferStrategy,
                        GetActiveOfferStrategiesUseCase getActiveOfferStrategies,
                        GetApplicableOffersUseCase getApplicableOffers, GetOffersValueUseCase getOffersValue,
                        GetStockValueBeforeOffersUseCase getStockValueBeforeOffers,
                        GetStockValueAfterOffersUseCase getStockValueAfterOffers) {
-        this.addNewItemIfNotExistsUseCase = addNewItemIfNotExistsUseCase;
-        this.fillStockUseCase = fillStockUseCase;
+        this.addNewItemIfNotExists = addNewItemIfNotExists;
+        this.fillStock = fillStock;
         this.reduceStock = reduceStock;
         this.getStock = getStock;
         this.addOfferStrategy = addOfferStrategy;
@@ -40,9 +40,9 @@ public class StockFacade {
         this.getStockValueAfterOffers = getStockValueAfterOffers;
     }
 
-    public void addNewItem(Item item) { addNewItemIfNotExistsUseCase.execute(item); }
+    public void addNewItem(Item item) { addNewItemIfNotExists.execute(item); }
 
-    public void fillStock(Item item, int quantity) { fillStockUseCase.execute(item, quantity); }
+    public void fillStock(Item item, int quantity) { fillStock.execute(item, quantity); }
 
     public void reduceStock(Item item, int quantity) { reduceStock.execute(item, quantity); }
 

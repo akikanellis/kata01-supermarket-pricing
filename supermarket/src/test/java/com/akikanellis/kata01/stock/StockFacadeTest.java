@@ -23,8 +23,8 @@ import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class StockFacadeTest {
-    @Mock private AddNewItemIfNotExistsUseCase addNewItemIfNotExistsUseCase;
-    @Mock private FillStockUseCase fillStockUseCase;
+    @Mock private AddNewItemIfNotExistsUseCase addNewItemIfNotExists;
+    @Mock private FillStockUseCase fillStock;
     @Mock private ReduceStockUseCase reduceStock;
     @Mock private GetStockUseCase getStock;
     @Mock private AddOfferStrategyUseCase addOfferStrategy;
@@ -37,7 +37,7 @@ public class StockFacadeTest {
     private StockFacade stockFacade;
 
     @Before public void beforeEach() {
-        stockFacade = new StockFacade(addNewItemIfNotExistsUseCase, fillStockUseCase, reduceStock, getStock,
+        stockFacade = new StockFacade(addNewItemIfNotExists, fillStock, reduceStock, getStock,
                 addOfferStrategy, removeOfferStrategy, getActiveOfferStrategies, getApplicableOffers, getOffersValue,
                 getStockValueBeforeOffers, getStockValueAfterOffers);
     }
@@ -47,7 +47,7 @@ public class StockFacadeTest {
 
         stockFacade.addNewItem(item);
 
-        verify(addNewItemIfNotExistsUseCase).execute(item);
+        verify(addNewItemIfNotExists).execute(item);
     }
 
     @Test public void fillingStock_usesFillStockUseCase() {
@@ -55,7 +55,7 @@ public class StockFacadeTest {
 
         stockFacade.fillStock(item, 50);
 
-        verify(fillStockUseCase).execute(item, 50);
+        verify(fillStock).execute(item, 50);
     }
 
     @Test public void reducingStock_usesReduceStockUseCase() {
