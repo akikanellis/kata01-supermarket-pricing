@@ -7,8 +7,8 @@ import static com.akikanellis.kata01.utils.Preconditions.checkNotNegative;
 import static com.akikanellis.kata01.utils.Preconditions.checkNotNull;
 
 public final class Price {
-    public static final Price ZERO = new Price(BigDecimal.ZERO);
-    public static final Price ONE = new Price(BigDecimal.ONE);
+    public static final Price ZERO = Price.of(BigDecimal.ZERO);
+    public static final Price ONE = Price.of(BigDecimal.ONE);
 
     private final BigDecimal amount;
 
@@ -16,17 +16,17 @@ public final class Price {
         this.amount = checkNotNull(amount);
     }
 
-    public static Price of(int amount) {
-        BigDecimal bigDecimalAmount = new BigDecimal(amount);
+    public static Price of(long amount) {
+        BigDecimal bigDecimalAmount = BigDecimal.valueOf(amount);
         return of(bigDecimalAmount);
     }
 
     public static Price of(BigDecimal amount) { return new Price(amount); }
 
-    public Price multiplyBy(int multiplier) {
+    public Price multiplyBy(long multiplier) {
         checkNotNegative(multiplier);
 
-        BigDecimal newAmount = amount.multiply(new BigDecimal(multiplier));
+        BigDecimal newAmount = amount.multiply(BigDecimal.valueOf(multiplier));
         return new Price(newAmount);
     }
 

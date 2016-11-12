@@ -26,7 +26,7 @@ public final class Preconditions {
         return s;
     }
 
-    public static int checkNotNegative(int n) {
+    public static long checkNotNegative(long n) {
         if (n < 0) throw new IllegalArgumentException(String.format("Argument can't be negative. Found [%d]", n));
 
         return n;

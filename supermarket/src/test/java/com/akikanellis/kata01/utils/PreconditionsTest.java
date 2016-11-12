@@ -53,17 +53,17 @@ public class PreconditionsTest {
     }
 
     @Test public void checkingNotNegative_withPositive_returnsNumber() {
-        int expectedNumber = 5;
+        long expectedNumber = 5;
 
-        int actualNumber = checkNotNegative(expectedNumber);
+        long actualNumber = checkNotNegative(expectedNumber);
 
         assertThat(actualNumber).isSameAs(expectedNumber);
     }
 
     @Test public void checkingNotNegative_withZero_returnsNumber() {
-        int expectedNumber = 0;
+        long expectedNumber = 0;
 
-        int actualNumber = checkNotNegative(expectedNumber);
+        long actualNumber = checkNotNegative(expectedNumber);
 
         assertThat(actualNumber).isSameAs(expectedNumber);
     }
