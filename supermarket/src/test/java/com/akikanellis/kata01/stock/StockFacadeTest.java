@@ -50,7 +50,7 @@ public class StockFacadeTest {
         verify(addNewItemIfNotExists).execute(item);
     }
 
-    @Test public void fillingStock_usesFillStockUseCase() {
+    @Test public void fillingStock_usesUseCase() {
         Item item = createDefaultItem();
 
         stockFacade.fillStock(item, 50);
@@ -58,7 +58,7 @@ public class StockFacadeTest {
         verify(fillStock).execute(item, 50);
     }
 
-    @Test public void reducingStock_usesReduceStockUseCase() {
+    @Test public void reducingStock_usesUseCase() {
         Item item = createDefaultItem();
 
         stockFacade.reduceStock(item, 50);
@@ -66,7 +66,7 @@ public class StockFacadeTest {
         verify(reduceStock).execute(item, 50);
     }
 
-    @Test public void gettingStock_usesGetStockUseCase() {
+    @Test public void gettingStock_usesUseCase() {
         Items expectedItems = defaultItems();
         when(getStock.execute()).thenReturn(expectedItems);
 
@@ -75,7 +75,7 @@ public class StockFacadeTest {
         assertThat(actualItems).isSameAs(expectedItems);
     }
 
-    @Test public void addingOfferStrategy_usesAddOfferStrategyUseCase() {
+    @Test public void addingOfferStrategy_usesUseCase() {
         OfferStrategy offerStrategy = createDefaultOfferStrategy();
 
         stockFacade.addOfferStrategy(offerStrategy);
@@ -83,7 +83,7 @@ public class StockFacadeTest {
         verify(addOfferStrategy).execute(offerStrategy);
     }
 
-    @Test public void removingOfferStrategy_usesRemoveOfferStrategyUseCase() {
+    @Test public void removingOfferStrategy_usesUseCase() {
         OfferStrategy offerStrategy = createDefaultOfferStrategy();
 
         stockFacade.removeOfferStrategy(offerStrategy);
