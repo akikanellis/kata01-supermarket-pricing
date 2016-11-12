@@ -4,6 +4,7 @@ import com.akikanellis.kata01.item.Item;
 import com.akikanellis.kata01.item.ItemAlreadyExistsException;
 import com.akikanellis.kata01.item.ItemDoesNotExistException;
 import com.akikanellis.kata01.item.Items;
+import com.akikanellis.kata01.price.Price;
 import com.akikanellis.kata01.test_utils.Fakes;
 import org.junit.Before;
 import org.junit.Test;
@@ -73,5 +74,23 @@ public class InMemoryStockRepositoryTest {
         Items items = stock.getAll();
 
         assertThat(items.asList()).isEmpty();
+    }
+
+    @Test public void gettingItemByBarcode_withItemPresent_returnsItem() {
+        Item expectedItem = Item.builder()
+                .barcode(10)
+                .name("Apple")
+                .price(Price.ONE)
+                .build();
+        stock.create(expectedItem);
+
+        Item actualItem = stock.getByBarcode(10);
+
+        assertThat(actualItem).isSameAs(expectedItem);
+    }
+
+    @Test public void gettingItemByBarcode_withNoItemPresent_throwsException() {
+        assertThatExceptionOfType(ItemDoesNotExistException.class)
+                .isThrownBy(() -> stock.getByBarcode(1));
     }
 }

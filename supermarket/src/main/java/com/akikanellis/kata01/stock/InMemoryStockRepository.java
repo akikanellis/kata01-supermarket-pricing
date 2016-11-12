@@ -30,5 +30,12 @@ class InMemoryStockRepository implements StockRepository {
 
     @Override public int getQuantity(Item item) { return stock.get(item); }
 
+    @Override public Item getByBarcode(long barcode) {
+        return stock.keySet().stream()
+                .filter(item -> item.barcode() == barcode)
+                .findFirst()
+                .orElseThrow(() -> new ItemDoesNotExistException(barcode));
+    }
+
     @Override public Items getAll() { return Items.fromEntries(stock.entrySet()); }
 }
