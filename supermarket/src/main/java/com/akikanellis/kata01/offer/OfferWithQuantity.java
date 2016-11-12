@@ -1,5 +1,6 @@
-package com.akikanellis.kata01;
+package com.akikanellis.kata01.offer;
 
+import com.akikanellis.kata01.Price;
 import com.google.auto.value.AutoValue;
 
 @AutoValue
