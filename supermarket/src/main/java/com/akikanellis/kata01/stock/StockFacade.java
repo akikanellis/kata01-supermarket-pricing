@@ -9,6 +9,7 @@ import com.akikanellis.kata01.price.Price;
 
 public class StockFacade {
     private final AddNewItemIfNotExistsUseCase addNewItemIfNotExists;
+    private final FindItemByBarcodeUseCase findItemByBarcode;
     private final FillStockUseCase fillStock;
     private final ReduceStockUseCase reduceStock;
     private final GetStockUseCase getStock;
@@ -20,14 +21,15 @@ public class StockFacade {
     private final GetStockValueBeforeOffersUseCase getStockValueBeforeOffers;
     private final GetStockValueAfterOffersUseCase getStockValueAfterOffers;
 
-    public StockFacade(AddNewItemIfNotExistsUseCase addNewItemIfNotExists, FillStockUseCase fillStock,
-                       ReduceStockUseCase reduceStock, GetStockUseCase getStock,
+    public StockFacade(AddNewItemIfNotExistsUseCase addNewItemIfNotExists, FindItemByBarcodeUseCase findItemByBarcode,
+                       FillStockUseCase fillStock, ReduceStockUseCase reduceStock, GetStockUseCase getStock,
                        AddOfferStrategyUseCase addOfferStrategy, RemoveOfferStrategyUseCase removeOfferStrategy,
                        GetActiveOfferStrategiesUseCase getActiveOfferStrategies,
                        GetApplicableOffersUseCase getApplicableOffers, GetOffersValueUseCase getOffersValue,
                        GetStockValueBeforeOffersUseCase getStockValueBeforeOffers,
                        GetStockValueAfterOffersUseCase getStockValueAfterOffers) {
         this.addNewItemIfNotExists = addNewItemIfNotExists;
+        this.findItemByBarcode = findItemByBarcode;
         this.fillStock = fillStock;
         this.reduceStock = reduceStock;
         this.getStock = getStock;

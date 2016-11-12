@@ -24,6 +24,7 @@ import static org.mockito.Mockito.when;
 @RunWith(MockitoJUnitRunner.class)
 public class StockFacadeTest {
     @Mock private AddNewItemIfNotExistsUseCase addNewItemIfNotExists;
+    @Mock private FindItemByBarcodeUseCase findItemByBarcode;
     @Mock private FillStockUseCase fillStock;
     @Mock private ReduceStockUseCase reduceStock;
     @Mock private GetStockUseCase getStock;
@@ -37,7 +38,7 @@ public class StockFacadeTest {
     private StockFacade stockFacade;
 
     @Before public void beforeEach() {
-        stockFacade = new StockFacade(addNewItemIfNotExists, fillStock, reduceStock, getStock,
+        stockFacade = new StockFacade(addNewItemIfNotExists, findItemByBarcode, fillStock, reduceStock, getStock,
                 addOfferStrategy, removeOfferStrategy, getActiveOfferStrategies, getApplicableOffers, getOffersValue,
                 getStockValueBeforeOffers, getStockValueAfterOffers);
     }
