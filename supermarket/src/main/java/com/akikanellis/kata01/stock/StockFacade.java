@@ -4,6 +4,7 @@ import com.akikanellis.kata01.item.Item;
 import com.akikanellis.kata01.item.Items;
 import com.akikanellis.kata01.offer.OfferStrategies;
 import com.akikanellis.kata01.offer.OfferStrategy;
+import com.akikanellis.kata01.price.Price;
 
 public class StockFacade {
     private final AddNewItemIfNotExistsUseCase addNewItemIfNotExistsUseCase;
@@ -13,13 +14,15 @@ public class StockFacade {
     private final AddOfferStrategyUseCase addOfferStrategy;
     private final RemoveOfferStrategyUseCase removeOfferStrategy;
     private final GetActiveOfferStrategiesUseCase getActiveOfferStrategies;
+    private final GetStockValueBeforeOffersUseCase getStockValueBeforeOffers;
 
     public StockFacade(AddNewItemIfNotExistsUseCase addNewItemIfNotExistsUseCase,
                        FillStockUseCase fillStockUseCase,
                        ReduceStockUseCase reduceStock,
                        GetStockUseCase getStock, AddOfferStrategyUseCase addOfferStrategy,
                        RemoveOfferStrategyUseCase removeOfferStrategy,
-                       GetActiveOfferStrategiesUseCase getActiveOfferStrategies) {
+                       GetActiveOfferStrategiesUseCase getActiveOfferStrategies,
+                       GetStockValueBeforeOffersUseCase getStockValueBeforeOffers) {
         this.addNewItemIfNotExistsUseCase = addNewItemIfNotExistsUseCase;
         this.fillStockUseCase = fillStockUseCase;
         this.reduceStock = reduceStock;
@@ -27,6 +30,7 @@ public class StockFacade {
         this.addOfferStrategy = addOfferStrategy;
         this.removeOfferStrategy = removeOfferStrategy;
         this.getActiveOfferStrategies = getActiveOfferStrategies;
+        this.getStockValueBeforeOffers = getStockValueBeforeOffers;
     }
 
     public void addNewItem(Item item) { addNewItemIfNotExistsUseCase.execute(item); }
@@ -42,4 +46,7 @@ public class StockFacade {
     public void removeOfferStrategy(OfferStrategy offerStrategy) { removeOfferStrategy.execute(offerStrategy); }
 
     public OfferStrategies getActiveOfferStrategies() { return getActiveOfferStrategies.execute(); }
+
+    public Price getStockValueBeforeOffers() { return getStockValueBeforeOffers.execute(); }
+
 }

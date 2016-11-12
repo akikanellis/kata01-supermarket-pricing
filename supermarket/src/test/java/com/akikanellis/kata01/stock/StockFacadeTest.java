@@ -4,6 +4,7 @@ import com.akikanellis.kata01.item.Item;
 import com.akikanellis.kata01.item.Items;
 import com.akikanellis.kata01.offer.OfferStrategies;
 import com.akikanellis.kata01.offer.OfferStrategy;
+import com.akikanellis.kata01.price.Price;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -27,11 +28,12 @@ public class StockFacadeTest {
     @Mock private AddOfferStrategyUseCase addOfferStrategy;
     @Mock private RemoveOfferStrategyUseCase removeOfferStrategy;
     @Mock private GetActiveOfferStrategiesUseCase getActiveOfferStrategies;
+    @Mock private GetStockValueBeforeOffersUseCase getStockValueBeforeOffers;
     private StockFacade stockFacade;
 
     @Before public void beforeEach() {
         stockFacade = new StockFacade(addNewItemIfNotExistsUseCase, fillStockUseCase, reduceStock, getStock,
-                addOfferStrategy, removeOfferStrategy, getActiveOfferStrategies);
+                addOfferStrategy, removeOfferStrategy, getActiveOfferStrategies, getStockValueBeforeOffers);
     }
 
     @Test public void addingNewItem_usesUseCase() {
@@ -90,5 +92,13 @@ public class StockFacadeTest {
         OfferStrategies actualOfferStrategies = stockFacade.getActiveOfferStrategies();
 
         assertThat(actualOfferStrategies).isSameAs(expectedOfferStrategies);
+    }
+
+    @Test public void gettingStockValueBeforeOffers_usesUseCase() {
+        when(getStockValueBeforeOffers.execute()).thenReturn(Price.ONE);
+
+        Price stockValueBeforeOffers = stockFacade.getStockValueBeforeOffers();
+
+        assertThat(stockValueBeforeOffers).isSameAs(Price.ONE);
     }
 }
