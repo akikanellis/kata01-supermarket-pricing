@@ -5,11 +5,11 @@ import com.akikanellis.kata01.offer.OfferStrategies;
 import com.akikanellis.kata01.offer.OfferStrategyRepository;
 import com.akikanellis.kata01.offer.Offers;
 
-public class GetActiveOffersUseCase {
+public class GetApplicableOffersUseCase {
     private final StockRepository stock;
     private final OfferStrategyRepository offerStrategyRepository;
 
-    public GetActiveOffersUseCase(StockRepository stock, OfferStrategyRepository offerStrategyRepository) {
+    public GetApplicableOffersUseCase(StockRepository stock, OfferStrategyRepository offerStrategyRepository) {
         this.stock = stock;
         this.offerStrategyRepository = offerStrategyRepository;
     }

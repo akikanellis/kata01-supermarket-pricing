@@ -16,13 +16,13 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
-public class GetActiveOffersUseCaseTest {
+public class GetApplicableOffersUseCaseTest {
     @Mock private StockRepository stockRepository;
     @Mock private OfferStrategyRepository offerStrategyRepository;
-    private GetActiveOffersUseCase getActiveOffers;
+    private GetApplicableOffersUseCase getApplicableOffers;
 
     @Before public void beforeEach() {
-        getActiveOffers = new GetActiveOffersUseCase(stockRepository, offerStrategyRepository);
+        getApplicableOffers = new GetApplicableOffersUseCase(stockRepository, offerStrategyRepository);
     }
 
     @Test public void gettingOffers_withAvailableOfferStrategies_returnsOffers() {
@@ -31,7 +31,7 @@ public class GetActiveOffersUseCaseTest {
         when(offerStrategyRepository.getAll()).thenReturn(offerStrategies);
         when(stockRepository.getAll()).thenReturn(items);
 
-        Offers offers = getActiveOffers.execute();
+        Offers offers = getApplicableOffers.execute();
 
         assertThat(offers.asList()).hasSize(3);
     }
@@ -42,7 +42,7 @@ public class GetActiveOffersUseCaseTest {
         when(offerStrategyRepository.getAll()).thenReturn(offerStrategies);
         when(stockRepository.getAll()).thenReturn(items);
 
-        Offers offers = getActiveOffers.execute();
+        Offers offers = getApplicableOffers.execute();
 
         assertThat(offers.asList()).isEmpty();
 
@@ -54,7 +54,7 @@ public class GetActiveOffersUseCaseTest {
         when(offerStrategyRepository.getAll()).thenReturn(offerStrategies);
         when(stockRepository.getAll()).thenReturn(items);
 
-        Offers offers = getActiveOffers.execute();
+        Offers offers = getApplicableOffers.execute();
 
         assertThat(offers.asList()).isEmpty();
 
