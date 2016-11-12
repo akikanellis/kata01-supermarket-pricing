@@ -1,7 +1,6 @@
-package com.akikanellis.kata01.stock;
+package com.akikanellis.kata01.offer;
 
 import com.akikanellis.kata01.item.Items;
-import com.akikanellis.kata01.offer.Offers;
 
 public interface OfferStrategy {
 

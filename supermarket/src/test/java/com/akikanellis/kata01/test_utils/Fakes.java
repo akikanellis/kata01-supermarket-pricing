@@ -3,10 +3,10 @@ package com.akikanellis.kata01.test_utils;
 import com.akikanellis.kata01.item.Item;
 import com.akikanellis.kata01.item.ItemWithQuantity;
 import com.akikanellis.kata01.item.Items;
+import com.akikanellis.kata01.offer.OfferStrategies;
+import com.akikanellis.kata01.offer.OfferStrategy;
 import com.akikanellis.kata01.offer.Offers;
 import com.akikanellis.kata01.price.Price;
-import com.akikanellis.kata01.stock.OfferStrategies;
-import com.akikanellis.kata01.stock.OfferStrategy;
 
 import java.util.ArrayList;
 import java.util.List;

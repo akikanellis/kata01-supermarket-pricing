@@ -1,5 +1,7 @@
 package com.akikanellis.kata01.stock;
 
+import com.akikanellis.kata01.offer.OfferStrategies;
+import com.akikanellis.kata01.offer.OfferStrategyRepository;
 import com.akikanellis.kata01.test_utils.Fakes;
 import org.junit.Before;
 import org.junit.Test;
