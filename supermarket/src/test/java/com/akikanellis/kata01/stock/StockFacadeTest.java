@@ -51,10 +51,17 @@ public class StockFacadeTest {
         verify(addNewItemIfNotExists).execute(item);
     }
 
-    @Test public void fillingStock_usesUseCase() {
-        Item item = createDefaultItem();
+    @Test public void fillingStock_firstFindsItemByBarcode() {
+        stockFacade.fillStock(10, 50);
 
-        stockFacade.fillStock(item, 50);
+        verify(findItemByBarcode).execute(10);
+    }
+
+    @Test public void fillingStock_usesFoundItemToFillStock() {
+        Item item = createDefaultItem();
+        when(findItemByBarcode.execute(10)).thenReturn(item);
+
+        stockFacade.fillStock(10, 50);
 
         verify(fillStock).execute(item, 50);
     }

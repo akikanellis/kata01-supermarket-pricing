@@ -44,7 +44,10 @@ public class StockFacade {
 
     public void addNewItem(Item item) { addNewItemIfNotExists.execute(item); }
 
-    public void fillStock(Item item, int quantity) { fillStock.execute(item, quantity); }
+    public void fillStock(long barcode, int quantity) {
+        Item item = findItemByBarcode.execute(barcode);
+        fillStock.execute(item, quantity);
+    }
 
     public void reduceStock(Item item, int quantity) { reduceStock.execute(item, quantity); }
 
