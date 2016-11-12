@@ -66,10 +66,17 @@ public class StockFacadeTest {
         verify(fillStock).execute(item, 50);
     }
 
-    @Test public void reducingStock_usesUseCase() {
-        Item item = createDefaultItem();
+    @Test public void reducingStock_firstFindsItemByBarcode() {
+        stockFacade.reduceStock(10, 50);
 
-        stockFacade.reduceStock(item, 50);
+        verify(findItemByBarcode).execute(10);
+    }
+
+    @Test public void reducingStock_usesFoundItemToReduceStock() {
+        Item item = createDefaultItem();
+        when(findItemByBarcode.execute(10)).thenReturn(item);
+
+        stockFacade.reduceStock(10, 50);
 
         verify(reduceStock).execute(item, 50);
     }

@@ -49,7 +49,10 @@ public class StockFacade {
         fillStock.execute(item, quantity);
     }
 
-    public void reduceStock(Item item, int quantity) { reduceStock.execute(item, quantity); }
+    public void reduceStock(long barcode, int quantity) {
+        Item item = findItemByBarcode.execute(barcode);
+        reduceStock.execute(item, quantity);
+    }
 
     public Items getStock() { return getStock.execute(); }
 
