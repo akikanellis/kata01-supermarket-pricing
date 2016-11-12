@@ -11,10 +11,10 @@ import static com.akikanellis.kata01.test_utils.Fakes.createDefaultItem;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
-public class StockRepositoryTest {
-    private StockRepository stock;
+public class InMemoryStockRepositoryTest {
+    private InMemoryStockRepository stock;
 
-    @Before public void beforeEach() { stock = new StockRepository(); }
+    @Before public void beforeEach() { stock = new InMemoryStockRepository(); }
 
     @Test public void creatingItem_withNotExistingItem_createsItem() {
         Item newItem = createDefaultItem();

@@ -14,7 +14,7 @@ import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ReduceStockTest {
-    @Mock private StockRepository stock;
+    @Mock private InMemoryStockRepository stock;
     @Mock private AddNewItemIfNotExistsUseCase addNewItemIfNotExists;
     private ReduceStockUseCase reduceStock;
 
