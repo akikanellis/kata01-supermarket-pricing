@@ -87,7 +87,44 @@ Same as FindBugs but works on the source code.
 Our Continuous Integration server for making sure errors are detected before they are merged.
 
 ## REST API
-DescriptionPlaceholder
+Instead of only having the backend exposed internaly, we could expose it through a REST API.
+  
+Assuming that our supermarket's website is *supermarket.com* and we are in version v1.0, then the REST API could look
+like this:
+
+### Root
+`api.supermarket.com`
+
+### Stock
+`api.supermarket.com/1.0/stock`
+
+### Main Resources
+
+- `/items`
+- `/items/valuebeforeoffers`
+- `/items/valueafteroffers`
+- `/offerstrategies`
+- `/applicableoffers`
+- `/applicableoffers/value`
+
+### Supported verbs
+
+- For `/items`
+    - **GET** `/items` -> Get all items
+    - **POST** `/items` -> Create new item 
+    - **PUT** `/items/<id>/increase/<quantity>` -> Increase item quantity
+    - **PUT** `/items/<id>/decrease/<quantity>` -> Decrease item quantity
+    - **GET** `/items/valuebeforeoffers` -> Get stock value before offers
+    - **GET** `/items/valueafteroffers` -> Get stock value after offers
+
+- For `/offerstrategies`
+    - **GET** `/offerstrategies` -> Get all offer strategies
+    - **POST** `/offerstrategies` -> Create new offer strategy
+    - **DELETE** `/offerstrategies/<id>` -> Delete offer strategy
+
+- For `/applicableoffers`
+    - **GET** `/applicableoffers` -> Get all applicable offers
+    -  **GET** `/applicableoffers/value` -> Get applicable offers value
 
 ## License
 This application itself is released under **MIT** license, see [LICENSE](./LICENSE).
