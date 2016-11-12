@@ -39,4 +39,9 @@ public final class Price {
     }
 
     @Override public int hashCode() { return Objects.hashCode(amount); }
+
+    public Price add(Price other) {
+        BigDecimal newAmount = amount.add(other.amount);
+        return new Price(newAmount);
+    }
 }
