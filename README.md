@@ -101,11 +101,11 @@ like this:
 ### Main Resources
 
 - `/items`
-- `/items/valuebeforeoffers`
-- `/items/valueafteroffers`
+- `/items`
+- `/items`
 - `/offerstrategies`
 - `/applicableoffers`
-- `/applicableoffers/value`
+- `/applicableoffers`
 
 ### Supported verbs
 
@@ -124,7 +124,7 @@ like this:
 
 - For `/applicableoffers`
     - **GET** `/applicableoffers` -> Get all applicable offers
-    -  **GET** `/applicableoffers/value` -> Get applicable offers value
+    - **GET** `/applicableoffers/value` -> Get applicable offers value
 
 ## License
 This application itself is released under **MIT** license, see [LICENSE](./LICENSE).
