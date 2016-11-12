@@ -5,10 +5,10 @@ import com.akikanellis.kata01.item.Item;
 import static com.akikanellis.kata01.utils.Preconditions.checkNotNegative;
 
 public class FillStockUseCase {
-    private final InMemoryStockRepository stock;
+    private final StockRepository stock;
     private final AddNewItemIfNotExistsUseCase addNewItemIfNotExists;
 
-    public FillStockUseCase(InMemoryStockRepository stock, AddNewItemIfNotExistsUseCase addNewItemIfNotExists) {
+    public FillStockUseCase(StockRepository stock, AddNewItemIfNotExistsUseCase addNewItemIfNotExists) {
         this.addNewItemIfNotExists = addNewItemIfNotExists;
         this.stock = stock;
     }

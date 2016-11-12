@@ -15,7 +15,7 @@ import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class AddNewItemIfNotExistsUseCaseTest {
-    @Mock private InMemoryStockRepository stock;
+    @Mock private StockRepository stock;
     private AddNewItemIfNotExistsUseCase addNewItemIfNotExistsUseCase;
 
     @Before public void beforeEach() { addNewItemIfNotExistsUseCase = new AddNewItemIfNotExistsUseCase(stock); }

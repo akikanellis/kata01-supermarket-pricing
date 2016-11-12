@@ -9,10 +9,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-public class InMemoryStockRepository implements StockRepository {
+class InMemoryStockRepository implements StockRepository {
     private final Map<Item, Integer> stock;
 
-    public InMemoryStockRepository() { this.stock = new HashMap<>(); }
+    InMemoryStockRepository() { this.stock = new HashMap<>(); }
+
+    @Override public boolean contains(Item item) { return stock.containsKey(item); }
 
     @Override public void create(Item item) {
         if (contains(item)) throw new ItemAlreadyExistsException(item);
@@ -26,11 +28,7 @@ public class InMemoryStockRepository implements StockRepository {
         stock.put(item, quantity);
     }
 
-    /* Visible for testing */
-    boolean contains(Item item) { return stock.containsKey(item); }
-
-    /* Visible for testing */
-    int getQuantity(Item item) { return stock.get(item); }
+    @Override public int getQuantity(Item item) { return stock.get(item); }
 
     @Override public Items getAll() { return Items.fromEntries(stock.entrySet()); }
 }
