@@ -1,6 +1,7 @@
 package com.akikanellis.kata01;
 
 import com.akikanellis.kata01.item.Item;
+import com.akikanellis.kata01.price.Price;
 import org.junit.Test;
 
 import java.util.stream.IntStream;

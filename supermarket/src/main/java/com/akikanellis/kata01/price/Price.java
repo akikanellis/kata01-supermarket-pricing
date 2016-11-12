@@ -1,4 +1,4 @@
-package com.akikanellis.kata01;
+package com.akikanellis.kata01.price;
 
 import java.math.BigDecimal;
 import java.util.Objects;
