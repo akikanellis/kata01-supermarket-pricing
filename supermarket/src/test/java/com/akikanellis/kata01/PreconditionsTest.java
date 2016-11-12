@@ -2,9 +2,9 @@ package com.akikanellis.kata01;
 
 import org.junit.Test;
 
-import static com.akikanellis.kata01.Preconditions.checkNotNegative;
-import static com.akikanellis.kata01.Preconditions.checkNotNull;
-import static com.akikanellis.kata01.Preconditions.checkNotNullOrEmpty;
+import static com.akikanellis.kata01.utils.Preconditions.checkNotNegative;
+import static com.akikanellis.kata01.utils.Preconditions.checkNotNull;
+import static com.akikanellis.kata01.utils.Preconditions.checkNotNullOrEmpty;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 

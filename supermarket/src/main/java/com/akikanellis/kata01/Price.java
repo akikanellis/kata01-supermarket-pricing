@@ -3,8 +3,8 @@ package com.akikanellis.kata01;
 import java.math.BigDecimal;
 import java.util.Objects;
 
-import static com.akikanellis.kata01.Preconditions.checkNotNegative;
-import static com.akikanellis.kata01.Preconditions.checkNotNull;
+import static com.akikanellis.kata01.utils.Preconditions.checkNotNegative;
+import static com.akikanellis.kata01.utils.Preconditions.checkNotNull;
 
 public final class Price {
     public static final Price ZERO = new Price(BigDecimal.ZERO);

@@ -1,4 +1,4 @@
-package com.akikanellis.kata01;
+package com.akikanellis.kata01.utils;
 
 /**
  * Utilities regarding preconditions in arguments, parameters, fields etc.

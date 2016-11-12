@@ -2,7 +2,7 @@ package com.akikanellis.kata01.stock;
 
 import com.akikanellis.kata01.item.Item;
 
-import static com.akikanellis.kata01.Preconditions.checkNotNegative;
+import static com.akikanellis.kata01.utils.Preconditions.checkNotNegative;
 
 public class FillStockUseCase {
     private final InMemoryStockRepository stock;
