@@ -130,5 +130,19 @@ public final class Fakes {
 
         return Offers.fromList(offers);
     }
+
+    public static Items createItemsWithPrices(long... amounts) {
+        List<ItemWithQuantity> items = IntStream.range(0, amounts.length)
+                .mapToObj(i -> Item.builder()
+                        .barcode(i)
+                        .name("item-" + i)
+                        .price(Price.of(amounts[i]))
+                        .build()
+                )
+                .map(item -> ItemWithQuantity.create(item, 1))
+                .collect(Collectors.toList());
+
+        return Items.fromList(items);
+    }
 }
 
