@@ -15,6 +15,7 @@ public class StockFacade {
     private final RemoveOfferStrategyUseCase removeOfferStrategy;
     private final GetActiveOfferStrategiesUseCase getActiveOfferStrategies;
     private final GetStockValueBeforeOffersUseCase getStockValueBeforeOffers;
+    private final GetOffersValueUseCase getOffersValue;
 
     public StockFacade(AddNewItemIfNotExistsUseCase addNewItemIfNotExistsUseCase,
                        FillStockUseCase fillStockUseCase,
@@ -22,7 +23,8 @@ public class StockFacade {
                        GetStockUseCase getStock, AddOfferStrategyUseCase addOfferStrategy,
                        RemoveOfferStrategyUseCase removeOfferStrategy,
                        GetActiveOfferStrategiesUseCase getActiveOfferStrategies,
-                       GetStockValueBeforeOffersUseCase getStockValueBeforeOffers) {
+                       GetStockValueBeforeOffersUseCase getStockValueBeforeOffers,
+                       GetOffersValueUseCase getOffersValue) {
         this.addNewItemIfNotExistsUseCase = addNewItemIfNotExistsUseCase;
         this.fillStockUseCase = fillStockUseCase;
         this.reduceStock = reduceStock;
@@ -31,6 +33,7 @@ public class StockFacade {
         this.removeOfferStrategy = removeOfferStrategy;
         this.getActiveOfferStrategies = getActiveOfferStrategies;
         this.getStockValueBeforeOffers = getStockValueBeforeOffers;
+        this.getOffersValue = getOffersValue;
     }
 
     public void addNewItem(Item item) { addNewItemIfNotExistsUseCase.execute(item); }
@@ -49,4 +52,5 @@ public class StockFacade {
 
     public Price getStockValueBeforeOffers() { return getStockValueBeforeOffers.execute(); }
 
+    public Price getOffersValue() { return getOffersValue.execute(); }
 }
