@@ -19,7 +19,7 @@ public class GetStockValueBeforeOffersUseCaseTest {
 
     @Before public void beforeEach() { getStockValueBeforeOffers = new GetStockValueBeforeOffersUseCase(getStock); }
 
-    @Test public void gettingValue_withOneItem_returnsItemValue() {
+    @Test public void executing_withOneItem_returnsItemValue() {
         when(getStock.execute()).thenReturn(createItemsWithPrices(50));
 
         Price value = getStockValueBeforeOffers.execute();
@@ -27,7 +27,7 @@ public class GetStockValueBeforeOffersUseCaseTest {
         assertThat(value).isEqualTo(Price.of(50));
     }
 
-    @Test public void gettingValue_withManyItems_returnsCumulativeValue() {
+    @Test public void executing_withManyItems_returnsCumulativeValue() {
         when(getStock.execute()).thenReturn(createItemsWithPrices(50, 90, 30));
 
         Price value = getStockValueBeforeOffers.execute();
@@ -35,7 +35,7 @@ public class GetStockValueBeforeOffersUseCaseTest {
         assertThat(value).isEqualTo(Price.of(170));
     }
 
-    @Test public void gettingValue_withNoItems_returnsZero() {
+    @Test public void executing_withNoItems_returnsZero() {
         when(getStock.execute()).thenReturn(Items.empty());
 
         Price value = getStockValueBeforeOffers.execute();

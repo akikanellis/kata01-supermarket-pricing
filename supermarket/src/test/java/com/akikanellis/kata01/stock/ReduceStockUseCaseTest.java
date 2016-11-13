@@ -13,14 +13,14 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
-public class ReduceStockTest {
+public class ReduceStockUseCaseTest {
     @Mock private StockRepository stock;
     @Mock private AddNewItemIfNotExistsUseCase addNewItemIfNotExists;
     private ReduceStockUseCase reduceStock;
 
     @Before public void beforeEach() { reduceStock = new ReduceStockUseCase(stock, addNewItemIfNotExists); }
 
-    @Test public void reducingStock_addsItemToStockFirst() {
+    @Test public void executing_addsItemToStockFirst() {
         Item item = createDefaultItem();
 
         reduceStock.execute(item, 50);
@@ -28,7 +28,7 @@ public class ReduceStockTest {
         verify(addNewItemIfNotExists).execute(item);
     }
 
-    @Test public void reducingStock_withCurrentStockBigger_replacesStockWithTheDifference() {
+    @Test public void executing_withCurrentQuantityBigger_replacesStockWithTheDifference() {
         Item item = createDefaultItem();
         when(stock.getQuantity(item)).thenReturn(50);
 
@@ -37,7 +37,7 @@ public class ReduceStockTest {
         verify(stock).replaceQuantity(item, 30);
     }
 
-    @Test public void reducingStock_withCurrentStockSmaller_replacesStockWithZero() {
+    @Test public void executing_withCurrentQuantitySmaller_replacesStockWithZero() {
         Item item = createDefaultItem();
         when(stock.getQuantity(item)).thenReturn(10);
 
@@ -46,10 +46,8 @@ public class ReduceStockTest {
         verify(stock).replaceQuantity(item, 0);
     }
 
-    @Test public void reducingStock_withNegativeQuantity_throwsException() {
-        Item item = createDefaultItem();
-
+    @Test public void executing_withNegativeQuantity_throwsException() {
         Assertions.assertThatExceptionOfType(IllegalArgumentException.class)
-                .isThrownBy(() -> reduceStock.execute(item, -5));
+                .isThrownBy(() -> reduceStock.execute(createDefaultItem(), -5));
     }
 }

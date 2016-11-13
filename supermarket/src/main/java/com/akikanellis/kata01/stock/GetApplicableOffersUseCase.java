@@ -7,18 +7,18 @@ import com.akikanellis.kata01.offer.Offers;
 
 public class GetApplicableOffersUseCase {
     private final StockRepository stock;
-    private final OfferStrategyRepository offerStrategyRepository;
+    private final OfferStrategyRepository offerStrategies;
 
-    public GetApplicableOffersUseCase(StockRepository stock, OfferStrategyRepository offerStrategyRepository) {
+    public GetApplicableOffersUseCase(StockRepository stock, OfferStrategyRepository offerStrategies) {
         this.stock = stock;
-        this.offerStrategyRepository = offerStrategyRepository;
+        this.offerStrategies = offerStrategies;
     }
 
     public Offers execute() {
-        OfferStrategies offerStrategies = offerStrategyRepository.getAll();
+        OfferStrategies strategies = offerStrategies.getAll();
         Items items = stock.getAll();
 
-        return offerStrategies.stream()
+        return strategies.stream()
                 .map(strategy -> strategy.calculateOffers(items))
                 .reduce(Offers::join)
                 .orElse(Offers.empty());

@@ -4,11 +4,11 @@ import com.akikanellis.kata01.offer.OfferStrategy;
 import com.akikanellis.kata01.offer.OfferStrategyRepository;
 
 public class FindOfferStrategyByIdUseCase {
-    private final OfferStrategyRepository offerStrategyRepository;
+    private final OfferStrategyRepository offerStrategies;
 
-    public FindOfferStrategyByIdUseCase(OfferStrategyRepository offerStrategyRepository) {
-        this.offerStrategyRepository = offerStrategyRepository;
+    public FindOfferStrategyByIdUseCase(OfferStrategyRepository offerStrategies) {
+        this.offerStrategies = offerStrategies;
     }
 
-    public OfferStrategy execute(long id) { return offerStrategyRepository.getById(id); }
+    public OfferStrategy execute(long id) { return offerStrategies.getById(id); }
 }

@@ -18,7 +18,7 @@ public class GetStockUseCaseTest {
 
     @Before public void beforeEach() { getStock = new GetStockUseCase(stock); }
 
-    @Test public void gettingStock_returnsStockFromRepository() {
+    @Test public void executing_returnsStockFromRepository() {
         Items expectedItems = createDefaultItems();
         when(stock.getAll()).thenReturn(expectedItems);
 

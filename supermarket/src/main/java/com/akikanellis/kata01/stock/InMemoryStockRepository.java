@@ -10,6 +10,8 @@ import java.util.Map;
 
 
 public class InMemoryStockRepository implements StockRepository {
+    private static final int STARTING_QUANTITY = 0;
+
     private final Map<Item, Integer> stock;
 
     public InMemoryStockRepository() { this.stock = new HashMap<>(); }
@@ -19,7 +21,7 @@ public class InMemoryStockRepository implements StockRepository {
     @Override public void create(Item item) {
         if (contains(item)) throw new ItemAlreadyExistsException(item);
 
-        stock.put(item, 0);
+        stock.put(item, STARTING_QUANTITY);
     }
 
     @Override public void replaceQuantity(Item item, int quantity) {

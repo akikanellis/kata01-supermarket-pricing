@@ -18,19 +18,19 @@ import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class GetApplicableOffersUseCaseTest {
-    @Mock private StockRepository stockRepository;
-    @Mock private OfferStrategyRepository offerStrategyRepository;
+    @Mock private StockRepository stock;
+    @Mock private OfferStrategyRepository offerStrategies;
     private GetApplicableOffersUseCase getApplicableOffers;
 
     @Before public void beforeEach() {
-        getApplicableOffers = new GetApplicableOffersUseCase(stockRepository, offerStrategyRepository);
+        getApplicableOffers = new GetApplicableOffersUseCase(stock, offerStrategies);
     }
 
     @Test public void gettingOffers_withAvailableOfferStrategies_returnsOffers() {
-        OfferStrategies offerStrategies = createOfferStrategiesWithQuantities(1, 2, 3);
+        OfferStrategies strategies = createOfferStrategiesWithQuantities(1, 2, 3);
         Items items = createDefaultItems();
-        when(offerStrategyRepository.getAll()).thenReturn(offerStrategies);
-        when(stockRepository.getAll()).thenReturn(items);
+        when(offerStrategies.getAll()).thenReturn(strategies);
+        when(stock.getAll()).thenReturn(items);
 
         Offers offers = getApplicableOffers.execute();
 
@@ -38,10 +38,10 @@ public class GetApplicableOffersUseCaseTest {
     }
 
     @Test public void gettingOffers_withNoOfferStrategies_returnsEmptyOffers() {
-        OfferStrategies offerStrategies = OfferStrategies.empty();
+        OfferStrategies strategies = OfferStrategies.empty();
         Items items = createDefaultItems();
-        when(offerStrategyRepository.getAll()).thenReturn(offerStrategies);
-        when(stockRepository.getAll()).thenReturn(items);
+        when(offerStrategies.getAll()).thenReturn(strategies);
+        when(stock.getAll()).thenReturn(items);
 
         Offers offers = getApplicableOffers.execute();
 
@@ -50,10 +50,10 @@ public class GetApplicableOffersUseCaseTest {
     }
 
     @Test public void gettingOffers_withNoGroceries_returnsEmptyOffers() {
-        OfferStrategies offerStrategies = createDefaultOfferStrategies();
+        OfferStrategies strategies = createDefaultOfferStrategies();
         Items items = Items.empty();
-        when(offerStrategyRepository.getAll()).thenReturn(offerStrategies);
-        when(stockRepository.getAll()).thenReturn(items);
+        when(offerStrategies.getAll()).thenReturn(strategies);
+        when(stock.getAll()).thenReturn(items);
 
         Offers offers = getApplicableOffers.execute();
 

@@ -14,14 +14,14 @@ import static org.mockito.Mockito.verify;
 @RunWith(MockitoJUnitRunner.class)
 public class AddOfferStrategyUseCaseTest {
     @Mock private OfferStrategyRepository offerStrategies;
-    private AddOfferStrategyUseCase addOfferStrategyUseCase;
+    private AddOfferStrategyUseCase addOfferStrategy;
 
-    @Before public void beforeEach() { addOfferStrategyUseCase = new AddOfferStrategyUseCase(offerStrategies); }
+    @Before public void beforeEach() { addOfferStrategy = new AddOfferStrategyUseCase(offerStrategies); }
 
     @Test public void addingOfferStrategy_addsStrategyInRepository() {
         OfferStrategy offerStrategy = createDefaultOfferStrategy();
 
-        addOfferStrategyUseCase.execute(offerStrategy);
+        addOfferStrategy.execute(offerStrategy);
 
         verify(offerStrategies).add(offerStrategy);
     }

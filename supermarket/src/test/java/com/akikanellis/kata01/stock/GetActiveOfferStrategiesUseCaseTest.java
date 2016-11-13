@@ -15,17 +15,17 @@ import static org.assertj.core.api.Assertions.assertThat;
 @RunWith(MockitoJUnitRunner.class)
 public class GetActiveOfferStrategiesUseCaseTest {
     @Mock private OfferStrategyRepository offerStrategies;
-    private GetActiveOfferStrategiesUseCase getActiveOfferStrategiesUseCase;
+    private GetActiveOfferStrategiesUseCase getActiveOfferStrategies;
 
     @Before public void beforeEach() {
-        getActiveOfferStrategiesUseCase = new GetActiveOfferStrategiesUseCase(offerStrategies);
+        getActiveOfferStrategies = new GetActiveOfferStrategiesUseCase(offerStrategies);
     }
 
     @Test public void executing_getsOfferStrategiesFromRepository() {
         OfferStrategies expectedOfferStrategies = createDefaultOfferStrategies();
         Mockito.when(offerStrategies.getAll()).thenReturn(expectedOfferStrategies);
 
-        OfferStrategies actualOfferStrategies = getActiveOfferStrategiesUseCase.execute();
+        OfferStrategies actualOfferStrategies = getActiveOfferStrategies.execute();
 
         assertThat(actualOfferStrategies).isSameAs(expectedOfferStrategies);
     }
