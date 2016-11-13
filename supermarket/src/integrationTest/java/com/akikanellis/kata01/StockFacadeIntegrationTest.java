@@ -62,7 +62,7 @@ public class StockFacadeIntegrationTest {
         stockManager = new StockManagerPageObject(stockFacade);
     }
 
-    @Test public void creatingItems_withDifferentBarcodes_addsThemToTheRepository() {
+    @Test public void creatingItems_withDifferentBarcodes_createsThem() {
         stockManager.createAppleBeansAndCheese();
 
         assertThat(stockManager.getStock().asItemsList())
@@ -74,7 +74,7 @@ public class StockFacadeIntegrationTest {
 
         stockManager.createApple();
 
-        assertThat(stockManager.getStock().asItemsList()).hasSize(1);
+        assertThat(stockManager.getStock().asItemsList()).containsOnly(stockManager.getApple());
     }
 
     @Test public void fillingStock_ofExistingItem_fillsStock() {
@@ -138,7 +138,7 @@ public class StockFacadeIntegrationTest {
 
         stockManager.removeAppleOffer();
 
-        assertThat(stockManager.getActiveOfferStrategies().asSet()).isEmpty();
+        assertThat(stockManager.getActiveOfferStrategies().isEmpty()).isTrue();
     }
 
     @Test public void removingOfferStrategy_withNoExistingStrategy_throwsException() {
@@ -163,7 +163,7 @@ public class StockFacadeIntegrationTest {
         assertThat(strategies.isEmpty()).isTrue();
     }
 
-    @Test public void gettingApplicableOffers_withOffers_returnsThem() {
+    @Test public void gettingApplicableOffers_withItemsAndOffers_returnsThem() {
         stockManager.createAndAddAllItems();
         stockManager.createAllOffers();
 
@@ -172,7 +172,7 @@ public class StockFacadeIntegrationTest {
         assertThat(offers.asList()).hasSize(3);
     }
 
-    @Test public void gettingApplicableOffers_withNoOffers_returnsEmptyOffers() {
+    @Test public void gettingApplicableOffers_withItemsButNoOffers_returnsEmptyOffers() {
         stockManager.createAndAddAllItems();
 
         Offers offers = stockManager.getApplicableOffers();
@@ -180,17 +180,22 @@ public class StockFacadeIntegrationTest {
         assertThat(offers.isEmpty()).isTrue();
     }
 
-    @Test public void gettingOffersValue_withOffers_returnsIt() {
+    @Test public void gettingApplicableOffers_withNoItemsAndNoOffers_returnsEmptyOffers() {
+        Offers offers = stockManager.getApplicableOffers();
+
+        assertThat(offers.isEmpty()).isTrue();
+    }
+
+    @Test public void gettingOffersValue_withItemsAndOffers_returnsIt() {
         stockManager.createAndAddAllItems();
         stockManager.createAllOffers();
-        Price expectedValue = Price.of(-5320);
 
         Price value = stockManager.getOffersValue();
 
-        assertThat(value).isEqualTo(expectedValue);
+        assertThat(value).isEqualTo(Price.of(-5320));
     }
 
-    @Test public void gettingOffersValue_withNoOffers_returnsZero() {
+    @Test public void gettingOffersValue_withItemsButNoOffers_returnsZero() {
         stockManager.createAndAddAllItems();
 
         Price value = stockManager.getOffersValue();
@@ -198,13 +203,18 @@ public class StockFacadeIntegrationTest {
         assertThat(value).isEqualTo(Price.ZERO);
     }
 
+    @Test public void gettingOffersValue_withNoItemsAndNoOffers_returnsZero() {
+        Price value = stockManager.getOffersValue();
+
+        assertThat(value).isEqualTo(Price.ZERO);
+    }
+
     @Test public void gettingStockValueBeforeOffers_withItems_returnsValue() {
         stockManager.createAndAddAllItems();
-        Price expectedValue = Price.of(19200);
 
         Price value = stockManager.getStockValueBeforeOffers();
 
-        assertThat(value).isEqualTo(expectedValue);
+        assertThat(value).isEqualTo(Price.of(19200));
     }
 
     @Test public void gettingStockValueBeforeOffers_withNoItems_returnsZero() {
@@ -216,20 +226,18 @@ public class StockFacadeIntegrationTest {
     @Test public void gettingStockValueAfterOffers_withItemsAndOffers_returnsTotalValue() {
         stockManager.createAndAddAllItems();
         stockManager.createAllOffers();
-        Price expectedValue = Price.of(13880);
 
         Price value = stockManager.getStockValueAfterOffers();
 
-        assertThat(value).isEqualTo(expectedValue);
+        assertThat(value).isEqualTo(Price.of(13880));
     }
 
     @Test public void gettingStockValueAfterOffers_withItemsAndNoOffers_returnsItemsValue() {
         stockManager.createAndAddAllItems();
-        Price expectedValue = Price.of(19200);
 
         Price value = stockManager.getStockValueAfterOffers();
 
-        assertThat(value).isEqualTo(expectedValue);
+        assertThat(value).isEqualTo(Price.of(19200));
     }
 
     @Test public void gettingStockValueAfterOffers_withOffersAndNoItems_returnsZero() {
@@ -240,7 +248,7 @@ public class StockFacadeIntegrationTest {
         assertThat(value).isEqualTo(Price.ZERO);
     }
 
-    @Test public void gettingStockValueAfterOffers_withNoOffersAndNoItems_returnsZero() {
+    @Test public void gettingStockValueAfterOffers_withNoItemsAndNoOffers_returnsZero() {
         Price value = stockManager.getStockValueAfterOffers();
 
         assertThat(value).isEqualTo(Price.ZERO);
