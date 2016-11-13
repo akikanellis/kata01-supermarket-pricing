@@ -26,4 +26,11 @@ public abstract class OfferStrategy {
     }
 
     @Override public final int hashCode() { return Long.hashCode(id); }
+
+    @Override public String toString() {
+        return "OfferStrategy{"
+                + "id=" + id + ", "
+                + "description='" + description + '\''
+                + '}';
+    }
 }
