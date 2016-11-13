@@ -101,4 +101,6 @@ public class StockManagerPageObject {
     public Offers getApplicableOffers() { return stockFacade.getApplicableOffers(); }
 
     public Price getOffersValue() { return stockFacade.getOffersValue(); }
+
+    public Price getStockValueBeforeOffers() { return stockFacade.getStockValueBeforeOffers(); }
 }
