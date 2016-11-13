@@ -82,7 +82,7 @@ An extensive tester for verifying whether the `equals` and `hashcode` contracts 
 ### Code analysis
 
 #### [CheckStyle](http://checkstyle.sourceforge.net/)
-A tool for making sure our Java code adheres to the coding standard that have been defined. The coding standard used is
+A tool for making sure our Java code adheres to the coding standard that has been defined. The coding standard used is
 the Oracle standard along with some modifications.
 
 #### [FindBugs](http://findbugs.sourceforge.net/)
