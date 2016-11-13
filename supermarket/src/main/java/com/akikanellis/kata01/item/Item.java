@@ -4,8 +4,6 @@ import com.akikanellis.kata01.price.Price;
 import com.akikanellis.kata01.utils.Preconditions;
 import com.google.auto.value.AutoValue;
 
-import java.util.Objects;
-
 /**
  * Represents an item/product for our stock and groceries management. The identification is based off of barcode
  * identification where each barcode is unique per item. The price is the base price of the item, or in other words the
@@ -47,7 +45,7 @@ public abstract class Item {
         if (o == null || getClass() != o.getClass()) return false;
 
         Item other = (Item) o;
-        return Objects.equals(barcode(), other.barcode());
+        return barcode() == other.barcode();
     }
 
     @Override public final int hashCode() { return Long.hashCode(barcode()); }
