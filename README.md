@@ -106,22 +106,31 @@ like this:
 
 ### Supported verbs
 
-- For `/items`
-    - **GET** `/items` -> Get all items
-    - **POST** `/items` -> Create new item 
-    - **PUT** `/items/<id>/increase/<quantity>` -> Increase item quantity
-    - **PUT** `/items/<id>/decrease/<quantity>` -> Decrease item quantity
-    - **GET** `/items/valuebeforeoffers` -> Get stock value before offers
-    - **GET** `/items/valueafteroffers` -> Get stock value after offers
+#### For `/items`
 
-- For `/offerstrategies`
-    - **GET** `/offerstrategies` -> Get all offer strategies
-    - **POST** `/offerstrategies` -> Create new offer strategy
-    - **DELETE** `/offerstrategies/<id>` -> Delete offer strategy
+| Verb                                      | Description                   |
+|-------------------------------------------|-------------------------------|
+| **GET** `/items`                          | Get all items                 |
+| **POST** `/items`                         | Create new item               |
+| **PUT** `/items/<id>/increase/<quantity>` | Increase item quantity        |
+| **PUT** `/items/<id>/decrease/<quantity>` | Decrease item quantity        |
+| **GET** `/items/valuebeforeoffers`        | Get stock value before offers |
+| **GET** `/items/valueafteroffers`         | Get stock value after offers  |
 
-- For `/applicableoffers`
-    - **GET** `/applicableoffers` -> Get all applicable offers
-    - **GET** `/applicableoffers/value` -> Get applicable offers value
+#### For `/offerstrategies`
+
+| Verb                                  | Description               |
+|---------------------------------------|---------------------------|
+| **GET** `/offerstrategies`            | Get all offer strategies  |
+| **POST** `/offerstrategies`           | Create new offer strategy |
+| **DELETE** `/offerstrategies/<id>`    | Delete offer strategy     |
+
+#### For `/applicableoffers`
+
+| Verb                              | Description                   |
+|-----------------------------------|-------------------------------|
+| **GET** `/applicableoffers`       | Get all applicable offers     |
+| **GET** `/applicableoffers/value` | Get applicable offers value   |
 
 ## License
 This application itself is released under **MIT** license, see [LICENSE](./LICENSE).
