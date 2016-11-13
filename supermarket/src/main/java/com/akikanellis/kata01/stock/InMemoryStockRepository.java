@@ -9,10 +9,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-class InMemoryStockRepository implements StockRepository {
+public class InMemoryStockRepository implements StockRepository {
     private final Map<Item, Integer> stock;
 
-    InMemoryStockRepository() { this.stock = new HashMap<>(); }
+    public InMemoryStockRepository() { this.stock = new HashMap<>(); }
 
     @Override public boolean contains(Item item) { return stock.containsKey(item); }
 

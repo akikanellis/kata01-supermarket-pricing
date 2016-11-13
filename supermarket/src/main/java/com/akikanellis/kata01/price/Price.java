@@ -21,6 +21,11 @@ public final class Price {
 
     public static Price of(BigDecimal amount) { return new Price(amount); }
 
+    public static Price of(double amount) {
+        BigDecimal bigDecimalAmount = BigDecimal.valueOf(amount);
+        return new Price(bigDecimalAmount);
+    }
+
     public Price add(Price other) {
         BigDecimal newAmount = amount.add(other.amount);
         return new Price(newAmount);
