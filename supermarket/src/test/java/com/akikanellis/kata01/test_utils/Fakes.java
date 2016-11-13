@@ -33,17 +33,17 @@ public final class Fakes {
         Item apple = Item.builder()
                 .barcode(1)
                 .name("Apple")
-                .price(Price.ZERO)
+                .price(Price.of(40))
                 .build();
         Item orange = Item.builder()
                 .barcode(2)
                 .name("Orange")
-                .price(Price.ZERO)
+                .price(Price.of(60))
                 .build();
         Item pear = Item.builder()
                 .barcode(3)
                 .name("Pear")
-                .price(Price.ZERO)
+                .price(Price.of(30))
                 .build();
         QuantifiedItem appleWithQuantity = QuantifiedItem.create(apple, 20);
         QuantifiedItem orangeWithQuantity = QuantifiedItem.create(orange, 60);
