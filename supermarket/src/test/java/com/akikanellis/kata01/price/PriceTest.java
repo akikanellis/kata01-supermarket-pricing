@@ -25,6 +25,42 @@ public class PriceTest {
         assertThat(actualPrice).isEqualTo(expectedPrice);
     }
 
+    @Test public void isPositive_withPositiveNumber_returnsTrue() {
+        assertThat(Price.of(15).isPositive()).isTrue();
+    }
+
+    @Test public void isPositive_withZero_returnsFalse() {
+        assertThat(Price.ZERO.isPositive()).isFalse();
+    }
+
+    @Test public void isPositive_withNegativeNumber_returnsFalse() {
+        assertThat(Price.of(-3).isPositive()).isFalse();
+    }
+
+    @Test public void isNegative_withNegativeNumber_returnsTrue() {
+        assertThat(Price.of(-3).isNegative()).isTrue();
+    }
+
+    @Test public void isNegative_withZero_returnsFalse() {
+        assertThat(Price.ZERO.isNegative()).isFalse();
+    }
+
+    @Test public void isNegative_withPositiveNumber_returnsFalse() {
+        assertThat(Price.of(15).isNegative()).isFalse();
+    }
+
+    @Test public void isZero_withZero_returnsTrue() {
+        assertThat(Price.ZERO.isZero()).isTrue();
+    }
+
+    @Test public void isZero_withPositiveNumber_returnsFalse() {
+        assertThat(Price.of(15).isZero()).isFalse();
+    }
+
+    @Test public void isZero_withNegativeNumber_returnsFalse() {
+        assertThat(Price.of(-3).isZero()).isFalse();
+    }
+
     @Test public void negating_withPositiveNumber_returnsNegative() {
         Price price = Price.of(200);
 
