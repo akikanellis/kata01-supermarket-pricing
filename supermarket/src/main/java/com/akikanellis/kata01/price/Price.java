@@ -12,7 +12,7 @@ public final class Price {
 
     private final BigDecimal amount;
 
-    private Price(BigDecimal amount) { this.amount = checkNotNull(amount); }
+    private Price(BigDecimal amount) { this.amount = checkNotNull(amount).stripTrailingZeros(); }
 
     public static Price of(long amount) {
         BigDecimal bigDecimalAmount = BigDecimal.valueOf(amount);
@@ -21,12 +21,40 @@ public final class Price {
 
     public static Price of(BigDecimal amount) { return new Price(amount); }
 
+    public static Price of(double amount) {
+        BigDecimal bigDecimalAmount = BigDecimal.valueOf(amount);
+        return new Price(bigDecimalAmount);
+    }
+
+    public boolean isPositive() { return amount.compareTo(BigDecimal.ZERO) == 1; }
+
+    public boolean isNegative() { return amount.compareTo(BigDecimal.ZERO) == -1; }
+
+    public boolean isZero() { return amount.compareTo(BigDecimal.ZERO) == 0; }
+
+    public Price negate() {
+        BigDecimal newAmount = amount.negate();
+        return new Price(newAmount);
+    }
+
     public Price add(Price other) {
         BigDecimal newAmount = amount.add(other.amount);
         return new Price(newAmount);
     }
 
+    public Price subtract(Price other) {
+        BigDecimal newAmount = this.amount.subtract(other.amount);
+        return new Price(newAmount);
+    }
+
     public Price multiplyBy(long multiplier) {
+        checkNotNegative(multiplier);
+
+        BigDecimal newAmount = amount.multiply(BigDecimal.valueOf(multiplier));
+        return new Price(newAmount);
+    }
+
+    public Price multiplyBy(double multiplier) {
         checkNotNegative(multiplier);
 
         BigDecimal newAmount = amount.multiply(BigDecimal.valueOf(multiplier));
@@ -44,4 +72,5 @@ public final class Price {
     @Override public int hashCode() { return Objects.hashCode(amount); }
 
     @Override public String toString() { return "Price{amount=" + amount + '}'; }
+
 }

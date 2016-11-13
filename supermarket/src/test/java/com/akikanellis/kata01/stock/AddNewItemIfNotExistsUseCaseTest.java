@@ -16,15 +16,15 @@ import static org.mockito.Mockito.when;
 @RunWith(MockitoJUnitRunner.class)
 public class AddNewItemIfNotExistsUseCaseTest {
     @Mock private StockRepository stock;
-    private AddNewItemIfNotExistsUseCase addNewItemIfNotExistsUseCase;
+    private AddNewItemIfNotExistsUseCase addNewItemIfNotExists;
 
-    @Before public void beforeEach() { addNewItemIfNotExistsUseCase = new AddNewItemIfNotExistsUseCase(stock); }
+    @Before public void beforeEach() { addNewItemIfNotExists = new AddNewItemIfNotExistsUseCase(stock); }
 
     @Test public void executing_withItemNotYetCreated_createsNewItemInRepository() {
         Item item = createDefaultItem();
         when(stock.contains(item)).thenReturn(false);
 
-        addNewItemIfNotExistsUseCase.execute(item);
+        addNewItemIfNotExists.execute(item);
 
         verify(stock).create(item);
     }
@@ -33,7 +33,7 @@ public class AddNewItemIfNotExistsUseCaseTest {
         Item item = createDefaultItem();
         when(stock.contains(item)).thenReturn(true);
 
-        addNewItemIfNotExistsUseCase.execute(item);
+        addNewItemIfNotExists.execute(item);
 
         verify(stock, never()).create(any(Item.class));
     }

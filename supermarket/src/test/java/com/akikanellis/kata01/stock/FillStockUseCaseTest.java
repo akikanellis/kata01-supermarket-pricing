@@ -20,7 +20,7 @@ public class FillStockUseCaseTest {
 
     @Before public void beforeEach() { fillStock = new FillStockUseCase(stock, addNewItemIfNotExists); }
 
-    @Test public void fillingStock_addsItemToStockFirst() {
+    @Test public void executing_addsItemToStockFirst() {
         Item item = createDefaultItem();
 
         fillStock.execute(item, 50);
@@ -28,7 +28,7 @@ public class FillStockUseCaseTest {
         verify(addNewItemIfNotExists).execute(item);
     }
 
-    @Test public void fillingStock_addsStockOnTopOfPreviousQuantity() {
+    @Test public void executing_withNonNegativeQuantity_addsStockOnTopOfPreviousQuantity() {
         Item item = createDefaultItem();
         when(stock.getQuantity(item)).thenReturn(20);
 
@@ -37,7 +37,7 @@ public class FillStockUseCaseTest {
         verify(stock).replaceQuantity(item, 70);
     }
 
-    @Test public void fillingStock_withNegativeQuantity_throwsException() {
+    @Test public void executing_withNegativeQuantity_throwsException() {
         Item item = createDefaultItem();
 
         Assertions.assertThatExceptionOfType(IllegalArgumentException.class)

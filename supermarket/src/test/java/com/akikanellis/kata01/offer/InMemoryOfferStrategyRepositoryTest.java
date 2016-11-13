@@ -30,9 +30,17 @@ public class InMemoryOfferStrategyRepositoryTest {
         assertThat(offerStrategies.getAll().asSet()).containsOnly(offerStrategy);
     }
 
-    @Test public void removingStrategy_removesFromStrategies() {
+    @Test public void removingStrategy_withExistingStrategy_removesFromStrategies() {
         OfferStrategy offerStrategy = createDefaultOfferStrategy();
         offerStrategies.add(offerStrategy);
+
+        offerStrategies.remove(offerStrategy);
+
+        assertThat(offerStrategies.getAll().isEmpty()).isTrue();
+    }
+
+    @Test public void removingStrategy_withNoExistingStrategy_doesNothing() {
+        OfferStrategy offerStrategy = createDefaultOfferStrategy();
 
         offerStrategies.remove(offerStrategy);
 
@@ -50,7 +58,7 @@ public class InMemoryOfferStrategyRepositoryTest {
     }
 
     @Test public void gettingById_withNoExistingStrategy_throwsException() {
-        assertThatExceptionOfType(OfferStrategyDoesNotExistException.class)
+        assertThatExceptionOfType(OfferStrategyNotFoundException.class)
                 .isThrownBy(() -> offerStrategies.getById(11));
     }
 }

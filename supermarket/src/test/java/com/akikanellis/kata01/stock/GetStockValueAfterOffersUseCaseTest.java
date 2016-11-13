@@ -20,7 +20,7 @@ public class GetStockValueAfterOffersUseCaseTest {
         getStockValueAfterOffers = new GetStockValueAfterOffersUseCase(getStockValueBeforeOffers, getOffersValue);
     }
 
-    @Test public void gettingValueAfterOffers_returnsStockValuePlusOffersValue() {
+    @Test public void executing_withNonZeroStockAndOffersValue_returnsStockValuePlusOffersValue() {
         when(getOffersValue.execute()).thenReturn(Price.of(-400));
         when(getStockValueBeforeOffers.execute()).thenReturn(Price.of(2500));
 
@@ -29,7 +29,7 @@ public class GetStockValueAfterOffersUseCaseTest {
         assertThat(price).isEqualTo(Price.of(2100));
     }
 
-    @Test public void gettingValueAfterOffers_withZeroStockValue_returnsZero() {
+    @Test public void executing_withZeroStockValueButNonZeroOffersValue_returnsZero() {
         when(getOffersValue.execute()).thenReturn(Price.of(-400));
         when(getStockValueBeforeOffers.execute()).thenReturn(Price.ZERO);
 
@@ -38,7 +38,7 @@ public class GetStockValueAfterOffersUseCaseTest {
         assertThat(price).isEqualTo(Price.ZERO);
     }
 
-    @Test public void gettingValueAfterOffers_withZeroOffersValue_returnsValueOfStock() {
+    @Test public void executing_withNonZeroStockValueButZeroOffersValue_returnsValueOfStock() {
         when(getOffersValue.execute()).thenReturn(Price.ZERO);
         when(getStockValueBeforeOffers.execute()).thenReturn(Price.of(2500));
 

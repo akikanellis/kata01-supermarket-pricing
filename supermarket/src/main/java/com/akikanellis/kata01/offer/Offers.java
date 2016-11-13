@@ -20,6 +20,10 @@ public final class Offers {
 
     public static Offers empty() { return fromCollection(Collections.emptyList()); }
 
+    public static Offers fromSingle(QuantifiedOffer quantifiedOffer) {
+        return fromCollection(Collections.singletonList(quantifiedOffer));
+    }
+
     public boolean isEmpty() { return quantifiedOffers.isEmpty(); }
 
     public List<QuantifiedOffer> asList() { return new ArrayList<>(quantifiedOffers); }

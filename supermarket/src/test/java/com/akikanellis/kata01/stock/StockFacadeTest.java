@@ -13,10 +13,10 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import static com.akikanellis.kata01.test_utils.Fakes.createDefaultItem;
+import static com.akikanellis.kata01.test_utils.Fakes.createDefaultItems;
 import static com.akikanellis.kata01.test_utils.Fakes.createDefaultOfferStrategies;
 import static com.akikanellis.kata01.test_utils.Fakes.createDefaultOfferStrategy;
 import static com.akikanellis.kata01.test_utils.Fakes.createDefaultOffers;
-import static com.akikanellis.kata01.test_utils.Fakes.defaultItems;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -71,7 +71,7 @@ public class StockFacadeTest {
     }
 
     @Test public void gettingStock_usesUseCase() {
-        Items expectedItems = defaultItems();
+        Items expectedItems = createDefaultItems();
         when(getStock.execute()).thenReturn(expectedItems);
 
         Items actualItems = stockFacade.getStock();

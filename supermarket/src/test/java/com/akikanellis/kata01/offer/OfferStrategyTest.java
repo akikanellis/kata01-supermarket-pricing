@@ -6,6 +6,8 @@ import org.junit.Test;
 public class OfferStrategyTest {
 
     @Test public void equals_isCorrect() {
-        EqualsVerifier.forClass(OfferStrategy.class).withIgnoredFields("description").verify();
+        EqualsVerifier.forClass(OfferStrategy.class)
+                .withIgnoredFields("description")
+                .verify();
     }
 }

@@ -2,14 +2,14 @@ package com.akikanellis.kata01.stock;
 
 import com.akikanellis.kata01.item.Item;
 import com.akikanellis.kata01.item.ItemAlreadyExistsException;
-import com.akikanellis.kata01.item.ItemDoesNotExistException;
+import com.akikanellis.kata01.item.ItemNotFoundException;
 import com.akikanellis.kata01.item.Items;
-import com.akikanellis.kata01.price.Price;
-import com.akikanellis.kata01.test_utils.Fakes;
 import org.junit.Before;
 import org.junit.Test;
 
 import static com.akikanellis.kata01.test_utils.Fakes.createDefaultItem;
+import static com.akikanellis.kata01.test_utils.Fakes.createDefaultItemBuilder;
+import static com.akikanellis.kata01.test_utils.Fakes.createDefaultItems;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
@@ -19,11 +19,11 @@ public class InMemoryStockRepositoryTest {
     @Before public void beforeEach() { stock = new InMemoryStockRepository(); }
 
     @Test public void creatingItem_withNotExistingItem_createsItem() {
-        Item newItem = createDefaultItem();
+        Item item = createDefaultItem();
 
-        stock.create(newItem);
+        stock.create(item);
 
-        assertThat(stock.contains(newItem)).isTrue();
+        assertThat(stock.contains(item)).isTrue();
     }
 
     @Test public void creatingItem_withNotExistingItem_initializesQuantityToZero() {
@@ -42,7 +42,7 @@ public class InMemoryStockRepositoryTest {
                 .isThrownBy(() -> stock.create(item));
     }
 
-    @Test public void replacingQuantity_withExistingItem_ReplacesQuantity() {
+    @Test public void replacingQuantity_withExistingItem_replacesQuantity() {
         Item item = createDefaultItem();
         stock.create(item);
 
@@ -54,12 +54,12 @@ public class InMemoryStockRepositoryTest {
     @Test public void replacingQuantity_withNotExistingItem_throwsException() {
         Item item = createDefaultItem();
 
-        assertThatExceptionOfType(ItemDoesNotExistException.class)
+        assertThatExceptionOfType(ItemNotFoundException.class)
                 .isThrownBy(() -> stock.replaceQuantity(item, 10));
     }
 
     @Test public void gettingAllItems_withItems_returnsAllPackagedAsItems() {
-        Items expectedItems = Fakes.defaultItems();
+        Items expectedItems = createDefaultItems();
         expectedItems.stream().forEach(itemWithQuantity -> {
             stock.create(itemWithQuantity.item());
             stock.replaceQuantity(itemWithQuantity.item(), itemWithQuantity.quantity());
@@ -77,10 +77,8 @@ public class InMemoryStockRepositoryTest {
     }
 
     @Test public void gettingItemByBarcode_withItemPresent_returnsItem() {
-        Item expectedItem = Item.builder()
+        Item expectedItem = createDefaultItemBuilder()
                 .barcode(10)
-                .name("Apple")
-                .price(Price.ONE)
                 .build();
         stock.create(expectedItem);
 
@@ -90,7 +88,7 @@ public class InMemoryStockRepositoryTest {
     }
 
     @Test public void gettingItemByBarcode_withNoItemPresent_throwsException() {
-        assertThatExceptionOfType(ItemDoesNotExistException.class)
+        assertThatExceptionOfType(ItemNotFoundException.class)
                 .isThrownBy(() -> stock.getByBarcode(1));
     }
 }

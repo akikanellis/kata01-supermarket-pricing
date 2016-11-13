@@ -34,5 +34,11 @@ public final class Items {
 
     public List<QuantifiedItem> asList() { return new ArrayList<>(quantifiedItems); }
 
+    public List<Item> asItemsList() {
+        return quantifiedItems.stream()
+                .map(QuantifiedItem::item)
+                .collect(Collectors.toList());
+    }
+
     public Stream<QuantifiedItem> stream() { return quantifiedItems.stream(); }
 }

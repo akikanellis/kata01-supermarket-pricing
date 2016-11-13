@@ -9,12 +9,13 @@ public class FillStockUseCase {
     private final AddNewItemIfNotExistsUseCase addNewItemIfNotExists;
 
     public FillStockUseCase(StockRepository stock, AddNewItemIfNotExistsUseCase addNewItemIfNotExists) {
-        this.addNewItemIfNotExists = addNewItemIfNotExists;
         this.stock = stock;
+        this.addNewItemIfNotExists = addNewItemIfNotExists;
     }
 
     public void execute(Item item, int quantity) {
         checkNotNegative(quantity);
+
         addNewItemIfNotExists.execute(item);
 
         int newQuantity = calculateNewQuantity(item, quantity);
