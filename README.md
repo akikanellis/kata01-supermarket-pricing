@@ -95,7 +95,7 @@ Same as FindBugs but works on the source code.
 Our Continuous Integration server for making sure errors are detected before they are merged.
 
 ## REST API
-Instead of only having the backend exposed internaly, we could expose it through a REST API.
+Instead of only having the backend exposed internally, we could expose it through a REST API.
   
 Assuming that our supermarket's website is *supermarket.com* and we are in version v1.0, then the REST API could look
 like this:
