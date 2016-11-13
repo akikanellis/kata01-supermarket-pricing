@@ -10,7 +10,7 @@ import java.util.Objects;
  * Represents an item/product for our stock and groceries management. The identification is based off of barcode
  * identification where each barcode is unique per item.
  * <p>
- * An item's price can never be negative.
+ * An {@code Item}'s price can never be negative.
  */
 @AutoValue
 public abstract class Item {
@@ -18,21 +18,21 @@ public abstract class Item {
     public static Builder builder() { return new AutoValue_Item.Builder(); }
 
     /**
-     * The barcode of the item. Each barcode is unique per item.
+     * The barcode of the {@code Item}. Each barcode is unique per item.
      *
-     * @return the barcode of the item
+     * @return the barcode of the {@code Item}
      */
     public abstract long barcode();
 
     /**
-     * @return the name of the item
+     * @return the name of the {@code Item}
      */
     public abstract String name();
 
     /**
-     * The price of the item. An item's price can never be negative.
+     * The price of the {@code Item}. An {@code Item}'s price can never be negative.
      *
-     * @return the price of the item
+     * @return the price of the {@code Item}
      */
     public abstract Price price();
 
