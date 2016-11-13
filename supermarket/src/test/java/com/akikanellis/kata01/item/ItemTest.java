@@ -144,7 +144,7 @@ public class ItemTest {
                 .price(Price.ZERO)
                 .build();
 
-        IntStream.range(0, 10)
+        IntStream.range(0, 5)
                 .forEach(ignored -> assertThat(first).isEqualTo(second));
     }
 

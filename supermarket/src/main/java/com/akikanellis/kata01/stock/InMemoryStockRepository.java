@@ -2,7 +2,7 @@ package com.akikanellis.kata01.stock;
 
 import com.akikanellis.kata01.item.Item;
 import com.akikanellis.kata01.item.ItemAlreadyExistsException;
-import com.akikanellis.kata01.item.ItemDoesNotExistException;
+import com.akikanellis.kata01.item.ItemNotFoundException;
 import com.akikanellis.kata01.item.Items;
 
 import java.util.HashMap;
@@ -23,7 +23,7 @@ public class InMemoryStockRepository implements StockRepository {
     }
 
     @Override public void replaceQuantity(Item item, int quantity) {
-        if (!contains(item)) throw new ItemDoesNotExistException(item);
+        if (!contains(item)) throw new ItemNotFoundException(item);
 
         stock.put(item, quantity);
     }
@@ -34,7 +34,7 @@ public class InMemoryStockRepository implements StockRepository {
         return stock.keySet().stream()
                 .filter(item -> item.barcode() == barcode)
                 .findFirst()
-                .orElseThrow(() -> new ItemDoesNotExistException(barcode));
+                .orElseThrow(() -> new ItemNotFoundException(barcode));
     }
 
     @Override public Items getAll() { return Items.fromEntries(stock.entrySet()); }

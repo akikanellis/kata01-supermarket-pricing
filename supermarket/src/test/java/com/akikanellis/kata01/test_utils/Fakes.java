@@ -20,12 +20,13 @@ public final class Fakes {
 
     private Fakes() { throw new AssertionError("No instances."); }
 
-    public static Item createDefaultItem() {
+    public static Item createDefaultItem() { return createDefaultItemBuilder().build(); }
+
+    public static Item.Builder createDefaultItemBuilder() {
         return Item.builder()
                 .barcode(1)
                 .name("Apple")
-                .price(Price.ONE)
-                .build();
+                .price(Price.ONE);
     }
 
     public static Items createDefaultItems() {

@@ -2,7 +2,7 @@ package com.akikanellis.kata01.stock;
 
 import com.akikanellis.kata01.item.Item;
 import com.akikanellis.kata01.item.ItemAlreadyExistsException;
-import com.akikanellis.kata01.item.ItemDoesNotExistException;
+import com.akikanellis.kata01.item.ItemNotFoundException;
 import com.akikanellis.kata01.item.Items;
 import com.akikanellis.kata01.price.Price;
 import com.akikanellis.kata01.test_utils.Fakes;
@@ -54,7 +54,7 @@ public class InMemoryStockRepositoryTest {
     @Test public void replacingQuantity_withNotExistingItem_throwsException() {
         Item item = createDefaultItem();
 
-        assertThatExceptionOfType(ItemDoesNotExistException.class)
+        assertThatExceptionOfType(ItemNotFoundException.class)
                 .isThrownBy(() -> stock.replaceQuantity(item, 10));
     }
 
@@ -90,7 +90,7 @@ public class InMemoryStockRepositoryTest {
     }
 
     @Test public void gettingItemByBarcode_withNoItemPresent_throwsException() {
-        assertThatExceptionOfType(ItemDoesNotExistException.class)
+        assertThatExceptionOfType(ItemNotFoundException.class)
                 .isThrownBy(() -> stock.getByBarcode(1));
     }
 }

@@ -1,6 +1,6 @@
 package com.akikanellis.kata01;
 
-import com.akikanellis.kata01.item.ItemDoesNotExistException;
+import com.akikanellis.kata01.item.ItemNotFoundException;
 import com.akikanellis.kata01.item.Items;
 import com.akikanellis.kata01.item.QuantifiedItem;
 import com.akikanellis.kata01.offer.InMemoryOfferStrategyRepository;
@@ -88,7 +88,7 @@ public class StockFacadeIntegrationTest {
     }
 
     @Test public void fillingStock_ofNotExistingItem_throwsException() {
-        assertThatExceptionOfType(ItemDoesNotExistException.class)
+        assertThatExceptionOfType(ItemNotFoundException.class)
                 .isThrownBy(() -> stockManager.increaseAppleQuantity(70));
     }
 
@@ -103,7 +103,7 @@ public class StockFacadeIntegrationTest {
     }
 
     @Test public void reducingStock_ofNotExistingItem_throwsException() {
-        assertThatExceptionOfType(ItemDoesNotExistException.class)
+        assertThatExceptionOfType(ItemNotFoundException.class)
                 .isThrownBy(() -> stockManager.decreaseAppleQuantity(30));
     }
 
