@@ -5,9 +5,32 @@ import org.junit.Test;
 
 import java.util.stream.IntStream;
 
+import static com.akikanellis.kata01.test_utils.Fakes.createDefaultItemBuilder;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 public class ItemTest {
+
+    @Test public void creating_withPositivePrice_creates() {
+        createDefaultItemBuilder()
+                .price(Price.of(50))
+                .build();
+    }
+
+    @Test public void creating_withZeroPrice_creates() {
+        createDefaultItemBuilder()
+                .price(Price.ZERO)
+                .build();
+    }
+
+    @Test public void creating_withNegativePrice_throwsException() {
+        assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() ->
+                        createDefaultItemBuilder()
+                                .price(Price.of(-1))
+                                .build()
+                );
+    }
 
     @Test public void comparingEquality_withEverythingEqual_areEqual() {
         Item first = Item.builder()

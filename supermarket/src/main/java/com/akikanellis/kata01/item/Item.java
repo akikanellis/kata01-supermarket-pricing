@@ -1,6 +1,7 @@
 package com.akikanellis.kata01.item;
 
 import com.akikanellis.kata01.price.Price;
+import com.akikanellis.kata01.utils.Preconditions;
 import com.google.auto.value.AutoValue;
 
 import java.util.Objects;
@@ -27,13 +28,22 @@ public abstract class Item {
     @Override public final int hashCode() { return Long.hashCode(barcode()); }
 
     @AutoValue.Builder
-    public interface Builder {
-        Builder barcode(long barcode);
+    public abstract static class Builder {
+        public abstract Builder barcode(long barcode);
 
-        Builder name(String name);
+        public abstract Builder name(String name);
 
-        Builder price(Price price);
+        public abstract Builder price(Price price);
 
-        Item build();
+        abstract Item autoBuild();
+
+        public Item build() {
+            Item item = autoBuild();
+
+            Price price = item.price();
+            Preconditions.checkArgument(!price.isNegative(), "Item price can't be negative. Was [%s]", price);
+
+            return item;
+        }
     }
 }
