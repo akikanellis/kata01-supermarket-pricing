@@ -66,7 +66,7 @@ public class StockFacadeIntegrationTest {
         stockManager.createAppleBeansAndCheese();
 
         assertThat(stockManager.getStock().asItemsList())
-                .containsOnly(stockManager.getDefaultApple(), stockManager.getCheese(), stockManager.getBeans());
+                .containsOnly(stockManager.getApple(), stockManager.getCheese(), stockManager.getBeans());
     }
 
     @Test public void creatingItem_thatAlreadyExists_doesNothing() {
@@ -80,7 +80,7 @@ public class StockFacadeIntegrationTest {
     @Test public void fillingStock_ofExistingItem_fillsStock() {
         stockManager.createApple();
         stockManager.increaseAppleQuantity(50);
-        QuantifiedItem expectedQuantifiedApple = QuantifiedItem.create(stockManager.getDefaultApple(), 120);
+        QuantifiedItem expectedQuantifiedApple = QuantifiedItem.create(stockManager.getApple(), 120);
 
         stockManager.increaseAppleQuantity(70);
 
@@ -95,7 +95,7 @@ public class StockFacadeIntegrationTest {
     @Test public void reducingStock_ofExistingItem_reducesStock() {
         stockManager.createApple();
         stockManager.increaseAppleQuantity(50);
-        QuantifiedItem expectedQuantifiedApple = QuantifiedItem.create(stockManager.getDefaultApple(), 20);
+        QuantifiedItem expectedQuantifiedApple = QuantifiedItem.create(stockManager.getApple(), 20);
 
         stockManager.decreaseAppleQuantity(30);
 
@@ -146,9 +146,14 @@ public class StockFacadeIntegrationTest {
     }
 
     @Test public void gettingOfferStrategies_withStrategies_returnsThem() {
+        stockManager.createAllOffers();
+
         OfferStrategies strategies = stockManager.getActiveOfferStrategies();
 
-        assertThat(strategies.isEmpty()).isTrue();
+        assertThat(strategies.asSet()).containsExactly(
+                stockManager.getAppleOfferStrategy(),
+                stockManager.getBeansOfferStrategy(),
+                stockManager.getTenPercentOffEverythingOfferStrategy());
     }
 
     @Test public void gettingOfferStrategies_withoutStrategies_returnsEmptyStrategies() {
@@ -158,10 +163,7 @@ public class StockFacadeIntegrationTest {
     }
 
     @Test public void gettingApplicableOffers_withOffers_returnsThem() {
-        stockManager.createAppleBeansAndCheese();
-        stockManager.increaseAppleQuantity(30);
-        stockManager.increaseCheeseQuantity(20000);
-        stockManager.increaseBeansQuantity(100);
+        stockManager.createAndAddAllItems();
         stockManager.createAllOffers();
 
         Offers offers = stockManager.getApplicableOffers();
@@ -170,10 +172,7 @@ public class StockFacadeIntegrationTest {
     }
 
     @Test public void gettingApplicableOffers_withNoOffers_returnsEmptyOffers() {
-        stockManager.createAppleBeansAndCheese();
-        stockManager.increaseAppleQuantity(30);
-        stockManager.increaseCheeseQuantity(20000);
-        stockManager.increaseBeansQuantity(100);
+        stockManager.createAndAddAllItems();
 
         Offers offers = stockManager.getApplicableOffers();
 
@@ -181,22 +180,17 @@ public class StockFacadeIntegrationTest {
     }
 
     @Test public void gettingOffersValue_withOffers_returnsIt() {
-        stockManager.createAppleBeansAndCheese();
-        stockManager.increaseAppleQuantity(30);
-        stockManager.increaseCheeseQuantity(20000);
-        stockManager.increaseBeansQuantity(100);
+        stockManager.createAndAddAllItems();
         stockManager.createAllOffers();
+        Price expectedValue = Price.of(-5320);
 
         Price value = stockManager.getOffersValue();
 
-        assertThat(value).isEqualTo(Price.of(-5320));
+        assertThat(value).isEqualTo(expectedValue);
     }
 
     @Test public void gettingOffersValue_withNoOffers_returnsZero() {
-        stockManager.createAppleBeansAndCheese();
-        stockManager.increaseAppleQuantity(30);
-        stockManager.increaseCheeseQuantity(20000);
-        stockManager.increaseBeansQuantity(100);
+        stockManager.createAndAddAllItems();
 
         Price value = stockManager.getOffersValue();
 
@@ -204,14 +198,12 @@ public class StockFacadeIntegrationTest {
     }
 
     @Test public void gettingStockValueBeforeOffers_withItems_returnsValue() {
-        stockManager.createAppleBeansAndCheese();
-        stockManager.increaseAppleQuantity(30);
-        stockManager.increaseCheeseQuantity(20000);
-        stockManager.increaseBeansQuantity(100);
+        stockManager.createAndAddAllItems();
+        Price expectedValue = Price.of(19200);
 
         Price value = stockManager.getStockValueBeforeOffers();
 
-        assertThat(value).isEqualTo(Price.of(19200));
+        assertThat(value).isEqualTo(expectedValue);
     }
 
     @Test public void gettingStockValueBeforeOffers_withNoItems_returnsZero() {
@@ -221,26 +213,22 @@ public class StockFacadeIntegrationTest {
     }
 
     @Test public void gettingStockValueAfterOffers_withItemsAndOffers_returnsTotalValue() {
-        stockManager.createAppleBeansAndCheese();
-        stockManager.increaseAppleQuantity(30);
-        stockManager.increaseCheeseQuantity(20000);
-        stockManager.increaseBeansQuantity(100);
+        stockManager.createAndAddAllItems();
         stockManager.createAllOffers();
+        Price expectedValue = Price.of(13880);
 
         Price value = stockManager.getStockValueAfterOffers();
 
-        assertThat(value).isEqualTo(Price.of(13880));
+        assertThat(value).isEqualTo(expectedValue);
     }
 
     @Test public void gettingStockValueAfterOffers_withItemsAndNoOffers_returnsItemsValue() {
-        stockManager.createAppleBeansAndCheese();
-        stockManager.increaseAppleQuantity(30);
-        stockManager.increaseCheeseQuantity(20000);
-        stockManager.increaseBeansQuantity(100);
+        stockManager.createAndAddAllItems();
+        Price expectedValue = Price.of(19200);
 
         Price value = stockManager.getStockValueAfterOffers();
 
-        assertThat(value).isEqualTo(Price.of(19200));
+        assertThat(value).isEqualTo(expectedValue);
     }
 
     @Test public void gettingStockValueAfterOffers_withOffersAndNoItems_returnsZero() {
