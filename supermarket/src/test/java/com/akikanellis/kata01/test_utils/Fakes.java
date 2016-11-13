@@ -12,7 +12,6 @@ import com.akikanellis.kata01.price.Price;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -59,9 +58,7 @@ public final class Fakes {
 
     public static OfferStrategy createDefaultOfferStrategy() {
         return new OfferStrategy(1, "Default offer strategy") {
-            @Override public Offers calculateOffers(Items items) {
-                return null;
-            }
+            @Override public Offers calculateOffers(Items items) { return Offers.empty(); }
         };
     }
 
@@ -79,18 +76,13 @@ public final class Fakes {
 
                             Offer offer = Offer.create(String.format("Offer made from [%s]", description), Price.ONE);
                             QuantifiedOffer quantifiedOffer = QuantifiedOffer.create(offer, quantities[i]);
-                            return Offers.fromCollection(Collections.singletonList(quantifiedOffer));
+                            return Offers.fromSingle(quantifiedOffer);
                         }
                     };
                 })
                 .collect(Collectors.toList());
 
         return OfferStrategies.fromCollection(offerStrategies);
-    }
-
-
-    private static Offer createThreeApplesForOnePoundOffer() {
-        return Offer.create("3 Apples for £1", Price.of(-50));
     }
 
     public static Offers createDefaultOffers() {
@@ -101,19 +93,17 @@ public final class Fakes {
         ));
     }
 
-    private static Offer createFiftyPercentOffPearsOffer() {
-        return Offer.create("50% off pears", Price.of(-50));
-    }
+    private static Offer createThreeApplesForOnePoundOffer() { return Offer.create("3 Apples for £1", Price.of(-50)); }
+
+    private static Offer createFiftyPercentOffPearsOffer() { return Offer.create("50% off pears", Price.of(-50)); }
 
     private static Offer createTwoOrangesOneFreeOffer() {
         return Offer.create("Buy 2 Oranges get 1 free", Price.of(-50));
     }
 
-    public static Offer createDefaultOffer() { return createThreeApplesForOnePoundOffer(); }
-
     public static Offers createOffersWithPrices(long... amounts) {
         List<QuantifiedOffer> offers = IntStream.range(0, amounts.length)
-                .mapToObj(i -> Offer.create("offer-" + i, Price.of(amounts[i])))
+                .mapToObj(i -> Offer.create("Offer-" + i, Price.of(amounts[i])))
                 .map(offer -> QuantifiedOffer.create(offer, 1))
                 .collect(Collectors.toList());
 
@@ -124,7 +114,7 @@ public final class Fakes {
         List<QuantifiedItem> items = IntStream.range(0, amounts.length)
                 .mapToObj(i -> Item.builder()
                         .barcode(i)
-                        .name("item-" + i)
+                        .name("Item-" + i)
                         .price(Price.of(amounts[i]))
                         .build()
                 )
@@ -136,9 +126,7 @@ public final class Fakes {
 
     public static OfferStrategy createOfferStrategyWithId(long id) {
         return new OfferStrategy(id, "OfferStrategy-" + id) {
-            @Override public Offers calculateOffers(Items items) {
-                throw new UnsupportedOperationException("Not supported in testing.");
-            }
+            @Override public Offers calculateOffers(Items items) { return Offers.empty(); }
         };
     }
 }
