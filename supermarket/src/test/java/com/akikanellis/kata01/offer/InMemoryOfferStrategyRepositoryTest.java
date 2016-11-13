@@ -13,8 +13,17 @@ public class InMemoryOfferStrategyRepositoryTest {
 
     @Before public void beforeEach() { offerStrategies = new InMemoryOfferStrategyRepository(); }
 
-    @Test public void addingStrategy_addsToStrategies() {
+    @Test public void addingStrategy_withNoExistingStrategy_addsToStrategies() {
         OfferStrategy offerStrategy = createDefaultOfferStrategy();
+
+        offerStrategies.add(offerStrategy);
+
+        assertThat(offerStrategies.contains(offerStrategy)).isTrue();
+    }
+
+    @Test public void addingStrategy_withExistingStrategy_replacesStrategy() {
+        OfferStrategy offerStrategy = createDefaultOfferStrategy();
+        offerStrategies.add(offerStrategy);
 
         offerStrategies.add(offerStrategy);
 

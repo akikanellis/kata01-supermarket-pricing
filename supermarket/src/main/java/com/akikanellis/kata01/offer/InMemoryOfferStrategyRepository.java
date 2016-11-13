@@ -3,10 +3,10 @@ package com.akikanellis.kata01.offer;
 import java.util.HashSet;
 import java.util.Set;
 
-public class InMemoryOfferStrategyRepository implements OfferStrategyRepository {
+class InMemoryOfferStrategyRepository implements OfferStrategyRepository {
     private final Set<OfferStrategy> offerStrategies;
 
-    public InMemoryOfferStrategyRepository() { this.offerStrategies = new HashSet<>(); }
+    InMemoryOfferStrategyRepository() { this.offerStrategies = new HashSet<>(); }
 
     @Override public boolean contains(OfferStrategy offerStrategy) { return offerStrategies.contains(offerStrategy); }
 
