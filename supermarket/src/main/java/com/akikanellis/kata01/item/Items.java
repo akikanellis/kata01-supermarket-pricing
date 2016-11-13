@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
- * A representation of a collection of items along with their quantities.
+ * A representation of a collection of {@link com.akikanellis.kata01.item.Item} along with their quantities.
  */
 public final class Items {
     private final List<QuantifiedItem> quantifiedItems;

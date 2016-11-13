@@ -7,7 +7,7 @@ import java.util.Set;
 import java.util.stream.Stream;
 
 /**
- * A representation of a collection of offer strategies.
+ * A representation of a collection of {@link com.akikanellis.kata01.offer.OfferStrategies}.
  */
 public final class OfferStrategies {
     private final Set<OfferStrategy> strategies;
