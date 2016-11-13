@@ -5,6 +5,9 @@ import com.google.auto.value.AutoValue;
 
 /**
  * Represents an item with a quantity of it.
+ * <p>
+ * For example normal item such as a can of beans has a minimum quantity of 1 can. A weighted item such as cheese has a
+ * minimum quantity of 1 gram.
  */
 @AutoValue
 public abstract class QuantifiedItem {
