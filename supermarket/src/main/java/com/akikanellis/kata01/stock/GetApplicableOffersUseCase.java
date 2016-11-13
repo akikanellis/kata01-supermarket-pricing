@@ -5,6 +5,9 @@ import com.akikanellis.kata01.offer.OfferStrategies;
 import com.akikanellis.kata01.offer.OfferStrategyRepository;
 import com.akikanellis.kata01.offer.Offers;
 
+/**
+ * Returns all the offers that can be applied to the current items.
+ */
 public class GetApplicableOffersUseCase {
     private final StockRepository stock;
     private final OfferStrategyRepository offerStrategies;

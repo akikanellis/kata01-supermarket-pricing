@@ -4,6 +4,9 @@ import com.akikanellis.kata01.item.Items;
 import com.akikanellis.kata01.item.QuantifiedItem;
 import com.akikanellis.kata01.price.Price;
 
+/**
+ * Returns the stock value in its "pure" form, before removing the offers value.
+ */
 public class GetStockValueBeforeOffersUseCase {
     private final GetStockUseCase getStock;
 

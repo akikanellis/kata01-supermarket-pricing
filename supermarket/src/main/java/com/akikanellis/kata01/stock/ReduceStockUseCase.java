@@ -4,6 +4,9 @@ import com.akikanellis.kata01.item.Item;
 
 import static com.akikanellis.kata01.utils.Preconditions.checkNotNegative;
 
+/**
+ * Reduces the quantity of the stock for the specified item by the specified quantity.
+ */
 public class ReduceStockUseCase {
     private final StockRepository stock;
     private final AddNewItemIfNotExistsUseCase addNewItemIfNotExists;

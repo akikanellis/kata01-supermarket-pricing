@@ -4,6 +4,9 @@ import com.akikanellis.kata01.offer.Offers;
 import com.akikanellis.kata01.offer.QuantifiedOffer;
 import com.akikanellis.kata01.price.Price;
 
+/**
+ * Returns the total value of the applicable offers.
+ */
 public class GetOffersValueUseCase {
     private final GetApplicableOffersUseCase getOffers;
 

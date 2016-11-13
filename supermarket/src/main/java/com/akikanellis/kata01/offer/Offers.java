@@ -7,6 +7,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+/**
+ * A representation of a collection of offers along with their quantities.
+ */
 public final class Offers {
     private final List<QuantifiedOffer> quantifiedOffers;
 

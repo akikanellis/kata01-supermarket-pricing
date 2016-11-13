@@ -6,6 +6,9 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Stream;
 
+/**
+ * A representation of a collection of offer strategies.
+ */
 public final class OfferStrategies {
     private final Set<OfferStrategy> strategies;
 
