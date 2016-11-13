@@ -28,12 +28,18 @@ public class InMemoryStockRepository implements StockRepository {
     }
 
     @Override public void replaceQuantity(Item item, int quantity) {
-        if (!contains(item)) throw new ItemNotFoundException(item);
+        checkContainsItem(item);
 
         stock.put(item, quantity);
     }
 
-    @Override public int getQuantity(Item item) { return stock.get(item); }
+    @Override public int getQuantity(Item item) {
+        checkContainsItem(item);
+
+        return stock.get(item);
+    }
+
+    private void checkContainsItem(Item item) { if (!contains(item)) throw new ItemNotFoundException(item); }
 
     @Override public Item getByBarcode(long barcode) {
         return stock.keySet().stream()

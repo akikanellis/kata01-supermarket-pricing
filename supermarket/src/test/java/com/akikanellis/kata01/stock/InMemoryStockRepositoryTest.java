@@ -56,22 +56,20 @@ public class InMemoryStockRepositoryTest {
                 .isThrownBy(() -> stock.replaceQuantity(createDefaultItem(), 10));
     }
 
-    @Test public void gettingAllItems_withItems_returnsAllPackagedAsItems() {
-        Items expectedItems = createDefaultItems();
-        expectedItems.stream().forEach(itemWithQuantity -> {
-            stock.create(itemWithQuantity.item());
-            stock.replaceQuantity(itemWithQuantity.item(), itemWithQuantity.quantity());
-        });
+    @Test public void gettingQuantity_withItemPresent_returnsQuantity() {
+        Item item = createDefaultItem();
+        stock.create(item);
+        int expectedQuantity = 10;
+        stock.replaceQuantity(item, expectedQuantity);
 
-        Items actualItems = stock.getAll();
+        int quantity = stock.getQuantity(item);
 
-        assertThat(actualItems.asList()).containsOnlyElementsOf(expectedItems.asList());
+        assertThat(quantity).isEqualTo(expectedQuantity);
     }
 
-    @Test public void gettingAllItems_withNoItems_returnsEmptyItems() {
-        Items items = stock.getAll();
-
-        assertThat(items.isEmpty()).isTrue();
+    @Test public void gettingQuantity_withNoItemPresent_throwsException() {
+        assertThatExceptionOfType(ItemNotFoundException.class)
+                .isThrownBy(() -> stock.getQuantity(createDefaultItem()));
     }
 
     @Test public void gettingItemByBarcode_withItemPresent_returnsItem() {
@@ -88,5 +86,23 @@ public class InMemoryStockRepositoryTest {
     @Test public void gettingItemByBarcode_withNoItemPresent_throwsException() {
         assertThatExceptionOfType(ItemNotFoundException.class)
                 .isThrownBy(() -> stock.getByBarcode(1));
+    }
+
+    @Test public void gettingAllItems_withItems_returnsAllPackagedAsItems() {
+        Items expectedItems = createDefaultItems();
+        expectedItems.stream().forEach(itemWithQuantity -> {
+            stock.create(itemWithQuantity.item());
+            stock.replaceQuantity(itemWithQuantity.item(), itemWithQuantity.quantity());
+        });
+
+        Items actualItems = stock.getAll();
+
+        assertThat(actualItems.asList()).containsOnlyElementsOf(expectedItems.asList());
+    }
+
+    @Test public void gettingAllItems_withNoItems_returnsEmptyItems() {
+        Items items = stock.getAll();
+
+        assertThat(items.isEmpty()).isTrue();
     }
 }
