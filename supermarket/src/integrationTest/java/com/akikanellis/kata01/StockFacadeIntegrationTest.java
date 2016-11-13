@@ -84,7 +84,7 @@ public class StockFacadeIntegrationTest {
 
         stockManager.increaseAppleQuantity(70);
 
-        assertThat(stockManager.getStock().asList()).containsExactly(expectedQuantifiedApple);
+        assertThat(stockManager.getStock().asList()).containsOnly(expectedQuantifiedApple);
     }
 
     @Test public void fillingStock_ofNotExistingItem_throwsException() {
@@ -99,7 +99,7 @@ public class StockFacadeIntegrationTest {
 
         stockManager.decreaseAppleQuantity(30);
 
-        assertThat(stockManager.getStock().asList()).containsExactly(expectedQuantifiedApple);
+        assertThat(stockManager.getStock().asList()).containsOnly(expectedQuantifiedApple);
     }
 
     @Test public void reducingStock_ofNotExistingItem_throwsException() {
@@ -120,7 +120,8 @@ public class StockFacadeIntegrationTest {
                 .containsOnly(
                         stockManager.getAppleOfferStrategy(),
                         stockManager.getBeansOfferStrategy(),
-                        stockManager.getTenPercentOffEverythingOfferStrategy());
+                        stockManager.getTenPercentOffEverythingOfferStrategy()
+                );
     }
 
     @Test public void creatingOfferStrategies_withSameIds_replacesThem() {
@@ -150,7 +151,7 @@ public class StockFacadeIntegrationTest {
 
         OfferStrategies strategies = stockManager.getActiveOfferStrategies();
 
-        assertThat(strategies.asSet()).containsExactly(
+        assertThat(strategies.asSet()).containsOnly(
                 stockManager.getAppleOfferStrategy(),
                 stockManager.getBeansOfferStrategy(),
                 stockManager.getTenPercentOffEverythingOfferStrategy());
