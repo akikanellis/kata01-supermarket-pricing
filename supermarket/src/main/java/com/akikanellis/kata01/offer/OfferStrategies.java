@@ -18,7 +18,7 @@ public final class OfferStrategies {
         return new OfferStrategies(offerStrategies);
     }
 
-    public static OfferStrategies empty() { return new OfferStrategies(Collections.emptyList()); }
+    public static OfferStrategies empty() { return fromCollection(Collections.emptyList()); }
 
     public boolean isEmpty() { return strategies.isEmpty(); }
 
