@@ -12,7 +12,7 @@ public class GetStockValueBeforeOffersUseCase {
     public Price execute() {
         Items items = getStock.execute();
 
-        return items.asList().stream()
+        return items.stream()
                 .map(ItemWithQuantity::totalPrice)
                 .reduce(Price::add)
                 .orElse(Price.ZERO);

@@ -60,7 +60,7 @@ public class InMemoryStockRepositoryTest {
 
     @Test public void gettingAllItems_withItems_returnsAllPackagedAsItems() {
         Items expectedItems = Fakes.defaultItems();
-        expectedItems.asList().forEach(itemWithQuantity -> {
+        expectedItems.stream().forEach(itemWithQuantity -> {
             stock.create(itemWithQuantity.item());
             stock.replaceQuantity(itemWithQuantity.item(), itemWithQuantity.quantity());
         });
@@ -73,7 +73,7 @@ public class InMemoryStockRepositoryTest {
     @Test public void gettingAllItems_withNoItems_returnsEmptyItems() {
         Items items = stock.getAll();
 
-        assertThat(items.asList()).isEmpty();
+        assertThat(items.isEmpty()).isTrue();
     }
 
     @Test public void gettingItemByBarcode_withItemPresent_returnsItem() {

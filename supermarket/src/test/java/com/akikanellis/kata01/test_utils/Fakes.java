@@ -54,7 +54,7 @@ public final class Fakes {
         itemsWithQuantities.add(orangeWithQuantity);
         itemsWithQuantities.add(pearWithQuantity);
 
-        return Items.fromList(itemsWithQuantities);
+        return Items.fromCollection(itemsWithQuantities);
     }
 
     public static OfferStrategy createDefaultOfferStrategy() {
@@ -75,7 +75,7 @@ public final class Fakes {
                     String description = "OfferStrategy-" + i;
                     return new OfferStrategy(i, description) {
                         @Override public Offers calculateOffers(Items items) {
-                            if (items.asList().isEmpty()) return Offers.empty();
+                            if (items.isEmpty()) return Offers.empty();
 
                             Offer offer = Offer.create(String.format("Offer made from [%s]", description), Price.ONE);
                             OfferWithQuantity offerWithQuantity = OfferWithQuantity.create(offer, quantities[i]);
@@ -131,7 +131,7 @@ public final class Fakes {
                 .map(item -> ItemWithQuantity.create(item, 1))
                 .collect(Collectors.toList());
 
-        return Items.fromList(items);
+        return Items.fromCollection(items);
     }
 
     public static OfferStrategy createOfferStrategyWithId(long id) {
