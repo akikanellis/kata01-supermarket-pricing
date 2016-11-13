@@ -7,7 +7,7 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import static com.akikanellis.kata01.test_utils.Fakes.defaultItems;
+import static com.akikanellis.kata01.test_utils.Fakes.createDefaultItems;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 
@@ -19,7 +19,7 @@ public class GetStockUseCaseTest {
     @Before public void beforeEach() { getStock = new GetStockUseCase(stock); }
 
     @Test public void gettingStock_returnsStockFromRepository() {
-        Items expectedItems = defaultItems();
+        Items expectedItems = createDefaultItems();
         when(stock.getAll()).thenReturn(expectedItems);
 
         Items actualItems = getStock.execute();

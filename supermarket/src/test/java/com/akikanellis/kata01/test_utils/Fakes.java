@@ -29,7 +29,7 @@ public final class Fakes {
                 .build();
     }
 
-    public static Items defaultItems() {
+    public static Items createDefaultItems() {
         Item apple = Item.builder()
                 .barcode(1)
                 .name("Apple")

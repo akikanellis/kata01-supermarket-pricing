@@ -10,8 +10,8 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import static com.akikanellis.kata01.test_utils.Fakes.createDefaultItems;
 import static com.akikanellis.kata01.test_utils.Fakes.createDefaultOfferStrategies;
-import static com.akikanellis.kata01.test_utils.Fakes.defaultItems;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 
@@ -27,7 +27,7 @@ public class GetApplicableOffersUseCaseTest {
 
     @Test public void gettingOffers_withAvailableOfferStrategies_returnsOffers() {
         OfferStrategies offerStrategies = createDefaultOfferStrategies();
-        Items items = defaultItems();
+        Items items = createDefaultItems();
         when(offerStrategyRepository.getAll()).thenReturn(offerStrategies);
         when(stockRepository.getAll()).thenReturn(items);
 
@@ -38,7 +38,7 @@ public class GetApplicableOffersUseCaseTest {
 
     @Test public void gettingOffers_withNoOfferStrategies_returnsEmptyOffers() {
         OfferStrategies offerStrategies = OfferStrategies.empty();
-        Items items = defaultItems();
+        Items items = createDefaultItems();
         when(offerStrategyRepository.getAll()).thenReturn(offerStrategies);
         when(stockRepository.getAll()).thenReturn(items);
 

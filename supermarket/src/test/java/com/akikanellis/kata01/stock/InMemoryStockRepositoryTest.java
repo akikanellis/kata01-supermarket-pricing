@@ -59,7 +59,7 @@ public class InMemoryStockRepositoryTest {
     }
 
     @Test public void gettingAllItems_withItems_returnsAllPackagedAsItems() {
-        Items expectedItems = Fakes.defaultItems();
+        Items expectedItems = Fakes.createDefaultItems();
         expectedItems.stream().forEach(itemWithQuantity -> {
             stock.create(itemWithQuantity.item());
             stock.replaceQuantity(itemWithQuantity.item(), itemWithQuantity.quantity());
