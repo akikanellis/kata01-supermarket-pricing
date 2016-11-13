@@ -2,6 +2,7 @@ package com.akikanellis.kata01;
 
 import com.akikanellis.kata01.item.Item;
 import com.akikanellis.kata01.item.Items;
+import com.akikanellis.kata01.offer.OfferStrategies;
 import com.akikanellis.kata01.offer.OfferStrategy;
 import com.akikanellis.kata01.price.Price;
 import com.akikanellis.kata01.stock.StockFacade;
@@ -11,6 +12,9 @@ public class StockManagerPageObject {
     private final Item apple;
     private final Item cheese;
     private final Item beans;
+    private OfferStrategy appleOfferStrategy;
+    private OfferStrategy beansOfferStrategy;
+    private OfferStrategy tenPercentOffEverythingOfferStrategy;
 
     public StockManagerPageObject(StockFacade stockFacade) {
         this.apple = Item.builder()
@@ -28,6 +32,11 @@ public class StockManagerPageObject {
                 .name("Beans")
                 .price(Price.of(120))
                 .build();
+
+        appleOfferStrategy = BuyTwoGetOneFree.create(1, apple);
+        beansOfferStrategy = TwoForOnePound.create(2, beans);
+        tenPercentOffEverythingOfferStrategy = TenPercentOffEverything.create(3);
+
         this.stockFacade = stockFacade;
     }
 
@@ -36,6 +45,12 @@ public class StockManagerPageObject {
     public Item getCheese() { return cheese; }
 
     public Item getBeans() { return beans; }
+
+    public OfferStrategy getAppleOfferStrategy() { return appleOfferStrategy; }
+
+    public OfferStrategy getBeansOfferStrategy() { return beansOfferStrategy; }
+
+    public OfferStrategy getTenPercentOffEverythingOfferStrategy() { return tenPercentOffEverythingOfferStrategy; }
 
     public void createAppleBeansAndCheese() {
         createApple();
@@ -59,22 +74,19 @@ public class StockManagerPageObject {
 
     public Items getStock() { return stockFacade.getStock(); }
 
-    public void createAppleBeansAndCheeseOffers() {
+    public void createThreeOffers() {
         createAppleOffer();
+        createBeansOffer();
+        createTenPercentOffEverythingOffer();
     }
 
-    public void createAppleOffer() {
-        OfferStrategy appleOfferStrategy = BuyTwoGetOneFree.create(1, apple);
-        stockFacade.addOfferStrategy(appleOfferStrategy);
-    }
+    public void createAppleOffer() { stockFacade.addOfferStrategy(appleOfferStrategy); }
 
-    public void createBeansOffer() {
-        OfferStrategy beansOfferStrategy = TwoForOnePound.create(2, beans);
-        stockFacade.addOfferStrategy(beansOfferStrategy);
-    }
+    public void createBeansOffer() { stockFacade.addOfferStrategy(beansOfferStrategy); }
 
     public void createTenPercentOffEverythingOffer() {
-        OfferStrategy beansOfferStrategy = TenPercentOffEverything.create(3);
-        stockFacade.addOfferStrategy(beansOfferStrategy);
+        stockFacade.addOfferStrategy(tenPercentOffEverythingOfferStrategy);
     }
+
+    public OfferStrategies getActiveOfferStrategies() { return stockFacade.getActiveOfferStrategies(); }
 }

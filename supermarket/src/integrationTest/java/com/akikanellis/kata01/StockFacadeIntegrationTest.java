@@ -110,9 +110,21 @@ public class StockFacadeIntegrationTest {
     }
 
     @Test public void creatingOfferStrategies_withDifferentIds_addsThem() {
-        stockManager.createAppleBeansAndCheeseOffers();
+        stockManager.createThreeOffers();
 
-        assertThat(stockManager.getStock().asItemsList())
-                .containsOnly(stockManager.getApple(), stockManager.getCheese(), stockManager.getBeans());
+        assertThat(stockManager.getActiveOfferStrategies().asSet())
+                .containsOnly(
+                        stockManager.getAppleOfferStrategy(),
+                        stockManager.getBeansOfferStrategy(),
+                        stockManager.getTenPercentOffEverythingOfferStrategy());
+    }
+
+    @Test public void creatingOfferStrategies_withSameIds_replacesThem() {
+        stockManager.createAppleOffer();
+
+        stockManager.createAppleOffer();
+
+        assertThat(stockManager.getActiveOfferStrategies().asSet())
+                .containsOnly(stockManager.getAppleOfferStrategy());
     }
 }
