@@ -6,8 +6,12 @@ import com.google.auto.value.AutoValue;
 import static com.akikanellis.kata01.utils.Preconditions.checkArgument;
 
 /**
- * A representation of an offer. An offer refers to how much price to remove from a value. The price much be
- * non-positive.
+ * A representation of an offer. An offer refers to how much price to remove from a value.
+ *
+ * For example we could have {@code Offer{description='2 Apples for £1', price=-20}} which would mean that for every 2
+ * Apples we remove -20 from the price.
+ *
+ * The price much be non-positive.
  */
 @AutoValue
 public abstract class Offer {
