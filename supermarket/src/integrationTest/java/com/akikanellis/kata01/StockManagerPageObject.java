@@ -89,4 +89,6 @@ public class StockManagerPageObject {
     }
 
     public OfferStrategies getActiveOfferStrategies() { return stockFacade.getActiveOfferStrategies(); }
+
+    public void removeAppleOffer() { stockFacade.removeOfferStrategy(appleOfferStrategy.id()); }
 }
