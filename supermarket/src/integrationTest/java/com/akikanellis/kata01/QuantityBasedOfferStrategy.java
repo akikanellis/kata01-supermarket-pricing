@@ -2,6 +2,7 @@ package com.akikanellis.kata01;
 
 import com.akikanellis.kata01.item.Item;
 import com.akikanellis.kata01.item.Items;
+import com.akikanellis.kata01.item.QuantifiedItem;
 import com.akikanellis.kata01.offer.Offer;
 import com.akikanellis.kata01.offer.OfferStrategy;
 import com.akikanellis.kata01.offer.Offers;
@@ -32,9 +33,11 @@ public class QuantityBasedOfferStrategy extends OfferStrategy {
     }
 
     @Override public Offers calculateOffers(Items items) {
-        int numberOfApplicableItems = (int) items.stream()
+        int numberOfApplicableItems = items.stream()
                 .filter(quantifiedItem -> quantifiedItem.item().equals(applicableItem))
-                .count();
+                .map(QuantifiedItem::quantity)
+                .reduce((firstQuantity, secondQuantity) -> firstQuantity + secondQuantity)
+                .orElse(0);
         int timesToApplyOffer = numberOfApplicableItems / quantityToDiscount;
 
         Offer baseOffer = Offer.create(description(), discount);

@@ -7,6 +7,8 @@ import com.akikanellis.kata01.offer.InMemoryOfferStrategyRepository;
 import com.akikanellis.kata01.offer.OfferStrategies;
 import com.akikanellis.kata01.offer.OfferStrategyDoesNotExistException;
 import com.akikanellis.kata01.offer.OfferStrategyRepository;
+import com.akikanellis.kata01.offer.Offers;
+import com.akikanellis.kata01.price.Price;
 import com.akikanellis.kata01.stock.AddNewItemIfNotExistsUseCase;
 import com.akikanellis.kata01.stock.AddOfferStrategyUseCase;
 import com.akikanellis.kata01.stock.FillStockUseCase;
@@ -64,7 +66,7 @@ public class StockFacadeIntegrationTest {
         stockManager.createAppleBeansAndCheese();
 
         assertThat(stockManager.getStock().asItemsList())
-                .containsOnly(stockManager.getApple(), stockManager.getCheese(), stockManager.getBeans());
+                .containsOnly(stockManager.getDefaultApple(), stockManager.getCheese(), stockManager.getBeans());
     }
 
     @Test public void creatingItem_thatAlreadyExists_doesNothing() {
@@ -78,7 +80,7 @@ public class StockFacadeIntegrationTest {
     @Test public void fillingStock_ofExistingItem_fillsStock() {
         stockManager.createApple();
         stockManager.increaseAppleQuantity(50);
-        QuantifiedItem expectedQuantifiedApple = QuantifiedItem.create(stockManager.getApple(), 120);
+        QuantifiedItem expectedQuantifiedApple = QuantifiedItem.create(stockManager.getDefaultApple(), 120);
 
         stockManager.increaseAppleQuantity(70);
 
@@ -93,7 +95,7 @@ public class StockFacadeIntegrationTest {
     @Test public void reducingStock_ofExistingItem_reducesStock() {
         stockManager.createApple();
         stockManager.increaseAppleQuantity(50);
-        QuantifiedItem expectedQuantifiedApple = QuantifiedItem.create(stockManager.getApple(), 20);
+        QuantifiedItem expectedQuantifiedApple = QuantifiedItem.create(stockManager.getDefaultApple(), 20);
 
         stockManager.decreaseAppleQuantity(30);
 
@@ -112,7 +114,7 @@ public class StockFacadeIntegrationTest {
     }
 
     @Test public void creatingOfferStrategies_withDifferentIds_addsThem() {
-        stockManager.createThreeOffers();
+        stockManager.createAllOffers();
 
         assertThat(stockManager.getActiveOfferStrategies().asSet())
                 .containsOnly(
@@ -143,7 +145,7 @@ public class StockFacadeIntegrationTest {
                 .isThrownBy(() -> stockManager.removeAppleOffer());
     }
 
-    @Test public void gettingOfferStrategies_withStrategies_returnsEmptyStrategies() {
+    @Test public void gettingOfferStrategies_withStrategies_returnsThem() {
         OfferStrategies strategies = stockManager.getActiveOfferStrategies();
 
         assertThat(strategies.isEmpty()).isTrue();
@@ -153,5 +155,51 @@ public class StockFacadeIntegrationTest {
         OfferStrategies strategies = stockManager.getActiveOfferStrategies();
 
         assertThat(strategies.isEmpty()).isTrue();
+    }
+
+    @Test public void gettingApplicableOffers_withOffers_returnsThem() {
+        stockManager.createAppleBeansAndCheese();
+        stockManager.increaseAppleQuantity(30);
+        stockManager.increaseCheeseQuantity(20000);
+        stockManager.increaseBeansQuantity(100);
+        stockManager.createAllOffers();
+
+        Offers offers = stockManager.getApplicableOffers();
+
+        assertThat(offers.asList()).hasSize(3);
+    }
+
+    @Test public void gettingApplicableOffers_withNoOffers_returnsEmptyOffers() {
+        stockManager.createAppleBeansAndCheese();
+        stockManager.increaseAppleQuantity(30);
+        stockManager.increaseCheeseQuantity(20000);
+        stockManager.increaseBeansQuantity(100);
+
+        Offers offers = stockManager.getApplicableOffers();
+
+        assertThat(offers.isEmpty()).isTrue();
+    }
+
+    @Test public void gettingOffersValue_withOffers_returnsIt() {
+        stockManager.createAppleBeansAndCheese();
+        stockManager.increaseAppleQuantity(30);
+        stockManager.increaseCheeseQuantity(20000);
+        stockManager.increaseBeansQuantity(100);
+        stockManager.createAllOffers();
+
+        Price value = stockManager.getOffersValue();
+
+        assertThat(value).isEqualTo(Price.of(-5320));
+    }
+
+    @Test public void gettingOffersValue_withNoOffers_returnsZero() {
+        stockManager.createAppleBeansAndCheese();
+        stockManager.increaseAppleQuantity(30);
+        stockManager.increaseCheeseQuantity(20000);
+        stockManager.increaseBeansQuantity(100);
+
+        Price value = stockManager.getOffersValue();
+
+        assertThat(value).isEqualTo(Price.ZERO);
     }
 }

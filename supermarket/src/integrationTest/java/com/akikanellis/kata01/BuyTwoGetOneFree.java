@@ -9,7 +9,7 @@ public class BuyTwoGetOneFree extends QuantityBasedOfferStrategy {
     }
 
     public static BuyTwoGetOneFree create(long id, Item applicableItem) {
-        Price discount = applicableItem.price();
+        Price discount = applicableItem.price().negate();
         String description = String.format("Buy 2 %s, get 1 free", applicableItem.name());
 
         return new BuyTwoGetOneFree(id, description, applicableItem, discount);

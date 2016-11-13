@@ -4,47 +4,51 @@ import com.akikanellis.kata01.item.Item;
 import com.akikanellis.kata01.item.Items;
 import com.akikanellis.kata01.offer.OfferStrategies;
 import com.akikanellis.kata01.offer.OfferStrategy;
+import com.akikanellis.kata01.offer.Offers;
 import com.akikanellis.kata01.price.Price;
 import com.akikanellis.kata01.stock.StockFacade;
 
 public class StockManagerPageObject {
     private final StockFacade stockFacade;
-    private final Item apple;
-    private final Item cheese;
-    private final Item beans;
+    private final Item.Builder defaultAppleBuilder;
+    private final Item.Builder defaultCheeseBuilder;
+    private final Item.Builder defaultBeansBuilder;
+    private final Item defaultApple;
+    private final Item defaultCheese;
+    private final Item defaultBeans;
     private OfferStrategy appleOfferStrategy;
     private OfferStrategy beansOfferStrategy;
     private OfferStrategy tenPercentOffEverythingOfferStrategy;
 
     public StockManagerPageObject(StockFacade stockFacade) {
-        this.apple = Item.builder()
+        this.defaultAppleBuilder = Item.builder()
                 .barcode(1)
                 .name("Apple")
-                .price(Price.of(40))
-                .build();
-        this.cheese = Item.builder()
+                .price(Price.of(40));
+        this.defaultApple = defaultAppleBuilder.build();
+        this.defaultCheeseBuilder = Item.builder()
                 .barcode(2)
                 .name("Cheese")
-                .price(Price.of(0.005))
-                .build();
-        this.beans = Item.builder()
+                .price(Price.of(0.5));
+        this.defaultCheese = defaultCheeseBuilder.build();
+        this.defaultBeansBuilder = Item.builder()
                 .barcode(3)
                 .name("Beans")
-                .price(Price.of(120))
-                .build();
+                .price(Price.of(80));
+        this.defaultBeans = defaultBeansBuilder.build();
 
-        appleOfferStrategy = BuyTwoGetOneFree.create(1, apple);
-        beansOfferStrategy = TwoForOnePound.create(2, beans);
+        appleOfferStrategy = BuyTwoGetOneFree.create(1, defaultApple);
+        beansOfferStrategy = TwoForOnePound.create(2, defaultBeans);
         tenPercentOffEverythingOfferStrategy = TenPercentOffEverything.create(3);
 
         this.stockFacade = stockFacade;
     }
 
-    public Item getApple() { return apple; }
+    public Item getDefaultApple() { return defaultApple; }
 
-    public Item getCheese() { return cheese; }
+    public Item getCheese() { return defaultCheese; }
 
-    public Item getBeans() { return beans; }
+    public Item getBeans() { return defaultBeans; }
 
     public OfferStrategy getAppleOfferStrategy() { return appleOfferStrategy; }
 
@@ -58,23 +62,25 @@ public class StockManagerPageObject {
         createCheese();
     }
 
-    public void createApple() { stockFacade.addNewItem(apple); }
+    public void createApple() { stockFacade.addNewItem(defaultApple); }
 
-    public void increaseAppleQuantity(int quantity) { stockFacade.fillStock(apple.barcode(), quantity); }
+    public void createAppleWithQuantity() { stockFacade.addNewItem(defaultApple); }
 
-    public void decreaseAppleQuantity(int quantity) { stockFacade.reduceStock(apple.barcode(), quantity); }
+    public void increaseAppleQuantity(int quantity) { stockFacade.fillStock(defaultApple.barcode(), quantity); }
 
-    public void createCheese() { stockFacade.addNewItem(cheese); }
+    public void decreaseAppleQuantity(int quantity) { stockFacade.reduceStock(defaultApple.barcode(), quantity); }
 
-    public void increaseCheeseQuantity(int quantity) { stockFacade.fillStock(cheese.barcode(), quantity); }
+    public void createCheese() { stockFacade.addNewItem(defaultCheese); }
 
-    public void createBeans() { stockFacade.addNewItem(beans); }
+    public void increaseCheeseQuantity(int quantity) { stockFacade.fillStock(defaultCheese.barcode(), quantity); }
 
-    public void increaseBeansQuantity(int quantity) { stockFacade.fillStock(beans.barcode(), quantity); }
+    public void createBeans() { stockFacade.addNewItem(defaultBeans); }
+
+    public void increaseBeansQuantity(int quantity) { stockFacade.fillStock(defaultBeans.barcode(), quantity); }
 
     public Items getStock() { return stockFacade.getStock(); }
 
-    public void createThreeOffers() {
+    public void createAllOffers() {
         createAppleOffer();
         createBeansOffer();
         createTenPercentOffEverythingOffer();
@@ -91,4 +97,8 @@ public class StockManagerPageObject {
     public OfferStrategies getActiveOfferStrategies() { return stockFacade.getActiveOfferStrategies(); }
 
     public void removeAppleOffer() { stockFacade.removeOfferStrategy(appleOfferStrategy.id()); }
+
+    public Offers getApplicableOffers() { return stockFacade.getApplicableOffers(); }
+
+    public Price getOffersValue() { return stockFacade.getOffersValue(); }
 }

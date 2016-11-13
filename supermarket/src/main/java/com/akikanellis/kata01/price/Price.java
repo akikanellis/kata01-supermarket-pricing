@@ -12,7 +12,7 @@ public final class Price {
 
     private final BigDecimal amount;
 
-    private Price(BigDecimal amount) { this.amount = checkNotNull(amount); }
+    private Price(BigDecimal amount) { this.amount = checkNotNull(amount).stripTrailingZeros(); }
 
     public static Price of(long amount) {
         BigDecimal bigDecimalAmount = BigDecimal.valueOf(amount);

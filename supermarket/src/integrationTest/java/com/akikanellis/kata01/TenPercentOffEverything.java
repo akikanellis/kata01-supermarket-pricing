@@ -1,6 +1,7 @@
 package com.akikanellis.kata01;
 
 import com.akikanellis.kata01.item.Items;
+import com.akikanellis.kata01.item.QuantifiedItem;
 import com.akikanellis.kata01.offer.Offer;
 import com.akikanellis.kata01.offer.OfferStrategy;
 import com.akikanellis.kata01.offer.Offers;
@@ -15,7 +16,7 @@ public class TenPercentOffEverything extends OfferStrategy {
 
     @Override public Offers calculateOffers(Items items) {
         Price itemsPrice = items.stream()
-                .map(quantifiedItem -> quantifiedItem.item().price())
+                .map(QuantifiedItem::totalPrice)
                 .reduce(Price::add)
                 .orElse(Price.ZERO);
 
