@@ -52,12 +52,6 @@ public class StockFacadeTest {
         verify(addNewItemIfNotExists).execute(item);
     }
 
-    @Test public void fillingStock_firstFindsItemByBarcode() {
-        stockFacade.fillStock(10, 50);
-
-        verify(findItemByBarcode).execute(10);
-    }
-
     @Test public void fillingStock_usesFoundItemToFillStock() {
         Item item = createDefaultItem();
         when(findItemByBarcode.execute(10)).thenReturn(item);
@@ -65,12 +59,6 @@ public class StockFacadeTest {
         stockFacade.fillStock(10, 50);
 
         verify(fillStock).execute(item, 50);
-    }
-
-    @Test public void reducingStock_firstFindsItemByBarcode() {
-        stockFacade.reduceStock(10, 50);
-
-        verify(findItemByBarcode).execute(10);
     }
 
     @Test public void reducingStock_usesFoundItemToReduceStock() {
@@ -99,12 +87,11 @@ public class StockFacadeTest {
         verify(addOfferStrategy).execute(offerStrategy);
     }
 
-    @Test public void removingOfferStrategy_usesFoundItemToRemoveIt() {
-        long id = 11;
+    @Test public void removingOfferStrategy_usesFoundStrategyToRemoveIt() {
         OfferStrategy offerStrategy = createDefaultOfferStrategy();
-        when(findOfferStrategyById.execute(id)).thenReturn(offerStrategy);
+        when(findOfferStrategyById.execute(11)).thenReturn(offerStrategy);
 
-        stockFacade.removeOfferStrategy(id);
+        stockFacade.removeOfferStrategy(11);
 
         verify(removeOfferStrategy).execute(offerStrategy);
     }
