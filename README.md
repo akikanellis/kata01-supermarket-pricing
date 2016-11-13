@@ -23,6 +23,8 @@ user stories are like so:
  - As a Stock Manager user, I can see the total value of the stock, after the offers.
  
 ## Design
+
+### Architecture
 The design of the supermarket follows a 3-layer [Clean Architecture](https://8thlight.com/blog/uncle-bob/2012/08/13/the-clean-architecture.html), the layers are:
 
 - **Entities**, which includes our business POJOs and the repository contracts (interfaces).
@@ -35,6 +37,12 @@ database) and we were to implement a UI (like a console application) then we cou
 - **Interface adapters**, for converting the database rows to business entities and the business entities to View Models.
 - **Presentation**, where the View Models are presented to the view. Preferably by leveraging a Design Pattern such as 
 Model-View-Presenter (MVP).
+
+### Packaging
+A [Package-By-Feature](http://www.javapractices.com/topic/TopicAction.do?Id=205) type of packaging is used.
+
+### Branching model
+The branching model used is [GitFlow](http://nvie.com/posts/a-successful-git-branching-model/).
 
 ## Modules
 
