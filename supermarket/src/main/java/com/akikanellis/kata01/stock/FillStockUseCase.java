@@ -4,6 +4,9 @@ import com.akikanellis.kata01.item.Item;
 
 import static com.akikanellis.kata01.utils.Preconditions.checkNotNegative;
 
+/**
+ * Increases the quantity in the stock of the specified item by the specified quantity.
+ */
 public class FillStockUseCase {
     private final StockRepository stock;
     private final AddNewItemIfNotExistsUseCase addNewItemIfNotExists;

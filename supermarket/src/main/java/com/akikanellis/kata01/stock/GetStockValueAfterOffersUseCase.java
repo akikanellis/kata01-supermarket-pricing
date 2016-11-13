@@ -2,6 +2,9 @@ package com.akikanellis.kata01.stock;
 
 import com.akikanellis.kata01.price.Price;
 
+/**
+ * Returns the stock value in its "actual" form, after removing the offers value.
+ */
 public class GetStockValueAfterOffersUseCase {
     private final GetStockValueBeforeOffersUseCase getStockValueBeforeOffers;
     private final GetOffersValueUseCase getOffersValue;

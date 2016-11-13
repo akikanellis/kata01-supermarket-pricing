@@ -4,8 +4,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * An in-memory implementation of an {@link com.akikanellis.kata01.offer.OfferStrategyRepository}. All the items are
- * unique and there can't be any duplicates.
+ * An in-memory implementation of an {@link com.akikanellis.kata01.offer.OfferStrategyRepository}. All the strategies
+ * are unique and there can't be any duplicates.
  */
 public class InMemoryOfferStrategyRepository implements OfferStrategyRepository {
     private final Set<OfferStrategy> offerStrategies;
