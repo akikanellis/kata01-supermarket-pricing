@@ -13,6 +13,7 @@ public class StockFacade {
     private final FillStockUseCase fillStock;
     private final ReduceStockUseCase reduceStock;
     private final GetStockUseCase getStock;
+    private final FindOfferStrategyByIdUseCase findOfferStrategyById;
     private final AddOfferStrategyUseCase addOfferStrategy;
     private final RemoveOfferStrategyUseCase removeOfferStrategy;
     private final GetActiveOfferStrategiesUseCase getActiveOfferStrategies;
@@ -23,7 +24,8 @@ public class StockFacade {
 
     public StockFacade(AddNewItemIfNotExistsUseCase addNewItemIfNotExists, FindItemByBarcodeUseCase findItemByBarcode,
                        FillStockUseCase fillStock, ReduceStockUseCase reduceStock, GetStockUseCase getStock,
-                       AddOfferStrategyUseCase addOfferStrategy, RemoveOfferStrategyUseCase removeOfferStrategy,
+                       FindOfferStrategyByIdUseCase findOfferStrategyById, AddOfferStrategyUseCase addOfferStrategy,
+                       RemoveOfferStrategyUseCase removeOfferStrategy,
                        GetActiveOfferStrategiesUseCase getActiveOfferStrategies,
                        GetApplicableOffersUseCase getApplicableOffers, GetOffersValueUseCase getOffersValue,
                        GetStockValueBeforeOffersUseCase getStockValueBeforeOffers,
@@ -33,6 +35,7 @@ public class StockFacade {
         this.fillStock = fillStock;
         this.reduceStock = reduceStock;
         this.getStock = getStock;
+        this.findOfferStrategyById = findOfferStrategyById;
         this.addOfferStrategy = addOfferStrategy;
         this.removeOfferStrategy = removeOfferStrategy;
         this.getActiveOfferStrategies = getActiveOfferStrategies;
@@ -58,7 +61,10 @@ public class StockFacade {
 
     public void addOfferStrategy(OfferStrategy offerStrategy) { addOfferStrategy.execute(offerStrategy); }
 
-    public void removeOfferStrategy(OfferStrategy offerStrategy) { removeOfferStrategy.execute(offerStrategy); }
+    public void removeOfferStrategy(long id) {
+        OfferStrategy offerStrategy = findOfferStrategyById.execute(id);
+        removeOfferStrategy.execute(offerStrategy);
+    }
 
     public OfferStrategies getActiveOfferStrategies() { return getActiveOfferStrategies.execute(); }
 

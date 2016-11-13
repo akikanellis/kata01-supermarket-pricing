@@ -4,10 +4,12 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static com.akikanellis.kata01.test_utils.Fakes.createDefaultOfferStrategy;
+import static com.akikanellis.kata01.test_utils.Fakes.createOfferStrategyWithId;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
-public class OfferStrategyRepositoryTest {
-    private OfferStrategyRepository offerStrategies;
+public class InMemoryOfferStrategyRepositoryTest {
+    private InMemoryOfferStrategyRepository offerStrategies;
 
     @Before public void beforeEach() { offerStrategies = new InMemoryOfferStrategyRepository(); }
 
@@ -26,5 +28,20 @@ public class OfferStrategyRepositoryTest {
         offerStrategies.remove(offerStrategy);
 
         assertThat(offerStrategies.getAll().asList()).isEmpty();
+    }
+
+    @Test public void gettingById_withExistingStrategy_returnsStrategy() {
+        long id = 11;
+        OfferStrategy expectedOfferStrategy = createOfferStrategyWithId(id);
+        offerStrategies.add(expectedOfferStrategy);
+
+        OfferStrategy actualOfferStrategy = offerStrategies.getById(id);
+
+        assertThat(actualOfferStrategy).isEqualTo(expectedOfferStrategy);
+    }
+
+    @Test public void gettingById_withNoExistingStrategy_throwsException() {
+        assertThatExceptionOfType(OfferStrategyDoesNotExistException.class)
+                .isThrownBy(() -> offerStrategies.getById(11));
     }
 }

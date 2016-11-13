@@ -133,5 +133,13 @@ public final class Fakes {
 
         return Items.fromList(items);
     }
+
+    public static OfferStrategy createOfferStrategyWithId(long id) {
+        return new OfferStrategy(id, "OfferStrategy-" + id) {
+            @Override public Offers calculateOffers(Items items) {
+                throw new UnsupportedOperationException("Not supported in testing.");
+            }
+        };
+    }
 }
 

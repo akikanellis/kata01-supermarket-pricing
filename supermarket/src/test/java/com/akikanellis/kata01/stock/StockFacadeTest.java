@@ -28,6 +28,7 @@ public class StockFacadeTest {
     @Mock private FillStockUseCase fillStock;
     @Mock private ReduceStockUseCase reduceStock;
     @Mock private GetStockUseCase getStock;
+    @Mock private FindOfferStrategyByIdUseCase findOfferStrategyById;
     @Mock private AddOfferStrategyUseCase addOfferStrategy;
     @Mock private RemoveOfferStrategyUseCase removeOfferStrategy;
     @Mock private GetActiveOfferStrategiesUseCase getActiveOfferStrategies;
@@ -39,8 +40,8 @@ public class StockFacadeTest {
 
     @Before public void beforeEach() {
         stockFacade = new StockFacade(addNewItemIfNotExists, findItemByBarcode, fillStock, reduceStock, getStock,
-                addOfferStrategy, removeOfferStrategy, getActiveOfferStrategies, getApplicableOffers, getOffersValue,
-                getStockValueBeforeOffers, getStockValueAfterOffers);
+                findOfferStrategyById, addOfferStrategy, removeOfferStrategy, getActiveOfferStrategies,
+                getApplicableOffers, getOffersValue, getStockValueBeforeOffers, getStockValueAfterOffers);
     }
 
     @Test public void addingNewItem_usesUseCase() {
@@ -98,10 +99,12 @@ public class StockFacadeTest {
         verify(addOfferStrategy).execute(offerStrategy);
     }
 
-    @Test public void removingOfferStrategy_usesUseCase() {
+    @Test public void removingOfferStrategy_usesFoundItemToRemoveIt() {
+        long id = 11;
         OfferStrategy offerStrategy = createDefaultOfferStrategy();
+        when(findOfferStrategyById.execute(id)).thenReturn(offerStrategy);
 
-        stockFacade.removeOfferStrategy(offerStrategy);
+        stockFacade.removeOfferStrategy(id);
 
         verify(removeOfferStrategy).execute(offerStrategy);
     }
