@@ -18,7 +18,7 @@ public class AddOfferStrategyUseCaseTest {
 
     @Before public void beforeEach() { addOfferStrategy = new AddOfferStrategyUseCase(offerStrategies); }
 
-    @Test public void addingOfferStrategy_addsStrategyInRepository() {
+    @Test public void executing_addsStrategyInRepository() {
         OfferStrategy offerStrategy = createDefaultOfferStrategy();
 
         addOfferStrategy.execute(offerStrategy);

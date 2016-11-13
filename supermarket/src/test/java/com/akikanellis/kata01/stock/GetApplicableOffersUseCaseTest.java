@@ -22,11 +22,9 @@ public class GetApplicableOffersUseCaseTest {
     @Mock private OfferStrategyRepository offerStrategies;
     private GetApplicableOffersUseCase getApplicableOffers;
 
-    @Before public void beforeEach() {
-        getApplicableOffers = new GetApplicableOffersUseCase(stock, offerStrategies);
-    }
+    @Before public void beforeEach() { getApplicableOffers = new GetApplicableOffersUseCase(stock, offerStrategies); }
 
-    @Test public void gettingOffers_withAvailableOfferStrategies_returnsOffers() {
+    @Test public void executing_withAvailableOfferStrategies_returnsOffers() {
         OfferStrategies strategies = createOfferStrategiesWithQuantities(1, 2, 3);
         Items items = createDefaultItems();
         when(offerStrategies.getAll()).thenReturn(strategies);
@@ -37,7 +35,7 @@ public class GetApplicableOffersUseCaseTest {
         assertThat(offers.asList()).hasSize(3);
     }
 
-    @Test public void gettingOffers_withNoOfferStrategies_returnsEmptyOffers() {
+    @Test public void executing_withNoOfferStrategies_returnsEmptyOffers() {
         OfferStrategies strategies = OfferStrategies.empty();
         Items items = createDefaultItems();
         when(offerStrategies.getAll()).thenReturn(strategies);
@@ -49,7 +47,7 @@ public class GetApplicableOffersUseCaseTest {
 
     }
 
-    @Test public void gettingOffers_withNoGroceries_returnsEmptyOffers() {
+    @Test public void executing_withNoGroceries_returnsEmptyOffers() {
         OfferStrategies strategies = createDefaultOfferStrategies();
         Items items = Items.empty();
         when(offerStrategies.getAll()).thenReturn(strategies);

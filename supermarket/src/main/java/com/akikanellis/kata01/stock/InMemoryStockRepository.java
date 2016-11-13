@@ -9,8 +9,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * An in-memory implementation of an {@link com.akikanellis.kata01.stock.StockRepository}. All the items are
- * unique and there can't be any duplicates.
+ * An in-memory implementation of an {@link com.akikanellis.kata01.stock.StockRepository}. Each item is mapped into a
+ * pair of itself and the current quantity.
  */
 public class InMemoryStockRepository implements StockRepository {
     private static final int STARTING_QUANTITY = 0;

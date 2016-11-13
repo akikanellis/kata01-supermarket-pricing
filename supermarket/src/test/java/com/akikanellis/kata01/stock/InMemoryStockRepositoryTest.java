@@ -52,10 +52,8 @@ public class InMemoryStockRepositoryTest {
     }
 
     @Test public void replacingQuantity_withNotExistingItem_throwsException() {
-        Item item = createDefaultItem();
-
         assertThatExceptionOfType(ItemNotFoundException.class)
-                .isThrownBy(() -> stock.replaceQuantity(item, 10));
+                .isThrownBy(() -> stock.replaceQuantity(createDefaultItem(), 10));
     }
 
     @Test public void gettingAllItems_withItems_returnsAllPackagedAsItems() {

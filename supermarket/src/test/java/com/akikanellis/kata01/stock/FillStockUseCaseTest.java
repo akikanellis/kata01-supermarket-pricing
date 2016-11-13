@@ -38,9 +38,7 @@ public class FillStockUseCaseTest {
     }
 
     @Test public void executing_withNegativeQuantity_throwsException() {
-        Item item = createDefaultItem();
-
         Assertions.assertThatExceptionOfType(IllegalArgumentException.class)
-                .isThrownBy(() -> fillStock.execute(item, -5));
+                .isThrownBy(() -> fillStock.execute(createDefaultItem(), -5));
     }
 }
