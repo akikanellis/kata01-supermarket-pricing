@@ -10,19 +10,19 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public final class Items {
-    private final List<ItemWithQuantity> itemsWithQuantities;
+    private final List<QuantifiedItem> quantifiedItems;
 
-    private Items(Collection<ItemWithQuantity> itemsWithQuantities) {
-        this.itemsWithQuantities = new ArrayList<>(itemsWithQuantities);
+    private Items(Collection<QuantifiedItem> quantifiedItems) {
+        this.quantifiedItems = new ArrayList<>(quantifiedItems);
     }
 
-    public static Items fromCollection(Collection<ItemWithQuantity> itemsWithQuantities) {
+    public static Items fromCollection(Collection<QuantifiedItem> itemsWithQuantities) {
         return new Items(itemsWithQuantities);
     }
 
     public static Items fromEntries(Set<Map.Entry<Item, Integer>> entries) {
-        List<ItemWithQuantity> itemsWithQuantities = entries.stream()
-                .map(entry -> ItemWithQuantity.create(entry.getKey(), entry.getValue()))
+        List<QuantifiedItem> itemsWithQuantities = entries.stream()
+                .map(entry -> QuantifiedItem.create(entry.getKey(), entry.getValue()))
                 .collect(Collectors.toList());
 
         return fromCollection(itemsWithQuantities);
@@ -30,9 +30,9 @@ public final class Items {
 
     public static Items empty() { return fromCollection(Collections.emptyList()); }
 
-    public boolean isEmpty() { return itemsWithQuantities.isEmpty(); }
+    public boolean isEmpty() { return quantifiedItems.isEmpty(); }
 
-    public List<ItemWithQuantity> asList() { return new ArrayList<>(itemsWithQuantities); }
+    public List<QuantifiedItem> asList() { return new ArrayList<>(quantifiedItems); }
 
-    public Stream<ItemWithQuantity> stream() { return itemsWithQuantities.stream(); }
+    public Stream<QuantifiedItem> stream() { return quantifiedItems.stream(); }
 }

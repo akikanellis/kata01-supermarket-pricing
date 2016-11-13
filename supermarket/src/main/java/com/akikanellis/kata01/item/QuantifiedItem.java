@@ -4,11 +4,11 @@ import com.akikanellis.kata01.price.Price;
 import com.google.auto.value.AutoValue;
 
 @AutoValue
-public abstract class ItemWithQuantity {
+public abstract class QuantifiedItem {
 
-    public static ItemWithQuantity create(Item item, int quantity) {
+    public static QuantifiedItem create(Item item, int quantity) {
         Price totalPrice = item.price().multiplyBy(quantity);
-        return new AutoValue_ItemWithQuantity(item, quantity, totalPrice);
+        return new AutoValue_QuantifiedItem(item, quantity, totalPrice);
     }
 
     public abstract Item item();

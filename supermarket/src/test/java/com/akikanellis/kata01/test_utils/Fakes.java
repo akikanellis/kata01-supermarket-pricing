@@ -1,8 +1,8 @@
 package com.akikanellis.kata01.test_utils;
 
 import com.akikanellis.kata01.item.Item;
-import com.akikanellis.kata01.item.ItemWithQuantity;
 import com.akikanellis.kata01.item.Items;
+import com.akikanellis.kata01.item.QuantifiedItem;
 import com.akikanellis.kata01.offer.Offer;
 import com.akikanellis.kata01.offer.OfferStrategies;
 import com.akikanellis.kata01.offer.OfferStrategy;
@@ -45,16 +45,16 @@ public final class Fakes {
                 .name("Pear")
                 .price(Price.ZERO)
                 .build();
-        ItemWithQuantity appleWithQuantity = ItemWithQuantity.create(apple, 20);
-        ItemWithQuantity orangeWithQuantity = ItemWithQuantity.create(orange, 60);
-        ItemWithQuantity pearWithQuantity = ItemWithQuantity.create(pear, 8);
+        QuantifiedItem appleWithQuantity = QuantifiedItem.create(apple, 20);
+        QuantifiedItem orangeWithQuantity = QuantifiedItem.create(orange, 60);
+        QuantifiedItem pearWithQuantity = QuantifiedItem.create(pear, 8);
 
-        List<ItemWithQuantity> itemsWithQuantities = new ArrayList<>();
-        itemsWithQuantities.add(appleWithQuantity);
-        itemsWithQuantities.add(orangeWithQuantity);
-        itemsWithQuantities.add(pearWithQuantity);
+        List<QuantifiedItem> quantifiedItems = new ArrayList<>();
+        quantifiedItems.add(appleWithQuantity);
+        quantifiedItems.add(orangeWithQuantity);
+        quantifiedItems.add(pearWithQuantity);
 
-        return Items.fromCollection(itemsWithQuantities);
+        return Items.fromCollection(quantifiedItems);
     }
 
     public static OfferStrategy createDefaultOfferStrategy() {
@@ -121,14 +121,14 @@ public final class Fakes {
     }
 
     public static Items createItemsWithPrices(long... amounts) {
-        List<ItemWithQuantity> items = IntStream.range(0, amounts.length)
+        List<QuantifiedItem> items = IntStream.range(0, amounts.length)
                 .mapToObj(i -> Item.builder()
                         .barcode(i)
                         .name("item-" + i)
                         .price(Price.of(amounts[i]))
                         .build()
                 )
-                .map(item -> ItemWithQuantity.create(item, 1))
+                .map(item -> QuantifiedItem.create(item, 1))
                 .collect(Collectors.toList());
 
         return Items.fromCollection(items);

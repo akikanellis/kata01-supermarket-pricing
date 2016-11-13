@@ -1,7 +1,7 @@
 package com.akikanellis.kata01.stock;
 
-import com.akikanellis.kata01.item.ItemWithQuantity;
 import com.akikanellis.kata01.item.Items;
+import com.akikanellis.kata01.item.QuantifiedItem;
 import com.akikanellis.kata01.price.Price;
 
 public class GetStockValueBeforeOffersUseCase {
@@ -13,7 +13,7 @@ public class GetStockValueBeforeOffersUseCase {
         Items items = getStock.execute();
 
         return items.stream()
-                .map(ItemWithQuantity::totalPrice)
+                .map(QuantifiedItem::totalPrice)
                 .reduce(Price::add)
                 .orElse(Price.ZERO);
     }
