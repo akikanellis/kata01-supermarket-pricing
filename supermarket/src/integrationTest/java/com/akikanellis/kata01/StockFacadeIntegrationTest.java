@@ -219,4 +219,41 @@ public class StockFacadeIntegrationTest {
 
         assertThat(value).isEqualTo(Price.ZERO);
     }
+
+    @Test public void gettingStockValueAfterOffers_withItemsAndOffers_returnsTotalValue() {
+        stockManager.createAppleBeansAndCheese();
+        stockManager.increaseAppleQuantity(30);
+        stockManager.increaseCheeseQuantity(20000);
+        stockManager.increaseBeansQuantity(100);
+        stockManager.createAllOffers();
+
+        Price value = stockManager.getStockValueAfterOffers();
+
+        assertThat(value).isEqualTo(Price.of(13880));
+    }
+
+    @Test public void gettingStockValueAfterOffers_withItemsAndNoOffers_returnsItemsValue() {
+        stockManager.createAppleBeansAndCheese();
+        stockManager.increaseAppleQuantity(30);
+        stockManager.increaseCheeseQuantity(20000);
+        stockManager.increaseBeansQuantity(100);
+
+        Price value = stockManager.getStockValueAfterOffers();
+
+        assertThat(value).isEqualTo(Price.of(19200));
+    }
+
+    @Test public void gettingStockValueAfterOffers_withOffersAndNoItems_returnsZero() {
+        stockManager.createAllOffers();
+
+        Price value = stockManager.getStockValueAfterOffers();
+
+        assertThat(value).isEqualTo(Price.ZERO);
+    }
+
+    @Test public void gettingStockValueAfterOffers_withNoOffersAndNoItems_returnsZero() {
+        Price value = stockManager.getStockValueAfterOffers();
+
+        assertThat(value).isEqualTo(Price.ZERO);
+    }
 }
