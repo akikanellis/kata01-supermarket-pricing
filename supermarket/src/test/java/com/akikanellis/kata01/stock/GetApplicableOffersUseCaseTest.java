@@ -44,7 +44,7 @@ public class GetApplicableOffersUseCaseTest {
 
         Offers offers = getApplicableOffers.execute();
 
-        assertThat(offers.asList()).isEmpty();
+        assertThat(offers.isEmpty()).isTrue();
 
     }
 
@@ -56,7 +56,7 @@ public class GetApplicableOffersUseCaseTest {
 
         Offers offers = getApplicableOffers.execute();
 
-        assertThat(offers.asList()).isEmpty();
+        assertThat(offers.isEmpty()).isTrue();
 
     }
 }

@@ -79,7 +79,7 @@ public final class Fakes {
 
                             Offer offer = Offer.create(String.format("Offer made from [%s]", description), Price.ONE);
                             OfferWithQuantity offerWithQuantity = OfferWithQuantity.create(offer, quantities[i]);
-                            return Offers.fromList(Collections.singletonList(offerWithQuantity));
+                            return Offers.fromCollection(Collections.singletonList(offerWithQuantity));
                         }
                     };
                 })
@@ -94,7 +94,7 @@ public final class Fakes {
     }
 
     public static Offers createDefaultOffers() {
-        return Offers.fromList(Arrays.asList(
+        return Offers.fromCollection(Arrays.asList(
                 OfferWithQuantity.create(createThreeApplesForOnePoundOffer(), 10),
                 OfferWithQuantity.create(createTwoOrangesOneFreeOffer(), 2),
                 OfferWithQuantity.create(createFiftyPercentOffPearsOffer(), 1)
@@ -117,7 +117,7 @@ public final class Fakes {
                 .map(offer -> OfferWithQuantity.create(offer, 1))
                 .collect(Collectors.toList());
 
-        return Offers.fromList(offers);
+        return Offers.fromCollection(offers);
     }
 
     public static Items createItemsWithPrices(long... amounts) {

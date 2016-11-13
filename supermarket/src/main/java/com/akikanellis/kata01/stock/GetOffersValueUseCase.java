@@ -12,7 +12,7 @@ public class GetOffersValueUseCase {
     public Price execute() {
         Offers offers = getOffers.execute();
 
-        return offers.asList().stream()
+        return offers.stream()
                 .map(OfferWithQuantity::totalPrice)
                 .reduce(Price::add)
                 .orElse(Price.ZERO);
