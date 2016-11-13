@@ -26,13 +26,13 @@ public final class Price {
         return new Price(bigDecimalAmount);
     }
 
-    public Price add(Price other) {
-        BigDecimal newAmount = amount.add(other.amount);
+    public Price negate() {
+        BigDecimal newAmount = amount.negate();
         return new Price(newAmount);
     }
 
-    public Price negate() {
-        BigDecimal newAmount = amount.negate();
+    public Price add(Price other) {
+        BigDecimal newAmount = amount.add(other.amount);
         return new Price(newAmount);
     }
 
@@ -52,13 +52,6 @@ public final class Price {
         checkNotNegative(multiplier);
 
         BigDecimal newAmount = amount.multiply(BigDecimal.valueOf(multiplier));
-        return new Price(newAmount);
-    }
-
-    public Price divideBy(long divisor) {
-        checkNotNegative(divisor);
-
-        BigDecimal newAmount = amount.divide(BigDecimal.valueOf(divisor));
         return new Price(newAmount);
     }
 
