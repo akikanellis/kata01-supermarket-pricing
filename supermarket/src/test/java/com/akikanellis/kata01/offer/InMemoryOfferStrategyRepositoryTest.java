@@ -58,7 +58,7 @@ public class InMemoryOfferStrategyRepositoryTest {
     }
 
     @Test public void gettingById_withNoExistingStrategy_throwsException() {
-        assertThatExceptionOfType(OfferStrategyDoesNotExistException.class)
+        assertThatExceptionOfType(OfferStrategyNotFoundException.class)
                 .isThrownBy(() -> offerStrategies.getById(11));
     }
 }

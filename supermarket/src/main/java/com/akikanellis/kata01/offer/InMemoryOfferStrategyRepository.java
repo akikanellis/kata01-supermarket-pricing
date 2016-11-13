@@ -18,7 +18,7 @@ public class InMemoryOfferStrategyRepository implements OfferStrategyRepository 
         return offerStrategies.stream()
                 .filter(offerStrategy -> offerStrategy.id() == id)
                 .findFirst()
-                .orElseThrow(() -> new OfferStrategyDoesNotExistException(id));
+                .orElseThrow(() -> new OfferStrategyNotFoundException(id));
     }
 
     @Override public OfferStrategies getAll() { return OfferStrategies.fromCollection(offerStrategies); }

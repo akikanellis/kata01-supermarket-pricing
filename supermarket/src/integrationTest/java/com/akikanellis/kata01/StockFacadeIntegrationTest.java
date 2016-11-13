@@ -5,7 +5,7 @@ import com.akikanellis.kata01.item.Items;
 import com.akikanellis.kata01.item.QuantifiedItem;
 import com.akikanellis.kata01.offer.InMemoryOfferStrategyRepository;
 import com.akikanellis.kata01.offer.OfferStrategies;
-import com.akikanellis.kata01.offer.OfferStrategyDoesNotExistException;
+import com.akikanellis.kata01.offer.OfferStrategyNotFoundException;
 import com.akikanellis.kata01.offer.OfferStrategyRepository;
 import com.akikanellis.kata01.offer.Offers;
 import com.akikanellis.kata01.price.Price;
@@ -142,7 +142,7 @@ public class StockFacadeIntegrationTest {
     }
 
     @Test public void removingOfferStrategy_withNoExistingStrategy_throwsException() {
-        assertThatExceptionOfType(OfferStrategyDoesNotExistException.class)
+        assertThatExceptionOfType(OfferStrategyNotFoundException.class)
                 .isThrownBy(() -> stockManager.removeAppleOffer());
     }
 

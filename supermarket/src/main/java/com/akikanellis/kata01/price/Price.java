@@ -26,6 +26,18 @@ public final class Price {
         return new Price(bigDecimalAmount);
     }
 
+    public boolean isPositive() {
+        return amount.compareTo(BigDecimal.ZERO) == 1;
+    }
+
+    public boolean isNegative() {
+        return amount.compareTo(BigDecimal.ZERO) == -1;
+    }
+
+    public boolean isZero() {
+        return amount.compareTo(BigDecimal.ZERO) == 0;
+    }
+
     public Price negate() {
         BigDecimal newAmount = amount.negate();
         return new Price(newAmount);

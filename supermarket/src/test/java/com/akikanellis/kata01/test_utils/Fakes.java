@@ -75,7 +75,7 @@ public final class Fakes {
                         @Override public Offers calculateOffers(Items items) {
                             if (items.isEmpty()) return Offers.empty();
 
-                            Offer offer = Offer.create(String.format("Offer made from [%s]", description), Price.ONE);
+                            Offer offer = Offer.create(String.format("Offer made from [%s]", description), Price.of(-1));
                             QuantifiedOffer quantifiedOffer = QuantifiedOffer.create(offer, quantities[i]);
                             return Offers.fromSingle(quantifiedOffer);
                         }
