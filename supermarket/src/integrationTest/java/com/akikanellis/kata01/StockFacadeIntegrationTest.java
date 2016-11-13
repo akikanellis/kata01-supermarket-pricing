@@ -1,6 +1,7 @@
 package com.akikanellis.kata01;
 
 import com.akikanellis.kata01.item.ItemDoesNotExistException;
+import com.akikanellis.kata01.item.Items;
 import com.akikanellis.kata01.item.QuantifiedItem;
 import com.akikanellis.kata01.offer.InMemoryOfferStrategyRepository;
 import com.akikanellis.kata01.offer.OfferStrategyRepository;
@@ -27,7 +28,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 public class StockFacadeIntegrationTest {
-    private StockFacade stockFacade;
     private StockManagerPageObject stockManager;
 
     @Before public void beforeEach() {
@@ -51,7 +51,7 @@ public class StockFacadeIntegrationTest {
         GetStockValueAfterOffersUseCase getStockValueAfterOffers
                 = new GetStockValueAfterOffersUseCase(getStockValueBeforeOffers, getOffersValue);
 
-        stockFacade = new StockFacade(addNewItemIfNotExists, findItemByBarcode, fillStock, reduceStock, getStock,
+        StockFacade stockFacade = new StockFacade(addNewItemIfNotExists, findItemByBarcode, fillStock, reduceStock, getStock,
                 findOfferStrategyById, addOfferStrategy, removeOfferStrategy, getActiveOfferStrategies,
                 getApplicableOffers, getOffersValue, getStockValueBeforeOffers, getStockValueAfterOffers);
 
@@ -61,7 +61,7 @@ public class StockFacadeIntegrationTest {
     @Test public void creatingItems_withDifferentBarcodes_addsThemToTheRepository() {
         stockManager.createAppleBeansAndCheese();
 
-        assertThat(stockFacade.getStock().asItemsList())
+        assertThat(stockManager.getStock().asItemsList())
                 .containsOnly(stockManager.getApple(), stockManager.getCheese(), stockManager.getBeans());
     }
 
@@ -70,7 +70,7 @@ public class StockFacadeIntegrationTest {
 
         stockManager.createApple();
 
-        assertThat(stockFacade.getStock().asItemsList()).hasSize(1);
+        assertThat(stockManager.getStock().asItemsList()).hasSize(1);
     }
 
     @Test public void fillingStock_ofExistingItem_fillsStock() {
@@ -80,8 +80,9 @@ public class StockFacadeIntegrationTest {
 
         stockManager.increaseAppleQuantity(70);
 
-        assertThat(stockFacade.getStock().asList()).containsExactly(expectedQuantifiedApple);
+        assertThat(stockManager.getStock().asList()).containsExactly(expectedQuantifiedApple);
     }
+
 
     @Test public void fillingStock_ofNotExistingItem_throwsException() {
         assertThatExceptionOfType(ItemDoesNotExistException.class)
@@ -95,11 +96,17 @@ public class StockFacadeIntegrationTest {
 
         stockManager.decreaseAppleQuantity(30);
 
-        assertThat(stockFacade.getStock().asList()).containsExactly(expectedQuantifiedApple);
+        assertThat(stockManager.getStock().asList()).containsExactly(expectedQuantifiedApple);
     }
 
     @Test public void reducingStock_ofNotExistingItem_throwsException() {
         assertThatExceptionOfType(ItemDoesNotExistException.class)
                 .isThrownBy(() -> stockManager.decreaseAppleQuantity(30));
+    }
+
+    @Test public void gettingStock_withoutItems_returnsEmptyStock() {
+        Items stock = stockManager.getStock();
+
+        assertThat(stock.isEmpty()).isTrue();
     }
 }

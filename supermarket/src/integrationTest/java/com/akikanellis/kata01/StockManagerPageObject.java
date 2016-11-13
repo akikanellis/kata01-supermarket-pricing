@@ -1,6 +1,7 @@
 package com.akikanellis.kata01;
 
 import com.akikanellis.kata01.item.Item;
+import com.akikanellis.kata01.item.Items;
 import com.akikanellis.kata01.price.Price;
 import com.akikanellis.kata01.stock.StockFacade;
 
@@ -54,4 +55,6 @@ public class StockManagerPageObject {
     public void createBeans() { stockFacade.addNewItem(beans); }
 
     public void increaseBeansQuantity(int quantity) { stockFacade.fillStock(beans.barcode(), quantity); }
+
+    public Items getStock() { return stockFacade.getStock(); }
 }
