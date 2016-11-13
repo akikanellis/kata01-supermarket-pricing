@@ -59,7 +59,7 @@ If you want to build the whole project, run all the tests and the code analysis 
 ### Production
 
 #### [AutoValue](https://github.com/google/auto)
-AutoValue provides us with an easy way to write immutable POJOs with generated 'equals', 'hashcode' and 'toString'
+AutoValue provides us with an easy way to write immutable POJOs with generated `equals`, `hashcode` and `toString`
 methods. It also provides a painless way to implement the Builder Pattern. These advantages allow us to have the
 boilerplate code generated for us which lets us focus on the features we want to provide to the user.
 
@@ -77,7 +77,7 @@ Provides a fluent API for assertions with better error messages than the default
 and easy to understand.
 
 #### [EqualsVerifier](http://jqno.nl/equalsverifier/)
-An extensive tester for verifying whether the 'equals' and 'hashcode' contracts in a class are met.
+An extensive tester for verifying whether the `equals` and `hashcode` contracts in a class are met.
 
 ### Code analysis
 
