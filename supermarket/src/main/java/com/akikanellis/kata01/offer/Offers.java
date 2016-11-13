@@ -8,26 +8,26 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public final class Offers {
-    private final List<OfferWithQuantity> offersWithQuantities;
+    private final List<QuantifiedOffer> quantifiedOffers;
 
-    private Offers(Collection<OfferWithQuantity> offersWithQuantities) {
-        this.offersWithQuantities = new ArrayList<>(offersWithQuantities);
+    private Offers(Collection<QuantifiedOffer> quantifiedOffers) {
+        this.quantifiedOffers = new ArrayList<>(quantifiedOffers);
     }
 
-    public static Offers fromCollection(Collection<OfferWithQuantity> offersWithQuantities) {
-        return new Offers(offersWithQuantities);
+    public static Offers fromCollection(Collection<QuantifiedOffer> quantifiedOffers) {
+        return new Offers(quantifiedOffers);
     }
 
     public static Offers empty() { return fromCollection(Collections.emptyList()); }
 
-    public boolean isEmpty() { return offersWithQuantities.isEmpty(); }
+    public boolean isEmpty() { return quantifiedOffers.isEmpty(); }
 
-    public List<OfferWithQuantity> asList() { return new ArrayList<>(offersWithQuantities); }
+    public List<QuantifiedOffer> asList() { return new ArrayList<>(quantifiedOffers); }
 
-    public Stream<OfferWithQuantity> stream() { return offersWithQuantities.stream(); }
+    public Stream<QuantifiedOffer> stream() { return quantifiedOffers.stream(); }
 
     public Offers join(Offers other) {
-        List<OfferWithQuantity> joined = Stream.concat(stream(), other.stream())
+        List<QuantifiedOffer> joined = Stream.concat(stream(), other.stream())
                 .collect(Collectors.toList());
 
         return fromCollection(joined);

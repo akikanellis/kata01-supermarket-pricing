@@ -16,16 +16,16 @@ public final class Items {
         this.quantifiedItems = new ArrayList<>(quantifiedItems);
     }
 
-    public static Items fromCollection(Collection<QuantifiedItem> itemsWithQuantities) {
-        return new Items(itemsWithQuantities);
+    public static Items fromCollection(Collection<QuantifiedItem> quantifiedItems) {
+        return new Items(quantifiedItems);
     }
 
     public static Items fromEntries(Set<Map.Entry<Item, Integer>> entries) {
-        List<QuantifiedItem> itemsWithQuantities = entries.stream()
+        List<QuantifiedItem> quantifiedItems = entries.stream()
                 .map(entry -> QuantifiedItem.create(entry.getKey(), entry.getValue()))
                 .collect(Collectors.toList());
 
-        return fromCollection(itemsWithQuantities);
+        return fromCollection(quantifiedItems);
     }
 
     public static Items empty() { return fromCollection(Collections.emptyList()); }

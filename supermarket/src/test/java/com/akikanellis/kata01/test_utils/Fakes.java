@@ -6,8 +6,8 @@ import com.akikanellis.kata01.item.QuantifiedItem;
 import com.akikanellis.kata01.offer.Offer;
 import com.akikanellis.kata01.offer.OfferStrategies;
 import com.akikanellis.kata01.offer.OfferStrategy;
-import com.akikanellis.kata01.offer.OfferWithQuantity;
 import com.akikanellis.kata01.offer.Offers;
+import com.akikanellis.kata01.offer.QuantifiedOffer;
 import com.akikanellis.kata01.price.Price;
 
 import java.util.ArrayList;
@@ -78,8 +78,8 @@ public final class Fakes {
                             if (items.isEmpty()) return Offers.empty();
 
                             Offer offer = Offer.create(String.format("Offer made from [%s]", description), Price.ONE);
-                            OfferWithQuantity offerWithQuantity = OfferWithQuantity.create(offer, quantities[i]);
-                            return Offers.fromCollection(Collections.singletonList(offerWithQuantity));
+                            QuantifiedOffer quantifiedOffer = QuantifiedOffer.create(offer, quantities[i]);
+                            return Offers.fromCollection(Collections.singletonList(quantifiedOffer));
                         }
                     };
                 })
@@ -95,9 +95,9 @@ public final class Fakes {
 
     public static Offers createDefaultOffers() {
         return Offers.fromCollection(Arrays.asList(
-                OfferWithQuantity.create(createThreeApplesForOnePoundOffer(), 10),
-                OfferWithQuantity.create(createTwoOrangesOneFreeOffer(), 2),
-                OfferWithQuantity.create(createFiftyPercentOffPearsOffer(), 1)
+                QuantifiedOffer.create(createThreeApplesForOnePoundOffer(), 10),
+                QuantifiedOffer.create(createTwoOrangesOneFreeOffer(), 2),
+                QuantifiedOffer.create(createFiftyPercentOffPearsOffer(), 1)
         ));
     }
 
@@ -112,9 +112,9 @@ public final class Fakes {
     public static Offer createDefaultOffer() { return createThreeApplesForOnePoundOffer(); }
 
     public static Offers createOffersWithPrices(long... amounts) {
-        List<OfferWithQuantity> offers = IntStream.range(0, amounts.length)
+        List<QuantifiedOffer> offers = IntStream.range(0, amounts.length)
                 .mapToObj(i -> Offer.create("offer-" + i, Price.of(amounts[i])))
-                .map(offer -> OfferWithQuantity.create(offer, 1))
+                .map(offer -> QuantifiedOffer.create(offer, 1))
                 .collect(Collectors.toList());
 
         return Offers.fromCollection(offers);
