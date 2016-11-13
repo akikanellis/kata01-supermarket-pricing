@@ -19,7 +19,7 @@ public class GetOffersValueUseCaseTest {
 
     @Before public void beforeEach() { getOffersValue = new GetOffersValueUseCase(getOffers); }
 
-    @Test public void gettingValue_withApplicableOffers_returnsCumulativeValue() {
+    @Test public void executing_withApplicableOffers_returnsCumulativeValue() {
         when(getOffers.execute()).thenReturn(createOffersWithPrices(-10, -15, -30));
 
         Price value = getOffersValue.execute();
@@ -27,7 +27,7 @@ public class GetOffersValueUseCaseTest {
         assertThat(value).isEqualTo(Price.of(-55));
     }
 
-    @Test public void gettingValue_withNoApplicableOffers_returnsZero() {
+    @Test public void executing_withNoApplicableOffers_returnsZero() {
         when(getOffers.execute()).thenReturn(Offers.empty());
 
         Price value = getOffersValue.execute();

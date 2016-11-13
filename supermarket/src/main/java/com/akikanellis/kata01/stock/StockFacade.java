@@ -8,7 +8,7 @@ import com.akikanellis.kata01.offer.Offers;
 import com.akikanellis.kata01.price.Price;
 
 /**
- * A facade for easily accessing all the functionality regarding the stock management.
+ * A facade for aggregating all the functionality regarding the management of the item stock.
  */
 public class StockFacade {
     private final AddNewItemIfNotExistsUseCase addNewItemIfNotExists;
@@ -94,7 +94,7 @@ public class StockFacade {
     /**
      * Removes an offer strategy.
      *
-     * @param id the id od the strategy to remove
+     * @param id the id of the strategy to remove
      */
     public void removeOfferStrategy(long id) {
         OfferStrategy offerStrategy = findOfferStrategyById.execute(id);

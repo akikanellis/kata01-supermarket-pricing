@@ -240,7 +240,7 @@ public class StockFacadeIntegrationTest {
         assertThat(value).isEqualTo(Price.of(19200));
     }
 
-    @Test public void gettingStockValueAfterOffers_withOffersAndNoItems_returnsZero() {
+    @Test public void gettingStockValueAfterOffers_withNoItemsButWithOffers_returnsZero() {
         stockManager.createAllOffers();
 
         Price value = stockManager.getStockValueAfterOffers();

@@ -7,8 +7,10 @@ import static com.akikanellis.kata01.utils.Preconditions.checkNotNegative;
 import static com.akikanellis.kata01.utils.Preconditions.checkNotNull;
 
 /**
- * Represents the money for our items and offers. The money are represented with the minimum viable money figure (pence)
+ * Represents the price of our items and offers. The price is represented with the minimum viable money figure (pence)
  * and the usage of a {@link java.math.BigDecimal}.
+ * <p>
+ * For example the {@code Price{amount=200}} represents a price of 200 pence.
  */
 public final class Price {
     public static final Price ZERO = Price.of(BigDecimal.ZERO);

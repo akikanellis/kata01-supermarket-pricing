@@ -7,7 +7,7 @@ import java.util.Set;
 import java.util.stream.Stream;
 
 /**
- * A representation of a collection of offer strategies.
+ * A representation of a collection of {@link com.akikanellis.kata01.offer.OfferStrategies}.
  */
 public final class OfferStrategies {
     private final Set<OfferStrategy> strategies;
@@ -18,7 +18,7 @@ public final class OfferStrategies {
         return new OfferStrategies(offerStrategies);
     }
 
-    public static OfferStrategies empty() { return new OfferStrategies(Collections.emptyList()); }
+    public static OfferStrategies empty() { return fromCollection(Collections.emptyList()); }
 
     public boolean isEmpty() { return strategies.isEmpty(); }
 

@@ -10,8 +10,8 @@ import com.akikanellis.kata01.offer.QuantifiedOffer;
 import com.akikanellis.kata01.price.Price;
 
 /**
- * A quantity-based offer strategy uses the item's base price and quantity of baseDiscount to calculate the final
- * discount.
+ * A quantity-based offer strategy uses the item's base price and in how much quantity to apply the base discount, in
+ * order to calculate the final discount.
  */
 class QuantityBasedOfferStrategy extends OfferStrategy {
     private final Item applicableItem;
