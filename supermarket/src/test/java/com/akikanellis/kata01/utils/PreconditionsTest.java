@@ -2,6 +2,7 @@ package com.akikanellis.kata01.utils;
 
 import org.junit.Test;
 
+import static com.akikanellis.kata01.utils.Preconditions.checkArgument;
 import static com.akikanellis.kata01.utils.Preconditions.checkNotNegative;
 import static com.akikanellis.kata01.utils.Preconditions.checkNotNull;
 import static com.akikanellis.kata01.utils.Preconditions.checkNotNullOrEmpty;
@@ -72,5 +73,15 @@ public class PreconditionsTest {
         assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(() -> checkNotNegative(-5))
                 .withMessageContaining("negative");
+    }
+
+    @Test public void checkingArgument_withTrueExpression_doesNothing() {
+        checkArgument(true, "message");
+    }
+
+    @Test public void checkingArgument_withFalseExpression_throwsExceptionWithGivenMessage() {
+        assertThatExceptionOfType(IllegalArgumentException.class)
+                .isThrownBy(() -> checkArgument(false, "message"))
+                .withMessageContaining("message");
     }
 }
