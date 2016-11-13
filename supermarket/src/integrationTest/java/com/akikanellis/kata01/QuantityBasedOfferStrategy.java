@@ -9,40 +9,38 @@ import com.akikanellis.kata01.offer.Offers;
 import com.akikanellis.kata01.offer.QuantifiedOffer;
 import com.akikanellis.kata01.price.Price;
 
-public class QuantityBasedOfferStrategy extends OfferStrategy {
+/**
+ * A quantity-based offer strategy uses the item's base price and quantity of baseDiscount to calculate the final
+ * discount.
+ */
+class QuantityBasedOfferStrategy extends OfferStrategy {
     private final Item applicableItem;
     private final int quantityToDiscount;
-    private final Price discount;
+    private final Price baseDiscount;
 
-    protected QuantityBasedOfferStrategy(long id, String description, Item applicableItem, int quantityToDiscount,
-                                         Price discount) {
+    QuantityBasedOfferStrategy(long id, String description, Item applicableItem, int quantityToDiscount,
+                               Price baseDiscount) {
         super(id, description);
         this.applicableItem = applicableItem;
         this.quantityToDiscount = quantityToDiscount;
-        this.discount = discount;
-    }
-
-    public static QuantityBasedOfferStrategy create(long id, Item applicableItem, int quantityToDiscount, Price discount) {
-        Price discountInPounds = discount.multiplyBy(quantityToDiscount).divideBy(1000);
-        String description = String.format("%d %s for £%s",
-                quantityToDiscount,
-                applicableItem.name(),
-                discountInPounds);
-
-        return new QuantityBasedOfferStrategy(id, description, applicableItem, quantityToDiscount, discount);
+        this.baseDiscount = baseDiscount;
     }
 
     @Override public Offers calculateOffers(Items items) {
-        int numberOfApplicableItems = items.stream()
+        int quantityOfApplicableItems = getQuantityOfApplicableItems(items);
+        int timesToApplyOffer = quantityOfApplicableItems / quantityToDiscount;
+
+        Offer baseOffer = Offer.create(description(), baseDiscount);
+        QuantifiedOffer quantifiedOffer = QuantifiedOffer.create(baseOffer, timesToApplyOffer);
+
+        return Offers.fromSingle(quantifiedOffer);
+    }
+
+    private int getQuantityOfApplicableItems(Items items) {
+        return items.stream()
                 .filter(quantifiedItem -> quantifiedItem.item().equals(applicableItem))
                 .map(QuantifiedItem::quantity)
                 .reduce((firstQuantity, secondQuantity) -> firstQuantity + secondQuantity)
                 .orElse(0);
-        int timesToApplyOffer = numberOfApplicableItems / quantityToDiscount;
-
-        Offer baseOffer = Offer.create(description(), discount);
-        QuantifiedOffer quantifiedOffer = QuantifiedOffer.create(baseOffer, timesToApplyOffer);
-
-        return Offers.fromSingle(quantifiedOffer);
     }
 }

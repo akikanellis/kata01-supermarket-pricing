@@ -55,8 +55,8 @@ public class StockFacadeIntegrationTest {
         GetStockValueAfterOffersUseCase getStockValueAfterOffers
                 = new GetStockValueAfterOffersUseCase(getStockValueBeforeOffers, getOffersValue);
 
-        StockFacade stockFacade = new StockFacade(addNewItemIfNotExists, findItemByBarcode, fillStock, reduceStock, getStock,
-                findOfferStrategyById, addOfferStrategy, removeOfferStrategy, getActiveOfferStrategies,
+        StockFacade stockFacade = new StockFacade(addNewItemIfNotExists, findItemByBarcode, fillStock, reduceStock,
+                getStock, findOfferStrategyById, addOfferStrategy, removeOfferStrategy, getActiveOfferStrategies,
                 getApplicableOffers, getOffersValue, getStockValueBeforeOffers, getStockValueAfterOffers);
 
         stockManager = new StockManagerPageObject(stockFacade);
