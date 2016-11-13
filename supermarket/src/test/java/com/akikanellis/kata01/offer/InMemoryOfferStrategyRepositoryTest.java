@@ -18,7 +18,7 @@ public class InMemoryOfferStrategyRepositoryTest {
 
         offerStrategies.add(offerStrategy);
 
-        assertThat(offerStrategies.getAll().asList()).containsOnly(offerStrategy);
+        assertThat(offerStrategies.getAll().asSet()).containsOnly(offerStrategy);
     }
 
     @Test public void removingStrategy_removesFromStrategies() {
@@ -27,7 +27,7 @@ public class InMemoryOfferStrategyRepositoryTest {
 
         offerStrategies.remove(offerStrategy);
 
-        assertThat(offerStrategies.getAll().asList()).isEmpty();
+        assertThat(offerStrategies.getAll().isEmpty()).isTrue();
     }
 
     @Test public void gettingById_withExistingStrategy_returnsStrategy() {
