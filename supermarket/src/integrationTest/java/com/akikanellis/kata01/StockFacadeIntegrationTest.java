@@ -83,7 +83,6 @@ public class StockFacadeIntegrationTest {
         assertThat(stockManager.getStock().asList()).containsExactly(expectedQuantifiedApple);
     }
 
-
     @Test public void fillingStock_ofNotExistingItem_throwsException() {
         assertThatExceptionOfType(ItemDoesNotExistException.class)
                 .isThrownBy(() -> stockManager.increaseAppleQuantity(70));
@@ -108,5 +107,12 @@ public class StockFacadeIntegrationTest {
         Items stock = stockManager.getStock();
 
         assertThat(stock.isEmpty()).isTrue();
+    }
+
+    @Test public void creatingOfferStrategies_withDifferentIds_addsThem() {
+        stockManager.createAppleBeansAndCheeseOffers();
+
+        assertThat(stockManager.getStock().asItemsList())
+                .containsOnly(stockManager.getApple(), stockManager.getCheese(), stockManager.getBeans());
     }
 }

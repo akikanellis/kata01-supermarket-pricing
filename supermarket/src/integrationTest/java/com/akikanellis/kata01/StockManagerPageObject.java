@@ -2,6 +2,7 @@ package com.akikanellis.kata01;
 
 import com.akikanellis.kata01.item.Item;
 import com.akikanellis.kata01.item.Items;
+import com.akikanellis.kata01.offer.OfferStrategy;
 import com.akikanellis.kata01.price.Price;
 import com.akikanellis.kata01.stock.StockFacade;
 
@@ -15,7 +16,7 @@ public class StockManagerPageObject {
         this.apple = Item.builder()
                 .barcode(1)
                 .name("Apple")
-                .price(Price.of(50))
+                .price(Price.of(40))
                 .build();
         this.cheese = Item.builder()
                 .barcode(2)
@@ -57,4 +58,23 @@ public class StockManagerPageObject {
     public void increaseBeansQuantity(int quantity) { stockFacade.fillStock(beans.barcode(), quantity); }
 
     public Items getStock() { return stockFacade.getStock(); }
+
+    public void createAppleBeansAndCheeseOffers() {
+        createAppleOffer();
+    }
+
+    public void createAppleOffer() {
+        OfferStrategy appleOfferStrategy = BuyTwoGetOneFree.create(1, apple);
+        stockFacade.addOfferStrategy(appleOfferStrategy);
+    }
+
+    public void createBeansOffer() {
+        OfferStrategy beansOfferStrategy = TwoForOnePound.create(2, beans);
+        stockFacade.addOfferStrategy(beansOfferStrategy);
+    }
+
+    public void createTenPercentOffEverythingOffer() {
+        OfferStrategy beansOfferStrategy = TenPercentOffEverything.create(3);
+        stockFacade.addOfferStrategy(beansOfferStrategy);
+    }
 }

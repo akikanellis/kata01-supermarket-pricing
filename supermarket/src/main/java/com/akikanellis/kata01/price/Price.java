@@ -31,10 +31,34 @@ public final class Price {
         return new Price(newAmount);
     }
 
+    public Price negate() {
+        BigDecimal newAmount = amount.negate();
+        return new Price(newAmount);
+    }
+
+    public Price subtract(Price other) {
+        BigDecimal newAmount = this.amount.subtract(other.amount);
+        return new Price(newAmount);
+    }
+
     public Price multiplyBy(long multiplier) {
         checkNotNegative(multiplier);
 
         BigDecimal newAmount = amount.multiply(BigDecimal.valueOf(multiplier));
+        return new Price(newAmount);
+    }
+
+    public Price multiplyBy(double multiplier) {
+        checkNotNegative(multiplier);
+
+        BigDecimal newAmount = amount.multiply(BigDecimal.valueOf(multiplier));
+        return new Price(newAmount);
+    }
+
+    public Price divideBy(long divisor) {
+        checkNotNegative(divisor);
+
+        BigDecimal newAmount = amount.divide(BigDecimal.valueOf(divisor));
         return new Price(newAmount);
     }
 
@@ -49,4 +73,5 @@ public final class Price {
     @Override public int hashCode() { return Objects.hashCode(amount); }
 
     @Override public String toString() { return "Price{amount=" + amount + '}'; }
+
 }

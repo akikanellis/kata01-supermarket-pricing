@@ -32,4 +32,9 @@ public final class Preconditions {
         return n;
     }
 
+    public static double checkNotNegative(double n) {
+        if (n < 0) throw new IllegalArgumentException(String.format("Argument can't be negative. Found [%d]", n));
+
+        return n;
+    }
 }
