@@ -9,6 +9,9 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+/**
+ * A representation of a collection of items along with their quantities.
+ */
 public final class Items {
     private final List<QuantifiedItem> quantifiedItems;
 
