@@ -13,5 +13,7 @@ public interface StockRepository {
 
     int getQuantity(Item item);
 
+    Item getByBarcode(long barcode);
+
     Items getAll();
 }

@@ -8,10 +8,12 @@ import com.akikanellis.kata01.offer.Offers;
 import com.akikanellis.kata01.price.Price;
 
 public class StockFacade {
-    private final AddNewItemIfNotExistsUseCase addNewItemIfNotExistsUseCase;
-    private final FillStockUseCase fillStockUseCase;
+    private final AddNewItemIfNotExistsUseCase addNewItemIfNotExists;
+    private final FindItemByBarcodeUseCase findItemByBarcode;
+    private final FillStockUseCase fillStock;
     private final ReduceStockUseCase reduceStock;
     private final GetStockUseCase getStock;
+    private final FindOfferStrategyByIdUseCase findOfferStrategyById;
     private final AddOfferStrategyUseCase addOfferStrategy;
     private final RemoveOfferStrategyUseCase removeOfferStrategy;
     private final GetActiveOfferStrategiesUseCase getActiveOfferStrategies;
@@ -20,17 +22,20 @@ public class StockFacade {
     private final GetStockValueBeforeOffersUseCase getStockValueBeforeOffers;
     private final GetStockValueAfterOffersUseCase getStockValueAfterOffers;
 
-    public StockFacade(AddNewItemIfNotExistsUseCase addNewItemIfNotExistsUseCase, FillStockUseCase fillStockUseCase,
-                       ReduceStockUseCase reduceStock, GetStockUseCase getStock,
-                       AddOfferStrategyUseCase addOfferStrategy, RemoveOfferStrategyUseCase removeOfferStrategy,
+    public StockFacade(AddNewItemIfNotExistsUseCase addNewItemIfNotExists, FindItemByBarcodeUseCase findItemByBarcode,
+                       FillStockUseCase fillStock, ReduceStockUseCase reduceStock, GetStockUseCase getStock,
+                       FindOfferStrategyByIdUseCase findOfferStrategyById, AddOfferStrategyUseCase addOfferStrategy,
+                       RemoveOfferStrategyUseCase removeOfferStrategy,
                        GetActiveOfferStrategiesUseCase getActiveOfferStrategies,
                        GetApplicableOffersUseCase getApplicableOffers, GetOffersValueUseCase getOffersValue,
                        GetStockValueBeforeOffersUseCase getStockValueBeforeOffers,
                        GetStockValueAfterOffersUseCase getStockValueAfterOffers) {
-        this.addNewItemIfNotExistsUseCase = addNewItemIfNotExistsUseCase;
-        this.fillStockUseCase = fillStockUseCase;
+        this.addNewItemIfNotExists = addNewItemIfNotExists;
+        this.findItemByBarcode = findItemByBarcode;
+        this.fillStock = fillStock;
         this.reduceStock = reduceStock;
         this.getStock = getStock;
+        this.findOfferStrategyById = findOfferStrategyById;
         this.addOfferStrategy = addOfferStrategy;
         this.removeOfferStrategy = removeOfferStrategy;
         this.getActiveOfferStrategies = getActiveOfferStrategies;
@@ -40,17 +45,26 @@ public class StockFacade {
         this.getStockValueAfterOffers = getStockValueAfterOffers;
     }
 
-    public void addNewItem(Item item) { addNewItemIfNotExistsUseCase.execute(item); }
+    public void addNewItem(Item item) { addNewItemIfNotExists.execute(item); }
 
-    public void fillStock(Item item, int quantity) { fillStockUseCase.execute(item, quantity); }
+    public void fillStock(long barcode, int quantity) {
+        Item item = findItemByBarcode.execute(barcode);
+        fillStock.execute(item, quantity);
+    }
 
-    public void reduceStock(Item item, int quantity) { reduceStock.execute(item, quantity); }
+    public void reduceStock(long barcode, int quantity) {
+        Item item = findItemByBarcode.execute(barcode);
+        reduceStock.execute(item, quantity);
+    }
 
     public Items getStock() { return getStock.execute(); }
 
     public void addOfferStrategy(OfferStrategy offerStrategy) { addOfferStrategy.execute(offerStrategy); }
 
-    public void removeOfferStrategy(OfferStrategy offerStrategy) { removeOfferStrategy.execute(offerStrategy); }
+    public void removeOfferStrategy(long id) {
+        OfferStrategy offerStrategy = findOfferStrategyById.execute(id);
+        removeOfferStrategy.execute(offerStrategy);
+    }
 
     public OfferStrategies getActiveOfferStrategies() { return getActiveOfferStrategies.execute(); }
 

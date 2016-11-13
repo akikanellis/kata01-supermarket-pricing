@@ -1,29 +1,35 @@
 package com.akikanellis.kata01.offer;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public final class Offers {
-    private final List<OfferWithQuantity> offersWithQuantities;
+    private final List<QuantifiedOffer> quantifiedOffers;
 
-    private Offers(List<OfferWithQuantity> offersWithQuantities) { this.offersWithQuantities = offersWithQuantities; }
-
-    public static Offers fromList(List<OfferWithQuantity> itemsWithQuantities) {
-        return new Offers(itemsWithQuantities);
+    private Offers(Collection<QuantifiedOffer> quantifiedOffers) {
+        this.quantifiedOffers = new ArrayList<>(quantifiedOffers);
     }
 
-    public static Offers empty() { return new Offers(Collections.emptyList()); }
+    public static Offers fromCollection(Collection<QuantifiedOffer> quantifiedOffers) {
+        return new Offers(quantifiedOffers);
+    }
 
-    public List<OfferWithQuantity> asList() { return new ArrayList<>(offersWithQuantities); }
+    public static Offers empty() { return fromCollection(Collections.emptyList()); }
+
+    public boolean isEmpty() { return quantifiedOffers.isEmpty(); }
+
+    public List<QuantifiedOffer> asList() { return new ArrayList<>(quantifiedOffers); }
+
+    public Stream<QuantifiedOffer> stream() { return quantifiedOffers.stream(); }
 
     public Offers join(Offers other) {
-        List<OfferWithQuantity> joinedOfferWithQuantities = new ArrayList<>();
+        List<QuantifiedOffer> joined = Stream.concat(stream(), other.stream())
+                .collect(Collectors.toList());
 
-        List<OfferWithQuantity> otherOfferWithQuantities = other.asList();
-        joinedOfferWithQuantities.addAll(offersWithQuantities);
-        joinedOfferWithQuantities.addAll(otherOfferWithQuantities);
-
-        return Offers.fromList(joinedOfferWithQuantities);
+        return fromCollection(joined);
     }
 }

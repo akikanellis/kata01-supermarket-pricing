@@ -1,10 +1,8 @@
 package com.akikanellis.kata01.offer;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 import java.util.stream.Stream;
 
@@ -19,7 +17,9 @@ public final class OfferStrategies {
 
     public static OfferStrategies empty() { return new OfferStrategies(Collections.emptyList()); }
 
-    public List<OfferStrategy> asList() { return new ArrayList<>(strategies); }
+    public boolean isEmpty() { return strategies.isEmpty(); }
 
-    public Stream<OfferStrategy> stream() { return asList().stream(); }
+    public Set<OfferStrategy> asSet() { return new HashSet<>(strategies); }
+
+    public Stream<OfferStrategy> stream() { return strategies.stream(); }
 }

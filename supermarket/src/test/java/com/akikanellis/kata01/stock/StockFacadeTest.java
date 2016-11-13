@@ -23,10 +23,12 @@ import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
 public class StockFacadeTest {
-    @Mock private AddNewItemIfNotExistsUseCase addNewItemIfNotExistsUseCase;
-    @Mock private FillStockUseCase fillStockUseCase;
+    @Mock private AddNewItemIfNotExistsUseCase addNewItemIfNotExists;
+    @Mock private FindItemByBarcodeUseCase findItemByBarcode;
+    @Mock private FillStockUseCase fillStock;
     @Mock private ReduceStockUseCase reduceStock;
     @Mock private GetStockUseCase getStock;
+    @Mock private FindOfferStrategyByIdUseCase findOfferStrategyById;
     @Mock private AddOfferStrategyUseCase addOfferStrategy;
     @Mock private RemoveOfferStrategyUseCase removeOfferStrategy;
     @Mock private GetActiveOfferStrategiesUseCase getActiveOfferStrategies;
@@ -37,9 +39,9 @@ public class StockFacadeTest {
     private StockFacade stockFacade;
 
     @Before public void beforeEach() {
-        stockFacade = new StockFacade(addNewItemIfNotExistsUseCase, fillStockUseCase, reduceStock, getStock,
-                addOfferStrategy, removeOfferStrategy, getActiveOfferStrategies, getApplicableOffers, getOffersValue,
-                getStockValueBeforeOffers, getStockValueAfterOffers);
+        stockFacade = new StockFacade(addNewItemIfNotExists, findItemByBarcode, fillStock, reduceStock, getStock,
+                findOfferStrategyById, addOfferStrategy, removeOfferStrategy, getActiveOfferStrategies,
+                getApplicableOffers, getOffersValue, getStockValueBeforeOffers, getStockValueAfterOffers);
     }
 
     @Test public void addingNewItem_usesUseCase() {
@@ -47,26 +49,28 @@ public class StockFacadeTest {
 
         stockFacade.addNewItem(item);
 
-        verify(addNewItemIfNotExistsUseCase).execute(item);
+        verify(addNewItemIfNotExists).execute(item);
     }
 
-    @Test public void fillingStock_usesFillStockUseCase() {
+    @Test public void fillingStock_usesFoundItemToFillStock() {
         Item item = createDefaultItem();
+        when(findItemByBarcode.execute(10)).thenReturn(item);
 
-        stockFacade.fillStock(item, 50);
+        stockFacade.fillStock(10, 50);
 
-        verify(fillStockUseCase).execute(item, 50);
+        verify(fillStock).execute(item, 50);
     }
 
-    @Test public void reducingStock_usesReduceStockUseCase() {
+    @Test public void reducingStock_usesFoundItemToReduceStock() {
         Item item = createDefaultItem();
+        when(findItemByBarcode.execute(10)).thenReturn(item);
 
-        stockFacade.reduceStock(item, 50);
+        stockFacade.reduceStock(10, 50);
 
         verify(reduceStock).execute(item, 50);
     }
 
-    @Test public void gettingStock_usesGetStockUseCase() {
+    @Test public void gettingStock_usesUseCase() {
         Items expectedItems = defaultItems();
         when(getStock.execute()).thenReturn(expectedItems);
 
@@ -75,7 +79,7 @@ public class StockFacadeTest {
         assertThat(actualItems).isSameAs(expectedItems);
     }
 
-    @Test public void addingOfferStrategy_usesAddOfferStrategyUseCase() {
+    @Test public void addingOfferStrategy_usesUseCase() {
         OfferStrategy offerStrategy = createDefaultOfferStrategy();
 
         stockFacade.addOfferStrategy(offerStrategy);
@@ -83,10 +87,11 @@ public class StockFacadeTest {
         verify(addOfferStrategy).execute(offerStrategy);
     }
 
-    @Test public void removingOfferStrategy_usesRemoveOfferStrategyUseCase() {
+    @Test public void removingOfferStrategy_usesFoundStrategyToRemoveIt() {
         OfferStrategy offerStrategy = createDefaultOfferStrategy();
+        when(findOfferStrategyById.execute(11)).thenReturn(offerStrategy);
 
-        stockFacade.removeOfferStrategy(offerStrategy);
+        stockFacade.removeOfferStrategy(11);
 
         verify(removeOfferStrategy).execute(offerStrategy);
     }
