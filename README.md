@@ -44,6 +44,19 @@ A [Package-By-Feature](http://www.javapractices.com/topic/TopicAction.do?Id=205)
 ### Branching model
 The branching model used is [GitFlow](http://nvie.com/posts/a-successful-git-branching-model/).
 
+### Notes
+This project was made to be simple, readable and maintainable. To achieve that certain decisions have been made:
+
+- There is no Dependency Injection framework used. If we were to create a production ready supermarket, then we would
+  use a Dependency Injection framework such as [Dagger 2](https://google.github.io/dagger/). By taking advantage of such a framework we could reduce
+  the visibility of certain internal classes (like the repository implementations) and we could also easily establish whichever
+  resources we want as singletons.
+- The supermarket does not support asynchronous operations, something that a real one should. This could be achieved
+  by using a Reactive Extensions framework such as [RxJava](https://github.com/ReactiveX/RxJava) to manage multiple asynchronous streams. Additionally, we
+  would have to make sure our reads and writes to the repositories are synchronized.
+- All repositories are in-memory, meaning that no state is persisted. We would have to change that by making database
+  implementations of the repositories.
+
 ## Modules
 
 ### Supermarket module
