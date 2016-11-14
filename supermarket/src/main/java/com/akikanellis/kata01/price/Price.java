@@ -11,6 +11,8 @@ import static com.akikanellis.kata01.utils.Preconditions.checkNotNull;
  * and the usage of a {@link java.math.BigDecimal}.
  * <p>
  * For example the {@code Price{amount=200}} represents a price of 200 pence.
+ * <p>
+ * Note: There is no rounding taking place. All the rounding is the responsibility of the client.
  */
 public final class Price {
     public static final Price ZERO = Price.of(BigDecimal.ZERO);
@@ -128,6 +130,13 @@ public final class Price {
         BigDecimal newAmount = amount.multiply(BigDecimal.valueOf(multiplier));
         return new Price(newAmount);
     }
+
+    /**
+     * Converts this {@code Price} to a {@code BigDecimal}.
+     *
+     * @return this {@code Price} converted to a {@code BigDecimal}.
+     */
+    public BigDecimal asBigDecimal() { return amount; }
 
     @Override public boolean equals(Object o) {
         if (this == o) return true;
