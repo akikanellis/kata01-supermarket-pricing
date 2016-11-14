@@ -138,4 +138,12 @@ public class PriceTest {
 
         assertThat(newPrice).isEqualTo(Price.ZERO);
     }
+
+    @Test public void asBigDecimal_returnsBigDecimalAmount() {
+        Price price = Price.of(250);
+
+        BigDecimal bigDecimalValue = price.asBigDecimal();
+
+        assertThat(bigDecimalValue.intValue()).isEqualTo(250);
+    }
 }
