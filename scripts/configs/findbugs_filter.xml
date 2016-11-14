@@ -1,0 +1,20 @@
+<FindBugsFilter>
+
+    <!-- Auto-generated classes -->
+    <Match>
+        <Class name="~.*\$.*"/>
+    </Match>
+
+    <!-- Non-initialized fields in tests, we initialize them in @Before -->
+    <Match>
+        <Class name="~.*Test"/>
+        <Or>
+            <Bug pattern="UWF_FIELD_NOT_INITIALIZED_IN_CONSTRUCTOR" type="UWF_FIELD_NOT_INITIALIZED_IN_CONSTRUCTOR"/>
+            <Bug pattern="NP_NONNULL_FIELD_NOT_INITIALIZED_IN_CONSTRUCTOR"
+                 type="NP_NONNULL_FIELD_NOT_INITIALIZED_IN_CONSTRUCTOR"/>
+            <Bug pattern="NP_NONNULL_PARAM_VIOLATION" type="NP_NONNULL_PARAM_VIOLATION"/>
+            <Bug pattern="RV_RETURN_VALUE_IGNORED_NO_SIDE_EFFECT" type="RV_RETURN_VALUE_IGNORED_NO_SIDE_EFFECT"/>
+        </Or>
+    </Match>
+
+</FindBugsFilter>

@@ -1,0 +1,46 @@
+def configsFolder = 'scripts/configs'
+
+plugins.apply('checkstyle')
+
+checkstyle {
+    toolVersion = '7.2'
+    configFile rootProject.file("$configsFolder/checkstyle_config.xml")
+}
+
+tasks.withType(Checkstyle) {
+    ignoreFailures false
+    showViolations true
+}
+
+plugins.apply('pmd')
+
+pmd {
+    toolVersion = '5.5.1'
+    ruleSetFiles = rootProject.files("$configsFolder/pmd_ruleset.xml")
+}
+
+tasks.withType(Pmd) {
+    ignoreFailures = false
+}
+
+tasks.withType(Pmd).findAll { it.name.toLowerCase().contains('test') }.forEach {
+    it.enabled = false
+}
+
+plugins.apply('findbugs')
+
+findbugs {
+    toolVersion = '3.0.1'
+    excludeFilter = rootProject.file("$configsFolder/findbugs_filter.xml")
+}
+
+tasks.withType(FindBugs) {
+    ignoreFailures = false
+    effort = 'max'
+    reportLevel = 'low'
+
+    reports {
+        xml.enabled = false
+        html.enabled = true
+    }
+}

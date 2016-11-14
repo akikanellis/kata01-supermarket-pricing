@@ -1,0 +1,21 @@
+group 'com.akikanellis.kata01'
+version '1.0'
+
+apply plugin: 'java'
+apply plugin: 'net.ltgt.apt'
+apply from: rootProject.file('scripts/dependencies.gradle')
+apply from: rootProject.file('scripts/extra_tests.gradle')
+apply from: rootProject.file('scripts/code_analysis.gradle')
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+dependencies {
+    compileOnly libraries.autoValue
+    apt libraries.autoValue
+
+    testCompile libraries.jUnit
+    testCompile libraries.assertJ
+    testCompile libraries.mockito
+    testCompile libraries.equalsVerifier
+}
