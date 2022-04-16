@@ -1,3 +1,8 @@
+# ⚠️ This project has been deprecated ⚠️
+
+This project contains some very old code that does not reflect my standards anymore. I will be leaving
+the project in an archived state in case it is still useful to someone.
+
 [![Build Status](https://travis-ci.org/AkiKanellis/kata01-supermarket-pricing.svg?branch=develop)](https://travis-ci.org/AkiKanellis/kata01-supermarket-pricing)
 # Kata01: Supermarket Pricing
 A solution to [Kata01: Supermarket Pricing](http://codekata.com/kata/kata01-supermarket-pricing).
